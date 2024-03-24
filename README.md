@@ -1,5 +1,7 @@
 # Clothing and Apparel Branding Website
 
+![Clothing and Apparel Branding](path/to/your/image.jpg)
+
 Welcome to our clothing and apparel branding website! This repository contains the source code and assets for our website.
 
 ## Overview
