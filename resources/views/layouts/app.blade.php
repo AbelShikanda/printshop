@@ -22,6 +22,9 @@
     <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
+    <!-- css -->
+    <link href="{{ asset('assets/css/productcard.css') }}" rel="stylesheet">
+
     <!-- Template Main CSS File -->
     {{-- <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet"> --}}
 
@@ -46,8 +49,6 @@
                     <li><a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">Home</a></li>
                     <li><a class="nav-link {{ request()->is('catalog') ? 'active' : '' }}" href="{{ url('/catalog') }}">Catalog</a></li>
                     <li><a class="nav-link {{ request()->is('blog') ? 'active' : '' }}" href="{{ url('/blog') }}">Blog</a></li>
-                    <li><a class="nav-link" href="{{ url('/catalog/detail') }}">Catalog Detail</a></li>
-                    <li><a class="nav-link" href="{{ url('/blog/single') }}">Blog Single</a></li>
                     <li><a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="{{ url('/contact') }}">Contact</a></li>
                     <!-- Authentication Links -->
                     @guest

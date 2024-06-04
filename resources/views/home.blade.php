@@ -73,7 +73,7 @@
             </div>
         </div>
     </section><!-- End Services Section -->
-    
+
     <!-- ======= Portfolio Section ======= -->
     <section id="work" class="portfolio-mf sect-pt4 route">
         <div class="container">
@@ -91,107 +91,15 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6 col-md-6 col-lg-4">
-                    <div class="work-box">
-                        <a href="assets/img/work-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox">
-                            <div class="work-img">
-                                <img src="assets/img/work-1.jpg" alt="" class="img-fluid">
-                            </div>
-                        </a>
-                        <div class="work-content">
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <h2 class="w-title">Lorem impsum dolor</h2>
-                                    <div class="w-more">
-                                        <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep.
-                                            2018</span>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="w-like">
-                                        <a href="portfolio-details.html"> <span class="bi bi-plus-circle"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="mb-5 col-6 col-md-6 col-lg-4">
+                    @include('layouts.partials.catalog')
                 </div>
-                <div class="col-6 col-md-6 col-lg-4">
-                    <div class="work-box">
-                        <a href="assets/img/work-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox">
-                            <div class="work-img">
-                                <img src="assets/img/work-2.jpg" alt="" class="img-fluid">
-                            </div>
-                        </a>
-                        <div class="work-content">
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <h2 class="w-title">Loreda Cuno Nere</h2>
-                                    <div class="w-more">
-                                        <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep.
-                                            2018</span>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="w-like">
-                                        <a href="portfolio-details.html"> <span class="bi bi-plus-circle"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="mb-5 col-6 col-md-6 col-lg-4">
+                    @include('layouts.partials.catalog')
                 </div>
-                <div class="col-6 col-md-6 col-lg-4">
-                    <div class="work-box">
-                        <a href="assets/img/work-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox">
-                            <div class="work-img">
-                                <img src="assets/img/work-3.jpg" alt="" class="img-fluid">
-                            </div>
-                        </a>
-                        <div class="work-content">
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <h2 class="w-title">Mavrito Lana Dere</h2>
-                                    <div class="w-more">
-                                        <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep.
-                                            2018</span>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="w-like">
-                                        <a href="portfolio-details.html"> <span class="bi bi-plus-circle"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="mb-5 col-6 col-md-6 col-lg-4">
+                    @include('layouts.partials.catalog')
                 </div>
-                <div class="col-6 col-md-6 col-lg-4">
-                    <div class="work-box">
-                        <a href="assets/img/work-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox">
-                            <div class="work-img">
-                                <img src="assets/img/work-3.jpg" alt="" class="img-fluid">
-                            </div>
-                        </a>
-                        <div class="work-content">
-                            <div class="row">
-                                <div class="col-sm-8">
-                                    <h2 class="w-title">Mavrito Lana Dere</h2>
-                                    <div class="w-more">
-                                        <span class="w-ctegory">Web Design</span> / <span class="w-date">18 Sep.
-                                            2018</span>
-                                    </div>
-                                </div>
-                                <div class="col-sm-4">
-                                    <div class="w-like">
-                                        <a href="portfolio-details.html"> <span class="bi bi-plus-circle"></span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section><!-- End Portfolio Section -->
@@ -252,7 +160,7 @@
             </div>
         </div>
     </div><!-- End Counter Section -->
-    
+
     <!-- ======= Blog Section ======= -->
     <section id="blog" class="blog-mf sect-pt4 route">
         <div class="container">
@@ -270,125 +178,11 @@
                 </div>
             </div>
             <div class="row mb-5">
-                <div class="mt-2 mb-2 col-6 col-md-6 col-lg-4">
-                    <div class="card card-blog">
-                        <div class="card-img">
-                            <a href="blog-single.html"><img src="assets/img/post-1.jpg" alt=""
-                                    class="img-fluid"></a>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-category-box">
-                                <div class="card-category">
-                                    <h6 class="category">Travel</h6>
-                                </div>
-                            </div>
-                            <h3 class="card-title"><a href="blog-single.html">See more ideas about Travel</a></h3>
-                            <p class="card-description">
-                                Proin eget tortor risus. Pellentesque in
-                            </p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="post-author">
-                                <a href="#">
-                                    <img src="assets/img/testimonial-2.jpg" alt="" class="avatar rounded-circle">
-                                    <span class="author">Morgan Freeman</span>
-                                </a>
-                            </div>
-                            <div class="post-date">
-                                <span class="bi bi-clock"></span> 10 min
-                            </div>
-                        </div>
-                    </div>
+                <div class="mt-2 mb-2 col-12 col-md-6 col-lg-6">
+                    @include('layouts.partials.blog')
                 </div>
-                <div class="mt-2 mb-2 col-6 col-md-6 col-lg-4">
-                    <div class="card card-blog">
-                        <div class="card-img">
-                            <a href="blog-single.html"><img src="assets/img/post-2.jpg" alt=""
-                                    class="img-fluid"></a>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-category-box">
-                                <div class="card-category">
-                                    <h6 class="category">Web Design</h6>
-                                </div>
-                            </div>
-                            <h3 class="card-title"><a href="blog-single.html">See more ideas about Travel</a></h3>
-                            <p class="card-description">
-                                Proin eget tortor risus. Pellentesque in
-                            </p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="post-author">
-                                <a href="#">
-                                    <img src="assets/img/testimonial-2.jpg" alt="" class="avatar rounded-circle">
-                                    <span class="author">Morgan Freeman</span>
-                                </a>
-                            </div>
-                            <div class="post-date">
-                                <span class="bi bi-clock"></span> 10 min
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-2 mb-2 col-6 col-md-6 col-lg-4">
-                    <div class="card card-blog">
-                        <div class="card-img">
-                            <a href="blog-single.html"><img src="assets/img/post-3.jpg" alt=""
-                                    class="img-fluid"></a>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-category-box">
-                                <div class="card-category">
-                                    <h6 class="category">Web Design</h6>
-                                </div>
-                            </div>
-                            <h3 class="card-title"><a href="blog-single.html">See more ideas about Travel</a></h3>
-                            <p class="card-description">
-                                Proin eget tortor risus. Pellentesque in
-                            </p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="post-author">
-                                <a href="#">
-                                    <img src="assets/img/testimonial-2.jpg" alt="" class="avatar rounded-circle">
-                                    <span class="author">Morgan Freeman</span>
-                                </a>
-                            </div>
-                            <div class="post-date">
-                                <span class="bi bi-clock"></span> 10 min
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mt-2 mb-2 col-6 col-md-6 col-lg-4">
-                    <div class="card card-blog">
-                        <div class="card-img">
-                            <a href="blog-single.html"><img src="assets/img/post-3.jpg" alt=""
-                                    class="img-fluid"></a>
-                        </div>
-                        <div class="card-body">
-                            <div class="card-category-box">
-                                <div class="card-category">
-                                    <h6 class="category">Web Design</h6>
-                                </div>
-                            </div>
-                            <h3 class="card-title"><a href="blog-single.html">See more ideas about Travel</a></h3>
-                            <p class="card-description">
-                                Proin eget tortor risus. Pellentesque in
-                            </p>
-                        </div>
-                        <div class="card-footer">
-                            <div class="post-author">
-                                <a href="#">
-                                    <img src="assets/img/testimonial-2.jpg" alt="" class="avatar rounded-circle">
-                                    <span class="author">Morgan Freeman</span>
-                                </a>
-                            </div>
-                            <div class="post-date">
-                                <span class="bi bi-clock"></span> 10 min
-                            </div>
-                        </div>
-                    </div>
+                <div class="mt-2 mb-2 col-12 col-md-6 col-lg-6">
+                    @include('layouts.partials.blog')
                 </div>
             </div>
         </div>
@@ -442,8 +236,8 @@
                     </div>
 
                     <!-- <div id="testimonial-mf" class="owl-carousel owl-theme">
-                          
-                        </div> -->
+                                          
+                                        </div> -->
                 </div>
             </div>
         </div>
