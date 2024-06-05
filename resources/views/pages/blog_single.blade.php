@@ -9,11 +9,8 @@
             <div class="row justify-content-center">
                 <div class="col-md-10">
                     <div class="post-box">
-                        <div class="post-thumb">
-                            <img src="{{ asset('assets/img/post-1.jpg') }}" class="img-fluid" alt="">
-                        </div>
                         <div class="post-meta">
-                            <h1 class="article-title">Lorem ipsum dolor sit amet consec tetur adipisicing</h1>
+                            <h1 class="article-title text-center">Lorem ipsum dolor sit amet consec tetur adipisicing</h1><br><br>
                             <ul>
                                 <li>
                                     <span class="bi bi-person"></span>
@@ -29,6 +26,9 @@
                                 </li>
                             </ul>
                         </div>
+                        <div class="post-thumb">
+                            <img src="{{ asset('assets/img/post-1.jpg') }}" class="img-fluid" alt="">
+                        </div><br><br>
                         <div class="article-content">
                             <p>
                                 Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Cras ultricies ligula sed magna
@@ -78,6 +78,7 @@
                         </div>
                     </div>
                     <div class="box-comments">
+                        <hr>
                         <div class="title-box-2">
                             <h4 class="title-comments title-left">Comments (34)</h4>
                         </div>

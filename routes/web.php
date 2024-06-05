@@ -25,9 +25,10 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Route::get('/catalog', [PagesController::class, 'catalog'])->name('catalog');
-Route::get('/catalog/detail', [PagesController::class, 'catalog_detail'])->name('catalog_detail');
+Route::get('/catalog/detail', [PagesController::class, 'catalog_detail'])->name('catalogDetail');
 Route::get('/blog', [PagesController::class, 'blog'])->name('blog');
-Route::get('/blog/single', [PagesController::class, 'blog_single'])->name('blog_single');
+Route::get('/blog/single', [PagesController::class, 'blog_single'])->name('blogSingle');
 Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
+Route::get('/cart/add/', [PagesController::class, 'add_to_cart'])->name('addToCart');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

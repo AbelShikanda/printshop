@@ -53,6 +53,38 @@ class PagesController extends Controller
     }
 
     /**
+     * FUnction to add to cart
+     *
+     * This function does the following:
+     * - Step 1
+     * - Step 2
+     * - Step 3
+     *
+     * @param  Parameter type  Parameter name Description of the parameter (optional)
+     * @return Return type Description of the return value (optional)
+     */
+    public function add_to_cart(Request $request) {
+        // $products = Products::find($id);
+        // $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        // $cart = new Cart($oldCart);
+        // $cart->add($products, $products->id);
+
+        // $request->session()->put('cart', $cart);
+        // return redirect()->route('addToCart');
+        $pageTitle = 'Cart';
+        $breadcrumbLinks = [
+            ['url' => '/', 'label' => 'Home'],
+            ['url' => '', 'label' => 'catalog detail'],
+            ['url' => '', 'label' => 'cart'],
+        ];
+        return view('pages.cart', with([
+            // 'title' => 'Catalog Detail',
+            'pageTitle' => $pageTitle,
+            'breadcrumbLinks' => $breadcrumbLinks,
+        ]));
+    }
+
+    /**
      * function to display blog detail
      *
      * This function does the following:

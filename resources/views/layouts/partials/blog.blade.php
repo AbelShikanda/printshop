@@ -11,7 +11,7 @@
     <div class="utility-info">
         <ul class="utility-list">
             <li class="date">06.23.2016</li>
-            <li><a href="{{ route('blog_single') }}"><i class="bi bi-arrow-right-circle-fill px-2"></i>VIEW</a></li>
+            <li><a href="{{ route('blogSingle') }}"><i class="bi bi-arrow-right-circle-fill px-2"></i>VIEW</a></li>
         </ul>
     </div><!--/.utility-info-->
     <!--overlays-->

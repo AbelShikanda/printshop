@@ -1455,7 +1455,7 @@ body {
   .box-comments,
   .widget-sidebar {
     padding: 2rem;
-    background-color: #bcbcbc;
+    background-color: #000000;
     margin-bottom: 3rem;
     border-radius: 5px;
   }
@@ -1511,6 +1511,11 @@ body {
   /*------/ Comments /------*/
   .box-comments .list-comments li {
     padding-bottom: 40px;
+  }
+
+  .box-comments hr{
+    width: 100%;
+    background: #878787;
   }
   
   .box-comments .list-comments .comment-avatar {
