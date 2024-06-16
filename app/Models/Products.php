@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class Products extends Model
 {
-    use HasFactory;
-    // use HasSlug;
+    use HasFactory, HasSlug;
 
     /**
      * The attributes that are mass assignable.
@@ -23,20 +24,21 @@ class Products extends Model
         'type_id',
         'sku',
         'name',
+        'slug',
         'description',
         'meta_keywords',
         'price',
     ];
 
-    // /**
-    //  * Get the options for generating the slug.
-    //  */
-    // public function getSlugOptions() : SlugOptions
-    // {
-    //     return SlugOptions::create()
-    //         ->generateSlugsFrom('name')
-    //         ->saveSlugsTo('slug');
-    // }
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
+    }
 
     // /**
     //  * Get the route key for the model.

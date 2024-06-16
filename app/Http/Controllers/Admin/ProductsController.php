@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\ProductMaterials;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class ProductMaterialsController extends Controller
+class ProductsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class ProductMaterialsController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ProductMaterials $productMaterials)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +42,7 @@ class ProductMaterialsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProductMaterials $productMaterials)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +50,7 @@ class ProductMaterialsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProductMaterials $productMaterials)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +58,7 @@ class ProductMaterialsController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductMaterials $productMaterials)
+    public function destroy(string $id)
     {
         //
     }

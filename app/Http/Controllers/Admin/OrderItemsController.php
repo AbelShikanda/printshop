@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
-use App\Models\ProductSizes;
+use App\Http\Controllers\Controller;
+use App\Models\OrderItems;
 use Illuminate\Http\Request;
 
-class ProductSizesController extends Controller
+class OrderItemsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +35,7 @@ class ProductSizesController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(ProductSizes $productSizes)
+    public function show(OrderItems $orderItems)
     {
         //
     }
@@ -42,7 +43,7 @@ class ProductSizesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProductSizes $productSizes)
+    public function edit(OrderItems $orderItems)
     {
         //
     }
@@ -50,7 +51,7 @@ class ProductSizesController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProductSizes $productSizes)
+    public function update(Request $request, OrderItems $orderItems)
     {
         //
     }
@@ -58,7 +59,7 @@ class ProductSizesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductSizes $productSizes)
+    public function destroy(OrderItems $orderItems)
     {
         //
     }

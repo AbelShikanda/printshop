@@ -14,16 +14,9 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->foreignId('user_id')->constrained('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('first_name');
-            $table->string('last_name');
             $table->string('reference');
-            $table->string('town');
-            $table->string('estate');
-            $table->string('landmark')->nullable();
-            $table->string('house_no')->nullable();
-            $table->string('phone');       
             $table->string('tracking_No');
-            $table->bigInteger('total_amount');
+            $table->decimal('price', 10, 2);
             $table->boolean('complete')->default(0);
             $table->timestamps();
         });

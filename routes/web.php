@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\ProfileController;
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // Route::get('/', function () {
@@ -16,6 +17,11 @@ use App\Http\Controllers\PagesController;
 // Route::get('/home', [HomeController::class, 'index'])
 // ->middleware(['auth', 'verified'])
 // ->name('home');
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+
+
+
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Auth::routes(['verify' => true]);
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -32,4 +38,5 @@ Route::get('/blog/single', [PagesController::class, 'blog_single'])->name('blogS
 Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
 Route::get('/cart/add/', [PagesController::class, 'add_to_cart'])->name('addToCart');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Route::get('/profile', [ProfileController::class, 'index'])->name('index');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

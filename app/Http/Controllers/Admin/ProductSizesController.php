@@ -1,27 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
+use App\Models\ProductSizes;
 use Illuminate\Http\Request;
 
-class ProfileController extends Controller
+class ProductSizesController extends Controller
 {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-    // {
-    //     $this->middleware('auth');
-    // }
-
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('profile.index');
+        //
     }
 
     /**
@@ -43,7 +35,7 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(ProductSizes $productSizes)
     {
         //
     }
@@ -51,7 +43,7 @@ class ProfileController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(ProductSizes $productSizes)
     {
         //
     }
@@ -59,7 +51,7 @@ class ProfileController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, ProductSizes $productSizes)
     {
         //
     }
@@ -67,7 +59,7 @@ class ProfileController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(ProductSizes $productSizes)
     {
         //
     }

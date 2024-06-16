@@ -4,11 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 
 class BlogCategories extends Model
 {
-    // use HasSlug;
-    use HasFactory;
+    use HasFactory, HasSlug;
 
     
     /**
@@ -21,15 +22,15 @@ class BlogCategories extends Model
         'slug',
     ];
 
-    // /**
-    //  * Get the options for generating the slug.
-    //  */
-    // public function getSlugOptions() : SlugOptions
-    // {
-    //     return SlugOptions::create()
-    //         ->generateSlugsFrom('name')
-    //         ->saveSlugsTo('slug');
-    // }
+    /**
+     * Get the options for generating the slug.
+     */
+    public function getSlugOptions() : SlugOptions
+    {
+        return SlugOptions::create()
+            ->generateSlugsFrom('name')
+            ->saveSlugsTo('slug');
+    }
 
     // /**
     //  * Get the route key for the model.
