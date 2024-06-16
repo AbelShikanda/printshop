@@ -23,6 +23,7 @@ Auth::routes(['verify' => true]);
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/home', [HomeController::class, 'homeDisplay'])->name('homeDisplay');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Route::get('/catalog', [PagesController::class, 'catalog'])->name('catalog');
 Route::get('/catalog/detail', [PagesController::class, 'catalog_detail'])->name('catalogDetail');

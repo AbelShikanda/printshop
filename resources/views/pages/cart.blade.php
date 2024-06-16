@@ -180,15 +180,6 @@
                         Cart Details
                     </div>
                     <div class="form_row">
-                        <div class="form_group cart_type">
-                            <label class="input_label">Payment Type</label>
-
-                            <input type="radio" name="cartType" required id="master" checked />
-                            <label class="type master" title="Master" for="master">
-                                <img src="{{ asset('assets/img/icons8-mpesa-48.png') }}" alt="M-pesa">
-                            </label>
-                        </div>
-
                         <div class="form_group">
                             <label class="input_label">Phone Number</label>
                             <input type="text" class="input" id="card_number" name='card' min="16"
@@ -204,7 +195,6 @@
 
                         <button class="btn">Checkout</button>
                     </div>
-
                 </div>
             </section>
         </div>
