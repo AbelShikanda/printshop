@@ -242,6 +242,5 @@
             </div>
         </div>
     </div><!-- End Testimonials Section -->
-
-    @include('layouts.footer')
+    
 @endsection

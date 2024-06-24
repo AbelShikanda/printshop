@@ -16,97 +16,7 @@
 
                     <div class="cart_list_wrap">
                         <div class="cart_responsive">
-
-                            <div class="tr_item">
-                                <div class="td_item item_like">
-                                    <span class="material-icons-outlined"><i class="bi bi-heart-fill"></i></span>
-                                </div>
-                                <div class="td_item item_img">
-                                    <img src="https://i.ibb.co/vQHXcYb/b68912b3426baa0b1f4c410a02174879.jpg" />
-                                </div>
-                                <div class="td_item item_name">
-                                    <label class="main">Denim Jacket</label>
-                                    <label class="sub">Ref. 007891987</label>
-                                </div>
-                                <div class="td_item item_color">
-                                    <select>
-                                        <option value="black">black</option>
-                                        <option value="white">white</option>
-                                        <option value="grey">grey</option>
-                                    </select>
-                                </div>
-                                <div class="td_item item_size">
-                                    <select>
-                                        <option value="small">small</option>
-                                        <option value="large">large</option>
-                                        <option value="Xlarge">Xlarge</option>
-                                    </select>
-                                </div>
-                                <div class="td_item item_actions">
-                                    <span>
-                                        <i class="bi bi-cart3"><br>
-                                            <p>update</p>
-                                        </i></span>
-                                </div>
-                                <div class="td_item item_qty">
-                                    <div class="quantity">
-                                        <button class="minus" aria-label="Decrease">&minus;</button>
-                                        <input type="number" class="input-box" value="1" min="1" max="10" readonly>
-                                        <button class="plus" aria-label="Increase">&plus;</button>
-                                    </div>
-                                </div>
-                                <div class="td_item item_price">
-                                    <label>Ksh. 260.00</label>
-                                </div>
-                                <div class="td_item item_remove">
-                                    <span class="material-icons-outlined">close</span>
-                                </div>
-                            </div>
-                            <div class="tr_item">
-                                <div class="td_item item_like">
-                                    <span class="material-icons-outlined"><i class="bi bi-heart-fill"></i></span>
-                                </div>
-                                <div class="td_item item_img">
-                                    <img src="https://i.ibb.co/vQHXcYb/b68912b3426baa0b1f4c410a02174879.jpg" />
-                                </div>
-                                <div class="td_item item_name">
-                                    <label class="main">Denim Jacket</label>
-                                    <label class="sub">Ref. 007891987</label>
-                                </div>
-                                <div class="td_item item_color">
-                                    <select>
-                                        <option value="black">black</option>
-                                        <option value="white">white</option>
-                                        <option value="grey">grey</option>
-                                    </select>
-                                </div>
-                                <div class="td_item item_size">
-                                    <select>
-                                        <option value="small">small</option>
-                                        <option value="large">large</option>
-                                        <option value="Xlarge">Xlarge</option>
-                                    </select>
-                                </div>
-                                <div class="td_item item_actions">
-                                    <span>
-                                        <i class="bi bi-cart3"><br>
-                                            <p>update</p>
-                                        </i></span>
-                                </div>
-                                <div class="td_item item_qty">
-                                    <div class="quantity">
-                                        <button class="minus" aria-label="Decrease">&minus;</button>
-                                        <input type="number" class="input-box" value="1" min="1" max="10" readonly>
-                                        <button class="plus" aria-label="Increase">&plus;</button>
-                                    </div>
-                                </div>
-                                <div class="td_item item_price">
-                                    <label>Ksh. 260.00</label>
-                                </div>
-                                <div class="td_item item_remove">
-                                    <span class="material-icons-outlined">close</span>
-                                </div>
-                            </div>
+                            
                             <div class="tr_item">
                                 <div class="td_item item_like">
                                     <span class="material-icons-outlined"><i class="bi bi-heart-fill"></i></span>
@@ -199,6 +109,5 @@
             </section>
         </div>
     </section><!-- End Blog Single Section -->
-
-    @include('layouts.footer')
+    
 @endsection

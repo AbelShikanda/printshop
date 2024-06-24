@@ -157,6 +157,5 @@
             </div>
         </div>
     </section><!-- End Blog Single Section -->
-
-    @include('layouts.footer')
+    
 @endsection

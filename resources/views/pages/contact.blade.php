@@ -103,5 +103,4 @@
         </div>
     </section><!-- End Contact Section -->
     
-    @include('layouts.footer')
 @endsection

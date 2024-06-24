@@ -28,6 +28,5 @@
             </div>
         </div>
     </section><!-- End Portfolio Details Section -->
-
-    @include('layouts.footer')
+    
 @endsection

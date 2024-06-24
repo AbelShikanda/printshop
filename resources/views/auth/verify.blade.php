@@ -1,7 +1,12 @@
 @extends('layouts.app')
+@section('header')
+    {{-- Leave this section empty to exclude the sidebar --}}
+@endsection
+@section('footer')
+    {{-- Leave this section empty to exclude the sidebar --}}
+@endsection
 
 @section('content')
-@include('layouts.hero_auth')
 <div class="container pt-5 mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">

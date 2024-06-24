@@ -1,19 +1,24 @@
 @extends('layouts.app')
+@section('header')
+    {{-- Leave this section empty to exclude the sidebar --}}
+@endsection
+@section('footer')
+    {{-- Leave this section empty to exclude the sidebar --}}
+@endsection
 
 @section('content')
-    @include('layouts.hero_auth')
     <div class="container pt-5 mt-5">
         <div class="row justify-content-center">
             <div class="col-md-8" style="margin-bottom: 10%">
-                <div class="boxes-inbox">
+                <div class="login-box">
                     <div class="form"method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="card-header text-center mb-4">{{ __('Login') }}</div>
-                        <a href="{{ url('/') }}" class=" boxes-inbox-logo text-center"><img
+                        <a href="{{ url('/') }}" class=" login-box-logo text-center"><img
                                 src="{{ asset('assets/img/logo.png') }}" alt=""></a>
                         <div class="row">
                             <div class="col">
-                                <div class="inputBoxes-inbox">
+                                <div class="inputlogin-box">
                                     <input type="email" class="@error('email') is-invalid @enderror" name="email"
                                         value="{{ old('email') }}" required autocomplete="email" autofocus>
                                     <span>Email</span>
@@ -24,7 +29,7 @@
                                         </span>
                                     @enderror
                                 </div>
-                                <div class="inputBoxes-inbox">
+                                <div class="inputlogin-box">
                                     <input type="password" class="@error('password') is-invalid @enderror" name="password"
                                         required autocomplete="new-password">
                                     <span>Password</span>
@@ -49,8 +54,8 @@
                                     {{ __('Login') }}
                                 </button>
                                 <div class="links">
-                                    <a href="#">Forget password</a>
-                                    <a href="#">Register</a>
+                                    <a href="{{ route('password.request') }}">Forget password</a>
+                                    <a href="{{ route('register') }}">Register</a>
                                 </div>
                             </div>
                         </div>

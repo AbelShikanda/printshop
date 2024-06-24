@@ -39,4 +39,6 @@ Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
 Route::get('/cart/add/', [PagesController::class, 'add_to_cart'])->name('addToCart');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Route::get('/profile', [ProfileController::class, 'index'])->name('index');
+Route::get('/profile/show/{id}', [ProfileController::class, 'show'])->name('show');
+Route::get('/profile/edit/{id}', [ProfileController::class, 'edit'])->name('edit');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
