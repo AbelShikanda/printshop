@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -21,7 +22,42 @@ use App\Http\Controllers\ProfileController;
 
 
 
+Route::resource('/dashboard', DashboardController::class);
 
+// Route::get('/admin', function () {
+//     return view('admin.index');})
+    // ->middleware('adminauth');
+
+
+// Route::group(['prefix' => '/admin'], function() {
+//     Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('getLogin');
+//     Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('postLogin');
+//     Route::post('/logout', [AdminAuthController::class, 'adminLogout'])->name('adminLogout');
+//     Route::resource('/dashboard', DashboardController::class)->middleware('adminauth');
+//     // Route::get('/dashboard', [DashboardController::class, 'data'])->name('data');
+// });
+
+
+// Route::group(['middleware' => 'adminauth'], function() {
+//     Route::resource('colors', ColorController::class);
+//     Route::resource('sizes', SizeController::class);
+//     Route::resource('types', TypeController::class);
+//     Route::resource('materials', MaterialController::class);
+//     Route::resource('categories', CategoryController::class);
+//     Route::resource('products', ProductsController::class);
+//     Route::resource('product_images', ProductImageController::class);
+//     Route::resource('orders', OrdersController::class);
+//     Route::resource('order_items', OrderItemsController::class);
+//     Route::resource('admins', AdminController::class);
+//     Route::resource('users', UserController::class);
+//     Route::resource('blogs', BlogController::class);
+//     Route::resource('blog_categories', BlogCategoryController::class);
+//     Route::resource('blog_images', BlogImageController::class);
+//     Route::resource('contact', ContactController::class);
+
+//     Route::resource('permissions', PermissionsController::class);
+//     Route::resource('roles', RolesController::class);
+// });
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Auth::routes(['verify' => true]);
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

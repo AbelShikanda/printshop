@@ -5,7 +5,7 @@
             <div class="container">
 
                 <section class="profile">
-                    <header class="head">
+                    <header class="profile-head">
                         <div class="details">
                             <h1 class="heading">Claire Doe</h1>
                             <div class="location">
