@@ -4,6 +4,11 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-12">
+                @if (Session('success'))
+                    <div class="text-success text-center">
+                        <strong>{{ Session('success') }}</strong>
+                    </div>
+                @endif
                 <div class="row align-items-center mb-2">
                     <div class="col">
                         <h2 class="h5 page-title">Welcome!</h2>
@@ -153,7 +158,8 @@
                                     <div class="list-group-item">
                                         <div class="row align-items-center">
                                             <div class="col-3 col-md-2">
-                                                <img src="./assets/products/p1.jpg" alt="..." class="thumbnail-sm">
+                                                <img src="{{ asset('admin/assets/products/p1.jpg') }}" alt="..."
+                                                    class="thumbnail-sm">
                                             </div>
                                             <div class="col">
                                                 <strong>Fusion Backpack</strong>
@@ -171,7 +177,8 @@
                                     <div class="list-group-item">
                                         <div class="row align-items-center">
                                             <div class="col-3 col-md-2">
-                                                <img src="./assets/products/p2.jpg" alt="..." class="thumbnail-sm">
+                                                <img src="{{ asset('admin/assets/products/p2.jpg') }}" alt="..."
+                                                    class="thumbnail-sm">
                                             </div>
                                             <div class="col">
                                                 <strong>Luma hoodies</strong>
@@ -189,7 +196,8 @@
                                     <div class="list-group-item">
                                         <div class="row align-items-center">
                                             <div class="col-3 col-md-2">
-                                                <img src="./assets/products/p3.jpg" alt="..." class="thumbnail-sm">
+                                                <img src="{{ asset('admin/assets/products/p3.jpg') }}" alt="..."
+                                                    class="thumbnail-sm">
                                             </div>
                                             <div class="col">
                                                 <strong>Luma shorts</strong>
@@ -207,7 +215,8 @@
                                     <div class="list-group-item">
                                         <div class="row align-items-center">
                                             <div class="col-3 col-md-2">
-                                                <img src="./assets/products/p4.jpg" alt="..." class="thumbnail-sm">
+                                                <img src="{{ asset('admin/assets/products/p4.jpg') }}" alt="..."
+                                                    class="thumbnail-sm">
                                             </div>
                                             <div class="col">
                                                 <strong>Brown Trousers</strong>

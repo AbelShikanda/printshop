@@ -11,7 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicons -->
-    <link rel="icon" href="favicon.ico">
+    <link href="{{ asset('assets/img/logo.png') }}" rel="icon">
 
     <title>{{ config('app.name', 'PrintShop Admin') }}</title>
     <!-- Simple bar CSS -->
@@ -35,7 +35,6 @@
     <link rel="stylesheet" href=" {{ asset('admin/css/app-dark.css') }} " id="darkTheme ">
 
     <!-- Scripts -->
-    {{-- @vite(['resources/css/app.scss', 'resources/js/app.js']) --}}
 </head>
 
 <body class="vertical  dark  ">
@@ -61,8 +60,8 @@
     <script src="{{ asset('admin/js/moment.min.js') }}"></script>
     <script src="{{ asset('admin/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('admin/js/simplebar.min.js') }}"></script>
-    <script src='{{ asset('admin/js/daterangepicker.js') }}'></script>
-    <script src='{{ asset('admin/js/jquery.stickOnScroll.js') }}'></script>
+    <script src="{{ asset('admin/js/daterangepicker.js') }}"></script>
+    <script src="{{ asset('admin/js/jquery.stickOnScroll.js') }}"></script>
     <script src="{{ asset('admin/js/tinycolor-min.js') }}"></script>
     <script src="{{ asset('admin/js/config.js') }}"></script>
     <script src="{{ asset('admin/js/d3.min.js') }}"></script>
@@ -80,14 +79,14 @@
     <script src="{{ asset('admin/js/jquery.sparkline.min.js') }}"></script>
     <script src="{{ asset('admin/js/apexcharts.min.js') }}"></script>
     <script src="{{ asset('admin/js/apexcharts.custom.js') }}"></script>
-    <script src='{{ asset('admin/js/jquery.mask.min.js') }}'></script>
-    <script src='{{ asset('admin/js/select2.min.js') }}'></script>
-    <script src='{{ asset('admin/js/jquery.steps.min.js') }}'></script>
-    <script src='{{ asset('admin/js/jquery.validate.min.js') }}'></script>
-    <script src='{{ asset('admin/js/jquery.timepicker.js') }}'></script>
-    <script src='{{ asset('admin/js/dropzone.min.js') }}'></script>
-    <script src='{{ asset('admin/js/uppy.min.js') }}'></script>
-    <script src='{{ asset('admin/js/quill.min.js') }}'></script>
+    <script src="{{ asset('admin/js/jquery.mask.min.js') }}"></script>
+    <script src="{{ asset('admin/js/select2.min.js') }}"></script>
+    <script src="{{ asset('admin/js/jquery.steps.min.js') }}"></script>
+    <script src="{{ asset('admin/js/jquery.validate.min.js') }}"></script>
+    <script src="{{ asset('admin/js/jquery.timepicker.js') }}"></script>
+    <script src="{{ asset('admin/js/dropzone.min.js') }}"></script>
+    <script src="{{ asset('admin/js/uppy.min.js') }}"></script>
+    <script src="{{ asset('admin/js/quill.min.js') }}"></script>
     <script>
         $('.select2').select2({
             theme: 'bootstrap4',

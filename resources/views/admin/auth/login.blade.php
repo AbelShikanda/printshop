@@ -1,70 +1,45 @@
-@extends('layouts.app')
-@section('header')
+@extends('admin.layouts.app')
+@section('nav')
     {{-- Leave this section empty to exclude the sidebar --}}
 @endsection
-@section('footer')
+@section('sidebar')
     {{-- Leave this section empty to exclude the sidebar --}}
 @endsection
 
 @section('content')
-    <div class="container pt-5 mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8" style="margin-bottom: 10%">
-                <div class="login-box">
-                    <div class="form"method="POST" action="{{ route('login') }}">
-                        @csrf
-                        <div class="card-header text-center mb-4">{{ __('Login') }}</div>
-                        <a href="{{ url('/') }}" class=" login-box-logo text-center"><img
-                                src="{{ asset('assets/img/logo.png') }}" alt=""></a>
-                        <div class="row">
-                            <div class="col">
-                                <div class="inputlogin-box">
-                                    <input type="email" class="@error('email') is-invalid @enderror" name="email"
-                                        value="{{ old('email') }}" required autocomplete="email" autofocus>
-                                    <span>Email</span>
-                                    <i></i>
-                                    @error('email')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="inputlogin-box">
-                                    <input type="password" class="@error('password') is-invalid @enderror" name="password"
-                                        required autocomplete="new-password">
-                                    <span>Password</span>
-                                    <i></i>
-                                    @error('password')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
-                                </div>
-                                <div class="row mb-1 mt-4">
-                                        <div class="form-check">
-                                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-        
-                                            <label class="form-check-label" for="remember">
-                                                {{ __('Remember Me') }}
-                                            </label>
-                                        </div>
-                                </div>
-                                {{-- <input type="submit" value="Login"> --}}
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
-                                </button>
-                                <div class="links">
-                                    <a href="{{ route('password.request') }}">Forget password</a>
-                                    <a href="{{ route('register') }}">Register</a>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-
-                       
-                    </div>
+    <div class="row align-items-center h-100">
+        <form class="col-lg-3 col-md-4 col-10 mx-auto text-center" action="{{ route('postLogin') }}" method="POST">
+            @csrf
+            @if (Session('error'))
+                <div class="text-danger text-center">
+                    <strong>{{ Session('error') }}</strong>
                 </div>
+            @endif
+            @if (Session('success'))
+                <div class="text-success text-center">
+                    <strong>{{ Session('success') }}</strong>
+                </div>
+            @endif
+            <a class="navbar-brand mx-auto mt-2 flex-fill text-center" href="{{ asset('/') }}">
+                <img src="{{ asset('admin/assets/images/logo.png') }}" alt="logo" class="w-50">
+            </a>
+            <h1 class="h6 mb-3">Login in</h1>
+            <div class="form-group">
+                <label for="inputEmail" class="sr-only">Email address</label>
+                <input type="email" id="inputEmail" class="form-control form-control-lg" placeholder="Email address"
+                    required="" autofocus="" name="email">
             </div>
-        @endsection
+            <div class="form-group">
+                <label for="inputPassword" class="sr-only">Password</label>
+                <input type="password" id="inputPassword" class="form-control form-control-lg" placeholder="Password"
+                    required="" name="password">
+            </div>
+            <div class="checkbox mb-3">
+                <label>
+                    <input type="checkbox" value="remember-me"> Stay logged in </label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Let me in</button>
+            <p class="mt-5 mb-3 text-muted">© 2024</p>
+        </form>
+    </div>
+@endsection

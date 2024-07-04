@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\AdminAuthenticated;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -12,7 +13,14 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-        //
+        // Register middleware aliases
+        $middleware->alias([
+            'adminauth' => AdminAuthenticated::class,
+        ]);
+        // Register middleware groups
+        $middleware->group('admin', [
+            'adminauth',
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //
