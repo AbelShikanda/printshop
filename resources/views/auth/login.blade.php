@@ -11,7 +11,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8" style="margin-bottom: 10%">
                 <div class="login-box">
-                    <div class="form"method="POST" action="{{ route('login') }}">
+                    <form class="form"method="POST" action="{{ route('login') }}">
                         @csrf
                         <div class="card-header text-center mb-4">{{ __('Login') }}</div>
                         <a href="{{ url('/') }}" class=" login-box-logo text-center"><img
@@ -59,12 +59,7 @@
                                 </div>
                             </div>
                         </div>
-
-
-
-
-                       
-                    </div>
+                    </form>
                 </div>
             </div>
         @endsection

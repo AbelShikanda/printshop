@@ -84,6 +84,74 @@ class PagesController extends Controller
         ]));
     }
 
+    // public function getAddToCart(Request $request, $id)
+    // {
+    //     $products = Products::find($id);
+    //     $oldCart = Session::has('cart') ? Session::get('cart') : null;
+    //     $cart = new Cart($oldCart);
+    //     $cart->add($products, $products->id);
+
+    //     $request->session()->put('cart', $cart);
+    //     return redirect()->route('cart');
+    // }
+
+    // public function updateCart(Request $request, $id)
+    // {
+    //     $size = $request->size;
+    //     $color = $request->color;
+    //     $products = Products::find($id);
+    //     $oldCart = Session::has('cart') ? Session::get('cart') : null;
+    //     $cart = new Cart($oldCart);
+    //     $cart->update($products, $products->id, $size, $color);
+
+    //     Session::put('cart', $cart);
+    //     return redirect()->route('cart');
+    // }
+
+    // public function getReduceCart($id)
+    // {
+    //     $oldCart = Session::has('cart') ? Session::get('cart') : null;
+    //     $cart = new Cart($oldCart);
+    //     $cart->reduce($id);
+
+    //     if (count($cart->items) > 0) {
+    //         Session::put('cart', $cart);
+    //     } else {
+    //         Session::forget('cart');
+    //     }
+
+
+    //     return redirect()->route('cart');
+    // }
+
+    // public function deleteCart($id)
+    // {
+    //     $oldCart = Session::has('cart') ? Session::get('cart') : null;
+    //     $cart = new Cart($oldCart);
+    //     $cart->remove($id);
+
+    //     if (count($cart->items) > 0) {
+    //         Session::put('cart', $cart);
+    //     } else {
+    //         Session::forget('cart');
+    //     }
+    //     return redirect()->route('cart');
+    // }
+
+    // public function getCart()
+    // {
+    //     if (!Session::has('cart')) {
+    //         return View('customers.pages.cart');
+    //     }
+    //     $oldCart = Session::get('cart');
+    //     $cart = new Cart($oldCart);
+    //     return View('customers.pages.cart', [
+    //         'products' => $cart->items,
+    //         'totalPrice' => $cart->totalPrice,
+    //         'shipping' => 300,
+    //     ]);
+    // }
+
     /**
      * function to display blog detail
      *

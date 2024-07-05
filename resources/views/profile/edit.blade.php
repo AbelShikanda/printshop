@@ -16,7 +16,7 @@
                     <div class="profile_edit_title">
                         Edit Details
                     </div>
-                    <div class="form_row">
+                    <form class="form_row">
                         <div class="form_group">
                             <label class="input_label">Email</label>
                             <input type="email" class="input" name='email' value="email" required />
@@ -42,8 +42,8 @@
                             <label class="input_label">Location</label>
                             <input type="text" class="input" id="card_number" name='location' value="location" required />
                         </div>
-                        <button class="btn mt-5">Checkout</button>
-                    </div>
+                        <a class="btn mt-5 text-dark p-4" href="{{ route('profileUpdate', 1) }}">Edit</a></a>
+                    </form>
                 </div>
             </section>
         </div>

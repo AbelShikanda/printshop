@@ -1,38 +1,53 @@
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
 
-    <!-- ======= Header ======= -->
-    <header id="header" class="fixed-top">
-        <div class="container d-flex align-items-center justify-content-between">
+        <a href="{{ url('/') }}" class="logo"><img src="{{ asset('assets/img/logo.png') }}" alt=""
+                class="img-fluid"></a>
+        <h1 class="logo"><a href="{{ url('/') }}">PrintShop</a></h1>
 
-            <a href="{{ url('/') }}" class="logo"><img src="{{ asset('assets/img/logo.png') }}" alt="" class="img-fluid"></a>
-            <h1 class="logo"><a href="{{ url('/') }}">PrintShop</a></h1>
+        <nav id="navbar" class="navbar">
+            <ul>
+                <li><a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">Home</a>
+                </li>
+                <li><a class="nav-link {{ request()->is('catalog') ? 'active' : '' }}"
+                        href="{{ url('/catalog') }}">Catalog</a></li>
+                <li><a class="nav-link {{ request()->is('blog') ? 'active' : '' }}" href="{{ url('/blog') }}">Blog</a>
+                </li>
+                <li><a class="nav-link {{ request()->is('contact') ? 'active' : '' }}"
+                        href="{{ url('/contact') }}">Contact</a></li>
+                <!-- Authentication Links -->
+                @guest
+                    @if (Route::has('login'))
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('login') ? 'active' : '' }}"
+                                href="{{ route('login') }}">{{ __('Login') }}</a>
+                        </li>
+                    @endif
 
-            <nav id="navbar" class="navbar">
-                <ul>
-                    <li><a class="nav-link {{ request()->is('/') ? 'active' : '' }}" href="{{ url('/') }}">Home</a></li>
-                    <li><a class="nav-link {{ request()->is('catalog') ? 'active' : '' }}" href="{{ url('/catalog') }}">Catalog</a></li>
-                    <li><a class="nav-link {{ request()->is('blog') ? 'active' : '' }}" href="{{ url('/blog') }}">Blog</a></li>
-                    <li><a class="nav-link {{ request()->is('contact') ? 'active' : '' }}" href="{{ url('/contact') }}">Contact</a></li>
-                    <!-- Authentication Links -->
-                    @guest
-                        @if (Route::has('login'))
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->is('login') ? 'active' : '' }}" href="{{ route('login') }}">{{ __('Login') }}</a>
+                    @if (Route::has('register'))
+                        <li class="nav-item">
+                            <a class="nav-link {{ request()->is('register') ? 'active' : '' }}"
+                                href="{{ route('register') }}">{{ __('Register') }}</a>
+                        </li>
+                    @endif
+                @else
+                    <li class="nav-item dropdown">
+                        <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                            {{ Auth::user()->first_name }}
+                        </a>
+                        <ul>
+                            <li><a href="{{ route('profile') }}">Profile</a></li>
+                            <li class="cart__menu">
+                                <a href="{{ route('addToCart') }}">
+                                    {{-- <span id="cart_qty">
+                                        {{ Session::has('cart') ? Session::get('cart')->totalQty : '0' }}
+                                    </span> --}}
+                                    <div class="cartword">Cart</div>
+                                </a>
                             </li>
-                        @endif
-
-                        @if (Route::has('register'))
-                            <li class="nav-item">
-                                <a class="nav-link {{ request()->is('register') ? 'active' : '' }}" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>
-                        @endif
-                    @else
-                        <li class="nav-item dropdown">
-                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
-                                data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                {{ Auth::user()->name }}
-                            </a>
-
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li>
                                 <a class="dropdown-item" href="{{ route('logout') }}"
                                     onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -42,12 +57,13 @@
                                 <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                     @csrf
                                 </form>
-                            </div>
-                        </li>
-                    @endguest
-                </ul>
-                <i class="bi bi-list mobile-nav-toggle"></i>
-            </nav><!-- .navbar -->
+                            </li>
+                        </ul>
+                    </li>
+                @endguest
+            </ul>
+            <i class="bi bi-list mobile-nav-toggle"></i>
+        </nav><!-- .navbar -->
 
-        </div>
-    </header><!-- End Header -->
+    </div>
+</header><!-- End Header -->

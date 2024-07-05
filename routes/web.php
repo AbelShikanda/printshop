@@ -54,10 +54,7 @@ Auth::routes(['verify' => true]);
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-// Route::get('/home', [HomeController::class, 'index'])
-// ->middleware(['auth', 'verified'])
-// ->name('home');
-Route::get('/home', [HomeController::class, 'homeDisplay'])->name('homeDisplay');
+// Route::get('/home', [HomeController::class, 'homeDisplay'])->name('homeDisplay');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Route::get('/catalog', [PagesController::class, 'catalog'])->name('catalog');
 Route::get('/catalog/detail', [PagesController::class, 'catalog_detail'])->name('catalogDetail');
@@ -66,7 +63,10 @@ Route::get('/blog/single', [PagesController::class, 'blog_single'])->name('blogS
 Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
 Route::get('/cart/add/', [PagesController::class, 'add_to_cart'])->name('addToCart');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Route::get('/profile', [ProfileController::class, 'index'])->name('index');
-Route::get('/profile/show/{id}', [ProfileController::class, 'show'])->name('show');
-Route::get('/profile/edit/{id}', [ProfileController::class, 'edit'])->name('edit');
+Route::group(['middleware' => ['auth', 'verified']], function() {
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::get('/profile/show/{id}', [ProfileController::class, 'show'])->name('profileShow');
+    Route::get('/profile/edit/{id}', [ProfileController::class, 'edit'])->name('profileEdit');
+    Route::get('/profile/update/{id}', [ProfileController::class, 'update'])->name('profileUpdate');
+});
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

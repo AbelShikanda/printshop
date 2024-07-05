@@ -37,7 +37,7 @@
     <!-- Scripts -->
 </head>
 
-<body class="vertical  dark  ">
+<body class="vertical dark">
     <div class="wrapper">
         @section('nav')
             @include('admin.layouts.nav')
