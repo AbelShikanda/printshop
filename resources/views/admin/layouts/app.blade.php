@@ -28,6 +28,8 @@
     <link rel="stylesheet" href=" {{ asset('admin/css/jquery.steps.css') }} ">
     <link rel="stylesheet" href=" {{ asset('admin/css/jquery.timepicker.css') }} ">
     <link rel="stylesheet" href=" {{ asset('admin/css/quill.snow.css') }} ">
+
+    <link rel="stylesheet" href=" {{ asset('admin/css/dataTables.bootstrap4.css') }}">
     <!-- Date Range Picker CSS -->
     <link rel="stylesheet" href=" {{ asset('admin/css/daterangepicker.css') }} ">
     <!-- App CSS -->
@@ -87,6 +89,7 @@
     <script src="{{ asset('admin/js/dropzone.min.js') }}"></script>
     <script src="{{ asset('admin/js/uppy.min.js') }}"></script>
     <script src="{{ asset('admin/js/quill.min.js') }}"></script>
+    <script src="{{ asset('admin/js/dataTables.bootstrap4.min.js') }}"></script>
     <script>
         $('.select2').select2({
             theme: 'bootstrap4',
@@ -257,6 +260,16 @@
                 console.log('Upload complete! We’ve uploaded these files:', result.successful)
             });
         }
+    </script>
+    <script>
+      $('#dataTable-1').DataTable(
+      {
+        autoWidth: true,
+        "lengthMenu": [
+          [16, 32, 64, -1],
+          [16, 32, 64, "All"]
+        ]
+      });
     </script>
     <script src="{{ asset('admin/js/apps.js') }}"></script>
 

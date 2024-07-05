@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class BlogsController extends Controller
+class PermissionsController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        return view('admin.blogs.index');
+        //
     }
 
     /**
@@ -20,7 +20,7 @@ class BlogsController extends Controller
      */
     public function create()
     {
-        return view('admin.blogs.create');
+        //
     }
 
     /**
@@ -28,7 +28,7 @@ class BlogsController extends Controller
      */
     public function store(Request $request)
     {
-        // return view('admin.blogs.index');
+        //
     }
 
     /**
@@ -36,7 +36,7 @@ class BlogsController extends Controller
      */
     public function show(string $id)
     {
-        return view('admin.blogs.show');
+        //
     }
 
     /**
@@ -44,7 +44,7 @@ class BlogsController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin.blogs.edit');
+        //
     }
 
     /**
@@ -52,7 +52,7 @@ class BlogsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // return view('admin.blogs.index');
+        //
     }
 
     /**
@@ -60,6 +60,6 @@ class BlogsController extends Controller
      */
     public function destroy(string $id)
     {
-        // return view('admin.blogs.index');
+        //
     }
 }

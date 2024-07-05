@@ -13,7 +13,7 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        //
+        return view('admin.orders.index');
     }
 
     /**
@@ -21,7 +21,7 @@ class OrdersController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.orders.create');
     }
 
     /**
@@ -29,7 +29,7 @@ class OrdersController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // return view('admin.orders.index');
     }
 
     /**
@@ -37,7 +37,7 @@ class OrdersController extends Controller
      */
     public function show(Orders $orders)
     {
-        //
+        return view('admin.orders.show');
     }
 
     /**
@@ -45,7 +45,7 @@ class OrdersController extends Controller
      */
     public function edit(Orders $orders)
     {
-        //
+        return view('admin.orders.edit');
     }
 
     /**
@@ -53,7 +53,7 @@ class OrdersController extends Controller
      */
     public function update(Request $request, Orders $orders)
     {
-        //
+        // return view('admin.orders.index');
     }
 
     /**
@@ -61,6 +61,6 @@ class OrdersController extends Controller
      */
     public function destroy(Orders $orders)
     {
-        //
+        // return view('admin.orders.index');
     }
 }

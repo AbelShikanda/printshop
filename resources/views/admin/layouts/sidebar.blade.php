@@ -34,11 +34,11 @@
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="ui-elements">
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="./ui-color.html"><span class="ml-1 item-text">Order</span>
+                        <a class="nav-link pl-3" href="{{ route('orders.index') }}"><span class="ml-1 item-text">Order</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="./ui-typograpy.html"><span class="ml-1 item-text">Order
+                        <a class="nav-link pl-3" href="{{ route('order_items.index') }}"><span class="ml-1 item-text">Order
                                 Details</span></a>
                     </li>
                 </ul>
@@ -50,29 +50,31 @@
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="forms">
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="./form_elements.html"><span
+                        <a class="nav-link pl-3" href="{{ route('products.index') }}"><span
                                 class="ml-1 item-text">Products</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="./form_advanced.html"><span
+                        <a class="nav-link pl-3" href="{{ route('product_categories.index') }}"><span
                                 class="ml-1 item-text">Categories</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="./form_validation.html"><span
+                        <a class="nav-link pl-3" href="{{ route('sizes.index') }}"><span
                                 class="ml-1 item-text">Size</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="./form_wizard.html"><span class="ml-1 item-text">Color</span></a>
+                        <a class="nav-link pl-3" href="{{ route('colors.index') }}"><span 
+                            class="ml-1 item-text">Color</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="./form_layouts.html"><span
+                        <a class="nav-link pl-3" href="{{ route('materials.index') }}"><span
                                 class="ml-1 item-text">Material</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="./form_upload.html"><span class="ml-1 item-text">Type</span></a>
+                        <a class="nav-link pl-3" href="{{ route('types.index') }}"><span 
+                            class="ml-1 item-text">Type</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="./form_upload.html"><span
+                        <a class="nav-link pl-3" href="{{ route('product_images.index') }}"><span
                                 class="ml-1 item-text">Images</span></a>
                     </li>
                 </ul>
@@ -89,11 +91,11 @@
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="charts">
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="./chart-inline.html"><span
+                        <a class="nav-link pl-3" href="{{ route('users.index') }}"><span
                                 class="ml-1 item-text">Users</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="./chart-chartjs.html"><span
+                        <a class="nav-link pl-3" href="{{ route('admins.index') }}"><span
                                 class="ml-1 item-text">Admins</span></a>
                     </li>
                 </ul>
@@ -105,11 +107,11 @@
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="chart">
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="./chart-inline.html"><span
+                        <a class="nav-link pl-3" href="{{ route('roles.index') }}"><span
                                 class="ml-1 item-text">Roles</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="./chart-chartjs.html"><span
+                        <a class="nav-link pl-3" href="{{ route('permissions.index') }}"><span
                                 class="ml-1 item-text">Permissions</span></a>
                     </li>
                 </ul>
@@ -127,35 +129,19 @@
                 </a>
                 <ul class="collapse list-unstyled pl-4 w-100" id="tables">
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="./table_basic.html"><span
+                        <a class="nav-link pl-3" href="{{ route('blogs.index') }}"><span
                                 class="ml-1 item-text">Articles</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="./table_advanced.html"><span
+                        <a class="nav-link pl-3" href="{{ route('blog_categories.index') }}"><span
                                 class="ml-1 item-text">Categories</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="./table_datatables.html"><span
+                        <a class="nav-link pl-3" href="{{ route('blog_images.index') }}"><span
                                 class="ml-1 item-text">Images</span></a>
                     </li>
                 </ul>
             </li>
         </ul>
-        <p class="text-muted nav-heading mt-4 mb-1">
-            <span>Documentation</span>
-        </p>
-        <ul class="navbar-nav flex-fill w-100 mb-2">
-            <li class="nav-item w-100">
-                <a class="nav-link" href="../docs/index.html">
-                    <i class="fe fe-help-circle fe-16"></i>
-                    <span class="ml-3 item-text">Getting Start</span>
-                </a>
-            </li>
-        </ul>
-        <div class="btn-box w-100 mt-4 mb-1">
-            <button type="button" class="btn mb-2 btn-primary btn-lg btn-block">
-                <i class="fe fe-shopping-cart fe-12 mr-2"></i><span class="small">Buy now</span>
-            </button>
-        </div>
     </nav>
 </aside>

@@ -1,12 +1,30 @@
 <?php
 
-use App\Http\Controllers\Admin\Auth\AdminAuthController;
-use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\Auth\AdminAuthController;
+use App\Http\Controllers\Admin\BlogCategoriesController;
+use App\Http\Controllers\Admin\BlogImageController;
+use App\Http\Controllers\Admin\BlogsController;
+use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\OrderItemsController;
+use App\Http\Controllers\Admin\OrdersController;
+use App\Http\Controllers\Admin\PermissionsController;
+use App\Http\Controllers\Admin\ProductCategoriesController;
+use App\Http\Controllers\Admin\ProductColorsController;
+use App\Http\Controllers\Admin\ProductImageController;
+use App\Http\Controllers\Admin\ProductMaterialsController;
+use App\Http\Controllers\Admin\ProductsController;
+use App\Http\Controllers\Admin\ProductSizesController;
+use App\Http\Controllers\Admin\ProductTypesController;
+use App\Http\Controllers\Admin\RolesController;
+use App\Http\Controllers\Admin\UserController;
+
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProfileController;
 
 
@@ -16,7 +34,6 @@ Route::get('/admin_', function () {
     return view('dashboard.index');})
     ->middleware('adminauth');
 
-
 Route::group(['prefix' => '/admin'], function() {
     Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('getLogin');
     Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('postLogin');
@@ -25,27 +42,26 @@ Route::group(['prefix' => '/admin'], function() {
     Route::resource('dashboard', DashboardController::class)->middleware('adminauth');
 });
 
+Route::group(['middleware' => 'adminauth'], function() {
+    Route::resource('colors', ProductColorsController::class);
+    Route::resource('sizes', ProductSizesController::class);
+    Route::resource('types', ProductTypesController::class);
+    Route::resource('materials', ProductMaterialsController::class);
+    Route::resource('product_categories', ProductCategoriesController::class);
+    Route::resource('products', ProductsController::class);
+    Route::resource('product_images', ProductImageController::class);
+    Route::resource('orders', OrdersController::class);
+    Route::resource('order_items', OrderItemsController::class);
+    Route::resource('admins', AdminController::class);
+    Route::resource('users', UserController::class);
+    Route::resource('blogs', BlogsController::class);
+    Route::resource('blog_categories', BlogCategoriesController::class);
+    Route::resource('blog_images', BlogImageController::class);
+    Route::resource('contact', ContactController::class);
 
-// Route::group(['middleware' => 'adminauth'], function() {
-//     Route::resource('colors', ColorController::class);
-//     Route::resource('sizes', SizeController::class);
-//     Route::resource('types', TypeController::class);
-//     Route::resource('materials', MaterialController::class);
-//     Route::resource('categories', CategoryController::class);
-//     Route::resource('products', ProductsController::class);
-//     Route::resource('product_images', ProductImageController::class);
-//     Route::resource('orders', OrdersController::class);
-//     Route::resource('order_items', OrderItemsController::class);
-//     Route::resource('admins', AdminController::class);
-//     Route::resource('users', UserController::class);
-//     Route::resource('blogs', BlogController::class);
-//     Route::resource('blog_categories', BlogCategoryController::class);
-//     Route::resource('blog_images', BlogImageController::class);
-//     Route::resource('contact', ContactController::class);
-
-//     Route::resource('permissions', PermissionsController::class);
-//     Route::resource('roles', RolesController::class);
-// });
+    Route::resource('permissions', PermissionsController::class);
+    Route::resource('roles', RolesController::class);
+});
 
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Auth::routes(['verify' => true]);
@@ -54,7 +70,6 @@ Auth::routes(['verify' => true]);
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-// Route::get('/home', [HomeController::class, 'homeDisplay'])->name('homeDisplay');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Route::get('/catalog', [PagesController::class, 'catalog'])->name('catalog');
 Route::get('/catalog/detail', [PagesController::class, 'catalog_detail'])->name('catalogDetail');
