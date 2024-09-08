@@ -13,7 +13,10 @@ class ProductTypesController extends Controller
      */
     public function index()
     {
-        //
+        $types = ProductTypes::latest()->get();
+        return view('admin.types.index', with([
+            'types' => $types,
+        ]));
     }
 
     /**

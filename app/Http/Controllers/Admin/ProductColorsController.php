@@ -13,7 +13,10 @@ class ProductColorsController extends Controller
      */
     public function index()
     {
-        //
+        $product_colors = ProductColors::latest()->get();
+        return view('admin.colors.index', with([
+            'product_colors' => $product_colors, 
+        ]));
     }
 
     /**

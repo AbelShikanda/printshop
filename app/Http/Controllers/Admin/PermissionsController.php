@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
 class PermissionsController extends Controller
 {
@@ -12,7 +13,10 @@ class PermissionsController extends Controller
      */
     public function index()
     {
-        //
+        $permissions = Permission::latest()->get();
+        return view('admin.permissions.index', with([
+            'permissions' => $permissions,
+        ]));
     }
 
     /**

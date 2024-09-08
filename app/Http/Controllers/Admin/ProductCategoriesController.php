@@ -13,7 +13,11 @@ class ProductCategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $productCategories = ProductCategories::latest()->get();
+        // dd($productCategories);
+        return view('admin.categories.productCategories.index', with([
+            'productCategories' => $productCategories,
+        ]));
     }
 
     /**

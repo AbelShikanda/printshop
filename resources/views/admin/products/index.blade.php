@@ -4,10 +4,17 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-12">
-                <h2 class="mb-2 page-title">Data table</h2>
-                <p class="card-text">DataTables is a plug-in for the jQuery Javascript library. It is a highly flexible tool,
-                    built upon the foundations of progressive enhancement, that adds all of these advanced features to any
-                    HTML table. </p>
+                <h2 class="mb-2 page-title">Products Table</h2>
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="card-text">
+                            Product available in the organization
+                        </p>
+                    </div>
+                    <div class="col-md-6">
+                        <a type="button" class=" float-right btn mb-2 btn-outline-primary">Add Product</a>
+                    </div>
+                </div>
                 <div class="row my-4">
                     <!-- Small table -->
                     <div class="col-md-12">
@@ -17,7 +24,6 @@
                                 <table class="table datatables" id="dataTable-1">
                                     <thead>
                                         <tr>
-                                            <th></th>
                                             <th>#</th>
                                             <th>Name</th>
                                             <th>Phone</th>
@@ -31,12 +37,6 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>
-                                                <div class="custom-control custom-checkbox">
-                                                    <input type="checkbox" class="custom-control-input">
-                                                    <label class="custom-control-label"></label>
-                                                </div>
-                                            </td>
                                             <td>368</td>
                                             <td>Imani Lara</td>
                                             <td>(478) 446-9234</td>
@@ -52,7 +52,7 @@
                                                 <div class="dropdown-menu dropdown-menu-right">
                                                     <a class="dropdown-item" href="#">Edit</a>
                                                     <a class="dropdown-item" href="#">Remove</a>
-                                                    <a class="dropdown-item" href="#">Assign</a>
+                                                    <a class="dropdown-item" href="#">view</a>
                                                 </div>
                                             </td>
                                         </tr>

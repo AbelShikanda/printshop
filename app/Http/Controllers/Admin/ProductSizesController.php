@@ -13,7 +13,10 @@ class ProductSizesController extends Controller
      */
     public function index()
     {
-        //
+        $sizes = ProductSizes::latest()->get();
+        return view('admin.sizes.index', with([
+            'sizes' => $sizes,
+        ]));
     }
 
     /**

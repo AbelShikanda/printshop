@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ProductMaterials;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Debug\VirtualRequestStack;
 
 class ProductMaterialsController extends Controller
 {
@@ -13,7 +15,10 @@ class ProductMaterialsController extends Controller
      */
     public function index()
     {
-        //
+        $productMaterials = ProductMaterials::latest()->get();
+        return View('admin.materials.index', with([
+            'productMaterials' => $productMaterials,
+        ]));
     }
 
     /**

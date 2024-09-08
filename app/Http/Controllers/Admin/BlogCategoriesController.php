@@ -13,7 +13,10 @@ class BlogCategoriesController extends Controller
      */
     public function index()
     {
-        //
+        $blogCategories = BlogCategories::latest()->get();
+        return view('admin.categories.blogCategories.index', with([
+            'blogCategories' => $blogCategories,
+        ]));
     }
 
     /**

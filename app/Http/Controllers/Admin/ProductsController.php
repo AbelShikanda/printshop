@@ -3,6 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
+use App\Models\Color;
+use App\Models\Material;
+use App\Models\Products;
+use App\Models\ProductTypes;
+use App\Models\Size;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -12,7 +18,20 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        return view('admin.products.index');
+        // $categories = Category::all();
+        // $colors = Color::all();
+        // $sizes = Size::all();
+        // $materials = Material::all();
+        // $types = ProductTypes::all();
+        // $products = Products::orderBy('id', 'ASC')->paginate(10);
+        return view('admin.products.index', with([
+            // 'categories' => $categories,
+            // 'colors' => $colors,
+            // 'sizes' => $sizes,
+            // 'materials' => $materials,
+            // 'types' => $types,
+            // 'products' => $products,
+        ]));
     }
 
     /**

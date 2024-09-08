@@ -42,7 +42,7 @@
                             <label class="input_label">Location</label>
                             <input type="text" class="input" id="card_number" name='location' value="location" required />
                         </div>
-                        <a class="btn mt-5 text-dark p-4" href="{{ route('profileUpdate', 1) }}">Edit</a></a>
+                        <a class="btn mt-2 mb-5 text-dark p-4" href="{{ route('profileUpdate', 1) }}">Edit</a></a>
                     </form>
                 </div>
             </section>
