@@ -20,6 +20,10 @@
                         <a class="nav-link pl-3" href="{{ route('dashboard.index') }}"><span
                                 class="ml-1 item-text">Home</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link pl-3" href="{{ route('schedules') }}"><span
+                                class="ml-1 item-text">schedule</span></a>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -76,6 +80,10 @@
                     <li class="nav-item">
                         <a class="nav-link pl-3" href="{{ route('product_images.index') }}"><span
                                 class="ml-1 item-text">Images</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link pl-3" href="{{ route('prices.index') }}"><span
+                                class="ml-1 item-text">Prices</span></a>
                     </li>
                 </ul>
             </li>

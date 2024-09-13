@@ -4,25 +4,17 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-12">
-                <h2 class="mb-2 page-title">Products Table</h2>
+                <h2 class="mb-2 page-title">Price Details Table</h2>
                 <div class="row">
                     <div class="col-md-6">
                         <p class="card-text">
-                            Product available in the organization
+                            Price Details available in the organization
                         </p>
                     </div>
                     <div class="col-md-6">
-                        <a href={{ route('products.create') }} type="button"
-                            class=" float-right btn mb-2 btn-outline-primary">Add Product</a>
+                        <a href={{ route('prices.create') }} type="button" class=" float-right btn mb-2 btn-outline-primary">Add Price Details</a>
                     </div>
                 </div>
-
-                @if (Session('success'))
-                    <div class="text-success text-center">
-                        <strong>{{ Session('success') }}</strong>
-                    </div>
-                @endif
-
                 <div class="row my-4">
                     <!-- Small table -->
                     <div class="col-md-12">
@@ -33,19 +25,20 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Name</th>
-                                            <th>Description</th>
                                             <th>Price</th>
-                                            <th></th>
+                                            <th>Type of product</th>
+                                            <th>created at</th>
+                                            <th>updated at</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($products as $p)
+                                        @foreach ($prices as $item)
                                             <tr>
-                                                <td>{{ $p->id }}</td>
-                                                <td>{{ $p->name }}</td>
-                                                <td>{{ $p->description }}</td>
-                                                <td>{{ $p->price }}</td>
+                                                <td>{{ $item->id }}</td>
+                                                <td>{{ $item->price }}</td>
+                                                <td>{{ $item->type_name }}</td>
+                                                <td>{{ $item->created_at }}</td>
+                                                <td>{{ $item->updated_at }}</td>
                                                 <td><button class="btn btn-sm dropdown-toggle more-horizontal"
                                                         type="button" data-toggle="dropdown" aria-haspopup="true"
                                                         aria-expanded="false">
@@ -54,7 +47,6 @@
                                                     <div class="dropdown-menu dropdown-menu-right">
                                                         <a class="dropdown-item" href="#">Edit</a>
                                                         <a class="dropdown-item" href="#">Remove</a>
-                                                        <a class="dropdown-item" href="#">view</a>
                                                     </div>
                                                 </td>
                                             </tr>

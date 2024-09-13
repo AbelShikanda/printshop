@@ -195,7 +195,7 @@
             <div class="row">
                 <div class="col-md-12">
 
-                    <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+                    {{-- <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
                         <div class="swiper-wrapper">
 
                             <div class="swiper-slide">
@@ -233,7 +233,7 @@
                             </div><!-- End testimonial item -->
                         </div>
                         <div class="swiper-pagination"></div>
-                    </div>
+                    </div> --}}
 
                     <!-- <div id="testimonial-mf" class="owl-carousel owl-theme">
                                           

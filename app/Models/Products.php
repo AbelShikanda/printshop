@@ -22,7 +22,6 @@ class Products extends Model
         'sizes_id',
         'materials_id',
         'type_id',
-        'sku',
         'name',
         'slug',
         'description',

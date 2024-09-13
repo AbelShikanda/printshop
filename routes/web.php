@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PricesController;
 use App\Http\Controllers\ProfileController;
 
 
@@ -40,6 +41,7 @@ Route::group(['prefix' => '/admin'], function() {
     Route::post('/register', [AdminAuthController::class, 'postLogin'])->name('postLogin');
     Route::post('/logout', [AdminAuthController::class, 'adminLogout'])->name('adminLogout');
     Route::resource('dashboard', DashboardController::class)->middleware('adminauth');
+    Route::get('/schedules', [DashboardController::class, 'schedules'])->name('schedules');
 });
 
 Route::group(['middleware' => 'adminauth'], function() {
@@ -58,6 +60,7 @@ Route::group(['middleware' => 'adminauth'], function() {
     Route::resource('blog_categories', BlogCategoriesController::class);
     Route::resource('blog_images', BlogImageController::class);
     Route::resource('contact', ContactController::class);
+    Route::resource('prices', PricesController::class);
 
     Route::resource('permissions', PermissionsController::class);
     Route::resource('roles', RolesController::class);
