@@ -21,7 +21,12 @@ class ProductsController extends Controller
      */
     public function index()
     {
-        $products = Products::orderBy('id', 'DESC')->paginate(10);
+        $products = Products::with('ProductType')->orderBy('id', 'DESC')->get();
+        // dd($products);
+        // foreach ($products as $value) {
+        //     // dd($products, $key, $value);
+        //     dd($value->ProductType[0]->name);
+        // }
         return view('admin.products.index', with([
             'products' => $products,
         ]));
@@ -42,7 +47,8 @@ class ProductsController extends Controller
             'colors' => $colors,
             'sizes' => $sizes,
             'materials' => $materials,
-            'product_types' => $product_types,]));
+            'product_types' => $product_types,
+        ]));
     }
 
     /**
@@ -67,11 +73,11 @@ class ProductsController extends Controller
         // dd($request->input('type'));
         $price = Prices::where('type_id', $request->input('type'))->pluck('price')->first();
         // dd($price);
-        
+
         try {
             DB::beginTransaction();
             // Logic For Save User Data
-            
+
             $product = Products::create([
                 'categories_id' => $request->category,
                 'colors_id' => $request->color,
@@ -85,7 +91,7 @@ class ProductsController extends Controller
                 'status' => 0,
             ]);
             // dd($product);
-            
+
             // ProductCategories::create([
             //     'products_id' => $product->id,
             //     'category_id' => $product->categories_id,
@@ -112,7 +118,7 @@ class ProductsController extends Controller
             // ]);
 
 
-            if(!$product){
+            if (!$product) {
                 DB::rollBack();
 
                 return back()->with('error', 'Something went wrong while saving user data');
@@ -120,8 +126,6 @@ class ProductsController extends Controller
 
             DB::commit();
             return redirect()->route('products.index')->with('success', 'product stored successfully');
-
-
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;

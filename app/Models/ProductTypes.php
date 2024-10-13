@@ -30,4 +30,12 @@ class ProductTypes extends Model
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
     }
+
+    /**
+     * Define the relationship: a product type has many products.
+     */
+    public function products()
+    {
+        return $this->bekongsToMany(Products::class, 'product_product_types', 'type_id', 'products_id');
+    }
 }

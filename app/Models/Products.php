@@ -82,13 +82,13 @@ class Products extends Model
     //     return $this->belongsToMany(Color::class);
     // }
     
-    // /**
-    // * Get the ProductType.
-    // */
-    // public function ProductType()
-    // {
-    //     return $this->belongsToMany(ProductType::class, 'products_product_types', 'products_id', 'id');
-    // }
+    /**
+    * Get the ProductType.
+    */
+    public function ProductType()
+    {
+        return $this->belongsToMany(ProductTypes::class, 'product_product_types', 'products_id', 'type_id');
+    }
     
     // /**
     // * Get the Material.
