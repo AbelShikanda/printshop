@@ -46,9 +46,6 @@
                                                 <td>{{ $p->id }}</td>
                                                 <td>{{ $p->name }}</td>
                                                 <td>{{ $p->ProductType[0]->name }}</td>
-                                                {{-- @foreach ($p as $item)
-                                                <td>{{ $item->ProductType->name }}</td>
-                                                @endforeach --}}
                                                 <td>{{ $p->description }}</td>
                                                 <td>{{ $p->price }}</td>
                                                 <td><button class="btn btn-sm dropdown-toggle more-horizontal"
@@ -57,9 +54,21 @@
                                                         <span class="text-muted sr-only">Action</span>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Edit</a>
-                                                        <a class="dropdown-item" href="#">Remove</a>
-                                                        <a class="dropdown-item" href="#">view</a>
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('products.show', $p->id) }}">view</a>
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('products.edit', $p->id) }}">Edit</a>
+
+                                                        <a class="dropdown-item" href="{{ route('products.destroy', $p->id) }}"
+                                                            onclick="event.preventDefault();
+                                                            document.getElementById('destroy-product').submit();">
+                                                            {{ __('Remove') }}
+                                                        </a>
+
+                                                        <form id="destroy-product" action="{{ route('products.destroy', $p->id) }}"
+                                                            method="DELETE" class="d-none">
+                                                            @csrf
+                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>

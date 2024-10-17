@@ -23,7 +23,9 @@ return new class extends Migration
             $table->string('slug');
             $table->text('description')->nullable();
             $table->text('meta_keywords')->nullable();
-            $table->tinyInteger('status')->default(0);
+            $table->tinyInteger('whatsapp')->default(0);
+            $table->tinyInteger('telegram')->default(0);
+            $table->tinyInteger('website')->default(0);
             $table->timestamps();
         });
     }

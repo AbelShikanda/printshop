@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
             ProductSizes::class,
             ProductTypes::class,
             PriceTypeSeeder::class,
+            CreateProductPriceTriggerSeeder::class,
         ]);
     }
 }

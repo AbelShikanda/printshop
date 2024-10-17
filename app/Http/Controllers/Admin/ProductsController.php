@@ -7,6 +7,7 @@ use App\Models\Prices;
 use App\Models\ProductCategories;
 use App\Models\ProductColors;
 use App\Models\ProductMaterials;
+use App\Models\ProductProductTypes;
 use App\Models\Products;
 use App\Models\ProductSizes;
 use App\Models\ProductType;
@@ -23,10 +24,6 @@ class ProductsController extends Controller
     {
         $products = Products::with('ProductType')->orderBy('id', 'DESC')->get();
         // dd($products);
-        // foreach ($products as $value) {
-        //     // dd($products, $key, $value);
-        //     dd($value->ProductType[0]->name);
-        // }
         return view('admin.products.index', with([
             'products' => $products,
         ]));
@@ -57,7 +54,6 @@ class ProductsController extends Controller
     public function store(Request $request)
     {
         $product = $request->validate([
-            'path' => 'required',
             'name' => 'required',
             'meta' => 'required',
             'category' => 'required',
@@ -68,15 +64,10 @@ class ProductsController extends Controller
             'description' => 'required',
         ]);
 
-        // $pric
-        // dd($product);
-        // dd($request->input('type'));
         $price = Prices::where('type_id', $request->input('type'))->pluck('price')->first();
-        // dd($price);
 
         try {
             DB::beginTransaction();
-            // Logic For Save User Data
 
             $product = Products::create([
                 'categories_id' => $request->category,
@@ -88,9 +79,11 @@ class ProductsController extends Controller
                 'description' => $request->input('description'),
                 'meta_keywords' => $request->input('meta'),
                 'price' => $price,
-                'status' => 0,
+                'whatsapp' => 0,
+                'telegram' => 0,
+                'website' => 0,
+                'promotion' => 0,
             ]);
-            // dd($product);
 
             // ProductCategories::create([
             //     'products_id' => $product->id,
@@ -112,10 +105,10 @@ class ProductsController extends Controller
             //     'material_id' => $product->materials_id,
             // ]);
 
-            // ProductType::create([
-            //     'products_id' => $product->id,
-            //     'type_id' => $product->type_id,
-            // ]);
+            ProductProductTypes::create([
+                'products_id' => $product->id,
+                'type_id' => $product->type_id,
+            ]);
 
 
             if (!$product) {
