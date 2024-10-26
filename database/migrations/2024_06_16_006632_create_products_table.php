@@ -26,6 +26,7 @@ return new class extends Migration
             $table->tinyInteger('whatsapp')->default(0);
             $table->tinyInteger('telegram')->default(0);
             $table->tinyInteger('website')->default(0);
+            $table->tinyInteger('promotion')->default(0);
             $table->timestamps();
         });
     }
