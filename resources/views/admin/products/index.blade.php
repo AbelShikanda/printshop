@@ -45,7 +45,9 @@
                                             <tr>
                                                 <td>{{ $p->id }}</td>
                                                 <td>{{ $p->name }}</td>
-                                                <td>{{ $p->ProductType[0]->name }}</td>
+                                                @foreach ($p->ProductType as $item)
+                                                    <td>{{ $item->name }}</td>
+                                                @endforeach
                                                 <td>{{ $p->description }}</td>
                                                 <td>{{ $p->price }}</td>
                                                 <td><button class="btn btn-sm dropdown-toggle more-horizontal"

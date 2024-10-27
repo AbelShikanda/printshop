@@ -36,6 +36,6 @@ class ProductTypes extends Model
      */
     public function products()
     {
-        return $this->bekongsToMany(Products::class, 'product_product_types', 'type_id', 'products_id');
+        return $this->belongsToMany(Products::class, 'product_product_types', 'product_types_id', 'products_id');
     }
 }

@@ -10,7 +10,6 @@ use App\Models\ProductMaterials;
 use App\Models\ProductProductTypes;
 use App\Models\Products;
 use App\Models\ProductSizes;
-use App\Models\ProductType;
 use App\Models\ProductTypes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -23,7 +22,6 @@ class ProductsController extends Controller
     public function index()
     {
         $products = Products::with('ProductType')->orderBy('id', 'DESC')->get();
-        // dd($products);
         return view('admin.products.index', with([
             'products' => $products,
         ]));
@@ -107,7 +105,7 @@ class ProductsController extends Controller
 
             ProductProductTypes::create([
                 'products_id' => $product->id,
-                'type_id' => $product->type_id,
+                'product_types_id' => $product->type_id,
             ]);
 
 
@@ -130,7 +128,21 @@ class ProductsController extends Controller
      */
     public function show(string $id)
     {
-        return view('admin.products.show');
+        $product = Products::with(
+            'ProductType',
+            'Material',
+            'Color',
+            'Size',
+            'Category',
+            'ProductImage',
+            )
+            ->where('id', $id)
+            ->orderBy('id', 'DESC')
+            ->first();
+            
+        return view('admin.products.show', with([
+            'product' => $product,
+        ]));
     }
 
     /**
@@ -245,7 +257,7 @@ class ProductsController extends Controller
             ProductProductTypes::where('products_id', $id)->delete();
             ProductProductTypes::create([
                 'products_id' => $product->id,
-                'type_id' => $request->input('type'),
+                'product_types_id' => $request->input('type'),
             ]);
 
 

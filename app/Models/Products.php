@@ -39,72 +39,71 @@ class Products extends Model
             ->saveSlugsTo('slug');
     }
 
-    // /**
-    //  * Get the route key for the model.
-    //  *
-    //  * @return string
-    //  */
-    // public function getRouteKeyName()
-    // {
-    //     return 'slug';
-    // }
-
-    // /**
-    // * Get the images.
-    // */
-    // public function ProductImage()
-    // {
-    //     return $this->belongsToMany(ProductImage::class, 'products_product_images', 'products_id', 'image_id');
-    //     // return $this->hasMany(ProductImage::class,'products_id', 'id');
-    // }
-    
-    // /**
-    // * Get the Category.
-    // */
-    // public function Category()
-    // {
-    //     return $this->belongsToMany('App\Models\Category', 'categories_products', 'id');
-    // }
-    
-    // /**
-    // * Get the Size.
-    // */
-    // public function Size()
-    // {
-    //     return $this->belongsToMany(Size::class);
-    // }
-    
-    // /**
-    // * Get the Color.
-    // */
-    // public function Color()
-    // {
-    //     return $this->belongsToMany(Color::class);
-    // }
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
     
     /**
     * Get the ProductType.
     */
     public function ProductType()
     {
-        return $this->belongsToMany(ProductTypes::class, 'product_product_types', 'products_id', 'type_id');
+        return $this->belongsToMany(ProductTypes::class, 'product_product_types', 'products_id', 'product_types_id');
     }
     
-    // /**
-    // * Get the Material.
-    // */
-    // public function Material()
-    // {
-    //     return $this->belongsTo('App\Models\Material', 'materials_id', 'id');
-    // }
+    /**
+    * Get the images.
+    */
+    public function ProductImage()
+    {
+        return $this->belongsToMany(ProductImages::class, 'product_product_images', 'products_id', 'product_images_id');
+    }
+    
+    /**
+    * Get the Category.
+    */
+    public function Category()
+    {
+        return $this->belongsToMany(ProductCategories::class, 'product_product_categories', 'products_id', 'product_categories_id');
+    }
+    
+    /**
+    * Get the Size.
+    */
+    public function Size()
+    {
+        return $this->belongsToMany(ProductSizes::class, 'product_product_sizes', 'products_id', 'product_sizes_id');
+    }
+    
+    /**
+    * Get the Color.
+    */
+    public function Color()
+    {
+        return $this->belongsToMany(ProductColors::class, 'product_product_colors', 'products_id', 'product_colors_id');
+    }
+    
+    /**
+    * Get the Material.
+    */
+    public function Material()
+    {
+        return $this->belongsToMany(ProductMaterials::class, 'product_product_materials', 'products_id', 'product_materials_id');
+    }
     
     
-    // /**
-    //  * The attributes that should be cast.
-    //  *
-    //  *
-    //  */
-    // public function Order_Items() {
-    //     return $this->hasMany(Order_Items::class);
-    // }
+    /**
+     * The attributes that should be cast.
+     *
+     *
+     */
+    public function Order_Items() {
+        return $this->hasMany(Order_Items::class);
+    }
 }
