@@ -21,15 +21,18 @@ class CreateProductPriceTriggerSeeder extends Seeder
 
                 DECLARE new_price DECIMAL(10,2);
                 
-                -- Fetch the new price based on the new type_id only if the type_id changes
+        		-- and in the event products id is correct and transaction amount is wrong
+        		
                 IF OLD.type_id != NEW.type_id THEN
+                    -- Fetch the price from product_types based on the new type_id
                     SELECT price INTO new_price 
-                    FROM products
+                    FROM prices 
                     WHERE id = NEW.type_id;
 
-                    -- Set the new price
+                    -- Update the price in the products table
                     SET NEW.price = new_price;
                 END IF;
+
             END;
         ');
     }

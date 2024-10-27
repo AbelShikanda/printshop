@@ -138,22 +138,23 @@ class ProductsController extends Controller
      */
     public function edit(string $id)
     {
-        $category = ProductCategories::find($id);
+        $products = Products::find($id);
+
+        $category = ProductCategories::where('id', $products->categories_id)->first();
         $categories = ProductCategories::all();
 
-        $color = ProductColors::find($id);
+        $color = ProductColors::where('id', $products->colors_id)->first();
         $colors = ProductColors::all();
 
-        $size = ProductSizes::find($id);
+        $size = ProductSizes::where('id', $products->sizes_id)->first();
         $sizes = ProductSizes::all();
 
-        $material = ProductMaterials::find($id);
+        $material = ProductMaterials::where('id', $products->materials_id)->first();
         $materials = ProductMaterials::all();
 
-        $product_type = ProductTypes::find($id);
+        $product_type = ProductTypes::where('id', $products->type_id)->first();
         $product_types = ProductTypes::all();
         
-        $products = Products::where('id', $id)->first();
 
         // dd($categories, $colors, $sizes, $materials, $product_types, $products);
 
@@ -197,21 +198,29 @@ class ProductsController extends Controller
         try {
             DB::beginTransaction();
 
-            $product = Products::where('id', $id)->update([
-                'categories_id' => $request->category,
-                'colors_id' => $request->color,
-                'sizes_id' => $request->size,
-                'materials_id' => $request->material,
-                'type_id' => $request->type,
-                'name' => $request->input('name'),
-                'description' => $request->input('description'),
-                'meta_keywords' => $request->input('meta'),
-                // 'price' => $price,
-                'whatsapp' => !empty($request->whatsapp) ? 1 : 0,
-                'telegram' => !empty($request->telegram) ? 1 : 0,
-                'website' => !empty($request->website) ? 1 : 0,
-                'promotion' => !empty($request->promotion) ? 1 : 0,
-            ]);
+            $product = Products::find($id);
+            if ($product) {
+                $product->categories_id = $request->category;
+                $product->colors_id = $request->color;
+                $product->sizes_id = $request->size;
+                $product->materials_id = $request->material;
+                $product->type_id = $request->type;
+                $product->name = $request->input('name');
+                $product->description = $request->input('description');
+                $product->meta_keywords = $request->input('meta');
+                $product->whatsapp = !empty($request->whatsapp) ? 1 : 0;
+                $product->telegram = !empty($request->telegram) ? 1 : 0;
+                $product->website = !empty($request->website) ? 1 : 0;
+                $product->promotion = !empty($request->promotion) ? 1 : 0;
+                
+                // Save the updated product
+                $product->save();
+            } else {
+                // Handle case where product is not found
+                dd("Product not found");
+            }
+            
+
 
             // ProductCategories::create([
             //     'products_id' => $product->id,
@@ -233,10 +242,10 @@ class ProductsController extends Controller
             //     'material_id' => $product->materials_id,
             // ]);
 
-            ProductProductTypes::where('job_id', $id)->delete();
+            ProductProductTypes::where('products_id', $id)->delete();
             ProductProductTypes::create([
-                'job_id' => $jobs->id,
-                'job_category_id' => $request->input('category'),
+                'products_id' => $product->id,
+                'type_id' => $request->input('type'),
             ]);
 
 

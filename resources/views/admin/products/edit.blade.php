@@ -95,7 +95,6 @@
                                                 <option value="{{ $material->id }}" selected>{{ $material->name }}</option>
                                             @endif
                                             @foreach ($materials as $m)
-                                                <option value=" ">Original</option>
                                                 <option value="{{ $m->id }}" @selected(old('m') == $m)>{{ $m->name }}</option>
                                             @endforeach
                                         </select>
@@ -103,7 +102,7 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="validationTextarea">Description</label>
-                                        <textarea class="form-control" name="description" id="validationTextarea" placeholder="{{ $products->description }}" required></textarea>
+                                        <textarea class="form-control" name="description" id="validationTextarea" placeholder="" required>{{ $products->description }}</textarea>
                                         <div class="invalid-feedback"> Please enter a message in the
                                             textarea. </div>
                                     </div>
