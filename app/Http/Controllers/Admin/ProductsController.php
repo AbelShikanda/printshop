@@ -172,8 +172,6 @@ class ProductsController extends Controller
         $product_types = ProductTypes::all();
         
 
-        // dd($categories, $colors, $sizes, $materials, $product_types, $products);
-
         return view('admin.products.edit', with([
             'category' => $category,
             'categories' => $categories,
