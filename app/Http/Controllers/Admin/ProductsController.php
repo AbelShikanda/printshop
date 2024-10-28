@@ -7,6 +7,10 @@ use App\Models\Prices;
 use App\Models\ProductCategories;
 use App\Models\ProductColors;
 use App\Models\ProductMaterials;
+use App\Models\ProductProductCategories;
+use App\Models\ProductProductColors;
+use App\Models\ProductProductMaterials;
+use App\Models\ProductProductSizes;
 use App\Models\ProductProductTypes;
 use App\Models\Products;
 use App\Models\ProductSizes;
@@ -83,25 +87,25 @@ class ProductsController extends Controller
                 'promotion' => 0,
             ]);
 
-            // ProductCategories::create([
-            //     'products_id' => $product->id,
-            //     'category_id' => $product->categories_id,
-            // ]);
+            ProductProductCategories::create([
+                'products_id' => $product->id,
+                'category_id' => $product->categories_id,
+            ]);
 
-            // ProductColors::create([
-            //     'products_id' => $product->id,
-            //     'color_id' => $product->colors_id,
-            // ]);
+            ProductProductColors::create([
+                'products_id' => $product->id,
+                'color_id' => $product->colors_id,
+            ]);
 
-            // ProductSizes::create([
-            //     'products_id' => $product->id,
-            //     'size_id' => $product->sizes_id,
-            // ]);
+            ProductProductSizes::create([
+                'products_id' => $product->id,
+                'size_id' => $product->sizes_id,
+            ]);
 
-            // ProductMaterials::create([
-            //     'products_id' => $product->id,
-            //     'material_id' => $product->materials_id,
-            // ]);
+            ProductProductMaterials::create([
+                'products_id' => $product->id,
+                'material_id' => $product->materials_id,
+            ]);
 
             ProductProductTypes::create([
                 'products_id' => $product->id,
@@ -205,8 +209,6 @@ class ProductsController extends Controller
             'promotion' => '',
         ]);
 
-        // $price = Prices::where('type_id', $request->input('type'))->pluck('price')->first();
-
         try {
             DB::beginTransaction();
 
@@ -225,34 +227,36 @@ class ProductsController extends Controller
                 $product->website = !empty($request->website) ? 1 : 0;
                 $product->promotion = !empty($request->promotion) ? 1 : 0;
                 
-                // Save the updated product
                 $product->save();
             } else {
-                // Handle case where product is not found
                 dd("Product not found");
             }
             
 
 
-            // ProductCategories::create([
-            //     'products_id' => $product->id,
-            //     'category_id' => $product->categories_id,
-            // ]);
+            ProductProductCategories::where('products_id', $id)->delete();
+            ProductProductCategories::create([
+                'products_id' => $product->id,
+                'product_categories_id' => $product->categories_id,
+            ]);
 
-            // ProductColors::create([
-            //     'products_id' => $product->id,
-            //     'color_id' => $product->colors_id,
-            // ]);
+            ProductProductColors::where('products_id', $id)->delete();
+            ProductProductColors::create([
+                'products_id' => $product->id,
+                'product_colors_id' => $product->colors_id,
+            ]);
 
-            // ProductSizes::create([
-            //     'products_id' => $product->id,
-            //     'size_id' => $product->sizes_id,
-            // ]);
+            ProductProductSizes::where('products_id', $id)->delete();
+            ProductProductSizes::create([
+                'products_id' => $product->id,
+                'product_sizes_id' => $product->sizes_id,
+            ]);
 
-            // ProductMaterials::create([
-            //     'products_id' => $product->id,
-            //     'material_id' => $product->materials_id,
-            // ]);
+            ProductProductMaterials::where('products_id', $id)->delete();
+            ProductProductMaterials::create([
+                'products_id' => $product->id,
+                'product_materials_id' => $product->materials_id,
+            ]);
 
             ProductProductTypes::where('products_id', $id)->delete();
             ProductProductTypes::create([
@@ -273,7 +277,6 @@ class ProductsController extends Controller
             DB::rollBack();
             throw $th;
         }
-        // return view('admin.products.index');
     }
 
     /**
@@ -281,6 +284,8 @@ class ProductsController extends Controller
      */
     public function destroy(string $id)
     {
-        // return view('admin.products.index');
+        $product = Products::find($id);
+        $product->delete();
+        return redirect()->route('products.index')->with('message', 'product Deleted Successfully.');
     }
 }
