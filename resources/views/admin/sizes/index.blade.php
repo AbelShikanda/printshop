@@ -12,7 +12,7 @@
                         </p>
                     </div>
                     <div class="col-md-6">
-                        <a type="button" class=" float-right btn mb-2 btn-outline-primary">Add A Size</a>
+                        <a href="{{ route('sizes.create') }}" type="button" class=" float-right btn mb-2 btn-outline-primary">Add A Size</a>
                     </div>
                 </div>
                 <p class="card-text">
@@ -45,8 +45,19 @@
                                                         <span class="text-muted sr-only">Action</span>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Edit</a>
-                                                        <a class="dropdown-item" href="#">Remove</a>
+                                                        <a class="dropdown-item" href="{{ route('sizes.edit', $item->id) }}">Edit</a>
+                                                        
+                                                        <a class="dropdown-item" href="{{ route('sizes.destroy', $item->id) }}"
+                                                            onclick="event.preventDefault();
+                                                            document.getElementById('destroy-sizes').submit();">
+                                                            {{ __('Remove') }}
+                                                        </a>
+
+                                                        <form id="destroy-sizes" action="{{ route('sizes.destroy', $item->id) }}"
+                                                            method="POST" class="d-none">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>
