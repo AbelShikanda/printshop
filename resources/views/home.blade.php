@@ -91,15 +91,11 @@
                 </div>
             </div>
             <div class="row">
-                <div class="mb-5 col-6 col-md-6 col-lg-4">
-                    @include('layouts.partials.catalog')
-                </div>
-                <div class="mb-5 col-6 col-md-6 col-lg-4">
-                    @include('layouts.partials.catalog')
-                </div>
-                <div class="mb-5 col-6 col-md-6 col-lg-4">
-                    @include('layouts.partials.catalog')
-                </div>
+                @foreach ($images as $item)
+                    <div class="mb-5 col-6 col-md-6 col-lg-4">
+                        @include('layouts.partials.catalog')
+                    </div>
+                @endforeach
             </div>
         </div>
     </section><!-- End Portfolio Section -->
@@ -236,11 +232,10 @@
                     </div> --}}
 
                     <!-- <div id="testimonial-mf" class="owl-carousel owl-theme">
-                                          
-                                        </div> -->
+                                              
+                                            </div> -->
                 </div>
             </div>
         </div>
     </div><!-- End Testimonials Section -->
-    
 @endsection

@@ -45,8 +45,23 @@
                                                         <span class="text-muted sr-only">Action</span>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Edit</a>
-                                                        <a class="dropdown-item" href="#">Remove</a>
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('prices.edit', $item->id) }}">Edit</a>
+
+                                                        {{-- javascript will keep picking the same item unless the id is made unique for each item --}}
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('prices.destroy', $item->id) }}"
+                                                            onclick="event.preventDefault();
+                                                            document.getElementById('destroy-prices-{{ $item->id }}').submit();">
+                                                            {{ __('Remove') }}
+                                                        </a>
+
+                                                        <form id="destroy-prices-{{ $item->id }}"
+                                                            action="{{ route('prices.destroy', $item->id) }}" method="POST"
+                                                            class="d-none">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>

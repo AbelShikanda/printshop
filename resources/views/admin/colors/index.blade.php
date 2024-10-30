@@ -12,7 +12,7 @@
                         </p>
                     </div>
                     <div class="col-md-6">
-                        <a type="button" class=" float-right btn mb-2 btn-outline-primary">Add Color</a>
+                        <a href="{{ route('colors.create') }}" type="button" class=" float-right btn mb-2 btn-outline-primary">Add Color</a>
                     </div>
                 </div>
                 <div class="row my-4">
@@ -31,7 +31,7 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($product_colors as $item)
+                                        @foreach ($colors as $item)
                                             <tr>
                                                 <td>{{ $item->id }}</td>
                                                 <td>{{ $item->name }}</td>
@@ -43,8 +43,22 @@
                                                         <span class="text-muted sr-only">Action</span>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Edit</a>
-                                                        <a class="dropdown-item" href="#">Remove</a>
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('colors.edit', $item->id) }}">Edit</a>
+
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('colors.destroy', $item->id) }}"
+                                                            onclick="event.preventDefault();
+                                                            document.getElementById('destroy-colors').submit();">
+                                                            {{ __('Remove') }}
+                                                        </a>
+
+                                                        <form id="destroy-colors"
+                                                            action="{{ route('colors.destroy', $item->id) }}" method="POST"
+                                                            class="d-none">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>

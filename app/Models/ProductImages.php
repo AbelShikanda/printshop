@@ -25,6 +25,6 @@ class ProductImages extends Model
     */
     public function Products()
     {
-        return $this->belongsTo(Products::class,  'product_product_images', 'products_id', 'product_images_id');
+        return $this->belongsToMany(Products::class,  'product_product_images', 'product_images_id', 'products_id');
     }
 }

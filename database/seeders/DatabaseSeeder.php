@@ -30,6 +30,7 @@ class DatabaseSeeder extends Seeder
             PriceTypeSeeder::class,
             CreateProductPriceTriggerSeeder::class,
             CreateUsersSeeder::class,
+            UpdateProductPriceTriggerSeeder::class,
         ]);
     }
 }

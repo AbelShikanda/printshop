@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\ProductMaterials;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Debug\VirtualRequestStack;
 
 class ProductMaterialsController extends Controller
@@ -26,7 +27,7 @@ class ProductMaterialsController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.materials.create');
     }
 
     /**
@@ -34,13 +35,37 @@ class ProductMaterialsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $materials = $request->validate([
+            'name' => 'required',
+            'slug' => 'required',
+        ]);
+
+        try {
+            DB::beginTransaction();
+            
+            $materials = ProductMaterials::create([
+                'name' => $request->input('name'),
+                'slug' => $request->input('slug'),
+            ]);
+
+            if (!$materials) {
+                DB::rollBack();
+                return back()->with(['message', 'something went wrong while saving your data']);
+            }
+
+            DB::commit();
+            return redirect()->route('materials.index')->with(['message', 'material created successfully']);
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(ProductMaterials $productMaterials)
+    public function show($id)
     {
         //
     }
@@ -48,24 +73,54 @@ class ProductMaterialsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ProductMaterials $productMaterials)
+    public function edit($id)
     {
-        //
+        $materials = ProductMaterials::find($id);
+        return view('admin.materials.edit', with([
+            'materials' => $materials,
+        ]));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ProductMaterials $productMaterials)
+    public function update(Request $request, $id)
     {
-        //
+        $materials = $request->validate([
+            'name' => '',
+            'slug' => '',
+        ]);
+
+        try {
+            DB::beginTransaction();
+            
+            $materials = ProductMaterials::find($id);
+            $materials->update([
+                'name' => $request->input('name'),
+                'slug' => $request->input('slug'),
+            ]);
+
+            if (!$materials) {
+                DB::rollBack();
+                return back()->with(['message', 'something went wrong while saving your data']);
+            }
+
+            DB::commit();
+            return redirect()->route('materials.index')->with(['message', 'material updated successfully']);
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ProductMaterials $productMaterials)
+    public function destroy($id)
     {
-        //
+        $material = ProductMaterials::find($id);
+        $material->delete();
+        return redirect()->route('materials.index')->with(['message', 'material deleted successfully']);
     }
 }

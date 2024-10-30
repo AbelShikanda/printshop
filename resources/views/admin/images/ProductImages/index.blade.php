@@ -12,9 +12,29 @@
                         </p>
                     </div>
                     <div class="col-md-6">
-                        <a type="button" class=" float-right btn mb-2 btn-outline-primary">Add Product Image</a>
+                        <a href="{{ route('product_images.create') }}" type="button" class=" float-right btn mb-2 btn-outline-primary">Add Product Image</a>
                     </div>
                 </div>
+
+                @if (count($errors) > 0)
+                    <div class="alert alert-danger col-md-8 offset-md-3">
+                        <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+
+                <div class="pt-3">
+                    @if (session()->has('message'))
+                        <div class="alert alert-success">
+                            {{ session()->get('message') }}
+                        </div>
+                    @endif
+                </div>
+
                 <div class="row my-4">
                     <!-- Small table -->
                     <div class="col-md-12">
@@ -25,37 +45,44 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
-                                            <th>Email</th>
-                                            <th>Company</th>
-                                            <th>Address</th>
-                                            <th>City</th>
-                                            <th>Date</th>
-                                            <th>Action</th>
+                                            <th>Image</th>
+                                            <th>Thumbnail</th>
+                                            <th>Caption</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td>368</td>
-                                            <td>Imani Lara</td>
-                                            <td>(478) 446-9234</td>
-                                            <td>Asset Management</td>
-                                            <td>Borland</td>
-                                            <td>9022 Suspendisse Rd.</td>
-                                            <td>High Wycombe</td>
-                                            <td>Jun 8, 2019</td>
-                                            <td><button class="btn btn-sm dropdown-toggle more-horizontal" type="button"
-                                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                    <span class="text-muted sr-only">Action</span>
-                                                </button>
-                                                <div class="dropdown-menu dropdown-menu-right">
-                                                    <a class="dropdown-item" href="#">Edit</a>
-                                                    <a class="dropdown-item" href="#">Remove</a>
-                                                    <a class="dropdown-item" href="#">view</a>
-                                                </div>
-                                            </td>
-                                        </tr>
+                                        @foreach ($productImages as $itm)
+                                            <tr>
+                                                <td>{{ $itm->id }}</td>
+                                                <td>
+                                                    <img src="{{ asset('storage/img/pictures/'.$itm->thumbnail) }}" style="width:50px;" alt="image">
+                                                </td>
+                                                <td>{{ $itm->full }}</td>
+                                                <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                        type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false">
+                                                        <span class="text-muted sr-only">Action</span>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-right">
+                                                        <a class="dropdown-item" href="{{ route('product_images.show', $itm->id) }}">view</a>
+                                                        <a class="dropdown-item" href="{{ route('product_images.edit', $itm->id) }}">Edit</a>
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('product_images.destroy', $itm->id) }}"
+                                                            onclick="event.preventDefault();
+                                                            document.getElementById('destroy-product_images').submit();">
+                                                            {{ __('Remove') }}
+                                                        </a>
+
+                                                        <form id="destroy-product_images"
+                                                            action="{{ route('product_images.destroy', $itm->id) }}" method="POST"
+                                                            class="d-none">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>

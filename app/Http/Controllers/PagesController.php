@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProductColors;
+use App\Models\ProductImages;
+use App\Models\ProductSizes;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -22,10 +25,11 @@ class PagesController extends Controller
             ['url' => '/', 'label' => 'Home'],
             ['url' => '', 'label' => 'Catalog'],
         ];
+        $images = ProductImages::latest()->get();
         return view('pages.catalog', with([
-            // 'title' => 'Blog Detail',
             'pageTitle' => $pageTitle,
             'breadcrumbLinks' => $breadcrumbLinks,
+            'images' => $images,
         ]));
     }
 
@@ -39,16 +43,23 @@ class PagesController extends Controller
      * @param  Parameter type  Parameter name Description of the parameter (optional)
      * @return Return type Description of the return value (optional)
      */
-    public function catalog_detail() {
+    public function catalog_detail($id) {
         $pageTitle = 'Catalog Detail';
         $breadcrumbLinks = [
             ['url' => '/', 'label' => 'Home'],
             ['url' => '', 'label' => 'catalog detail'],
         ];
+
+        $images = ProductImages::with('products')->find($id);
+        $colors = ProductColors::all();
+        $sizes = ProductSizes::find($id);
+
         return view('pages.catalog_detail', with([
-            // 'title' => 'Catalog Detail',
             'pageTitle' => $pageTitle,
             'breadcrumbLinks' => $breadcrumbLinks,
+            'images' => $images,
+            'colors' => $colors,
+            'sizes' => $sizes,
         ]));
     }
 

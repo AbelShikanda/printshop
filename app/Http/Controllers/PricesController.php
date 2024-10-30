@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Prices;
 use App\Models\ProductTypes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PricesController extends Controller
 {
@@ -44,13 +45,37 @@ class PricesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $prices = $request->validate([
+            'types' => 'required | integer | distinct | unique:prices,type_id',
+            'price' => 'required',
+        ]);
+
+        try {
+            DB::beginTransaction();
+            
+            $prices = Prices::create([
+                'type_id' => $request->input('types'),
+                'price' => $request->input('price'),
+            ]);
+
+            if (!$prices) {
+                DB::rollBack();
+                return back()->with(['message', 'something went wrong while saving your data']);
+            }
+
+            DB::commit();
+            return redirect()->route('prices.index')->with(['message', 'price created successfully']);
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(Prices $prices)
+    public function show($id)
     {
         //
     }
@@ -58,24 +83,58 @@ class PricesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Prices $prices)
+    public function edit($id)
     {
-        //
+        $type = ProductTypes::find($id);
+        $types = ProductTypes::all();
+        $prices = Prices::find($id);
+        return view('admin.prices.edit', with([
+            'prices' => $prices,
+            'types' => $types,
+            'type' => $type,
+        ]));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Prices $prices)
+    public function update(Request $request, $id)
     {
-        //
+        $prices = $request->validate([
+            'types' => '',
+            'price' => '',
+        ]);
+
+        try {
+            DB::beginTransaction();
+            
+            $prices = Prices::find($id);
+            $prices->update([
+                'type_id' => $request->input('types'),
+                'price' => $request->input('price'),
+            ]);
+
+            if (!$prices) {
+                DB::rollBack();
+                return back()->with(['message', 'something went wrong while saving your data']);
+            }
+
+            DB::commit();
+            return redirect()->route('prices.index')->with(['message', 'price updated successfully']);
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Prices $prices)
+    public function destroy($id)
     {
-        //
+        $price = Prices::find($id);
+        $price->delete();
+        return redirect()->route('prices.index')->with(['message', 'price deleted successfully']);
     }
 }

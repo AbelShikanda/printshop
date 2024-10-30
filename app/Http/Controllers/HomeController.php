@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Blogs;
+use App\Models\ProductImages;
 use App\Models\Products;
 use Illuminate\Http\Request;
 
@@ -16,7 +16,14 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $images = ProductImages::with('products')
+        ->latest()
+        ->take(6)
+        ->get();
+        // dd($images);
+        return view('home', with([
+            'images' => $images,
+        ]));
     }
 
     /**

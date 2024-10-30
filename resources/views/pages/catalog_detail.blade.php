@@ -7,17 +7,16 @@
     <section id="portfolio-details" class="portfolio-details">
         <div class="container-blog mt-5 mb-5">
             <div class="product-image">
-                {{-- <img src="https://www.printshopeld.com/storage/products/papa-2023-11-09-654cd44ad95a3.jpg" alt="" class="product-pic"> --}}
-                <img src="https://www.printshopeld.com/storage/products/dad-2023-11-09-654cd3dd6a777.jpg" alt="" class="product-pic">
+                <img src="{{ asset('storage/img/pictures/' . $images->thumbnail) }}" alt="" class="product-pic">
             </div>
 
             <div class="product-details">
                 <header>
-                    <h1 class="title">Nike Roshe Run</h1>
+                    <h1 class="title">{{ $images->products[0]->name }}</h1>
                     <span class="colorCat">mint green</span>
                     <div class="prices">
-                        <span class="before">$150</span>
-                        <span class="current">$144.99</span>
+                        <span class="before">{{ $images->products[0]->price }}</span>
+                        <span class="current">{{ $images->products[0]->price }}</span>
                     </div>
                     <div class="rate">
                         <a href="#!" class="active">★</a>
@@ -29,7 +28,7 @@
                 </header>
                 <article>
                     <h5>Description</h5>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+                    <p>{{ $images->products[0]->description }}</p>
                 </article>
                 <div class="controls">
                     <div class="color">
@@ -40,11 +39,16 @@
                             <li><a href="#!" class="colors color-bdot3"></a></li>
                             <li><a href="#!" class="colors color-bdot4"></a></li>
                             <li><a href="#!" class="colors color-bdot5"></a></li>
+                            @foreach ($colors as $color)
+                                <li>
+                                    <a href="#!" class="colors {{ $color->slug }} active"></a>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="size">
                         <h5>size</h5>
-                        <a href="#!" class="option">(UK 8)</a>
+                        <a href="#!" class="option">{{ $sizes->name }}</a>
                     </div>
                     <div class="qty">
                         <h5>qty</h5>
@@ -75,5 +79,4 @@
         </div>
 
     </section><!-- End Portfolio Details Section -->
-    
 @endsection

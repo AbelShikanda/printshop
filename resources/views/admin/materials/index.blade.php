@@ -12,7 +12,7 @@
                         </p>
                     </div>
                     <div class="col-md-6">
-                        <a type="button" class=" float-right btn mb-2 btn-outline-primary">Add Product Materials</a>
+                        <a href="{{ route('materials.create') }}" type="button" class=" float-right btn mb-2 btn-outline-primary">Add Product Materials</a>
                     </div>
                 </div>
                 <div class="row my-4">
@@ -43,8 +43,22 @@
                                                         <span class="text-muted sr-only">Action</span>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Edit</a>
-                                                        <a class="dropdown-item" href="#">Remove</a>
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('materials.edit', $item->id) }}">Edit</a>
+
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('materials.destroy', $item->id) }}"
+                                                            onclick="event.preventDefault();
+                                                            document.getElementById('destroy-materials').submit();">
+                                                            {{ __('Remove') }}
+                                                        </a>
+
+                                                        <form id="destroy-materials"
+                                                            action="{{ route('materials.destroy', $item->id) }}" method="POST"
+                                                            class="d-none">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>
