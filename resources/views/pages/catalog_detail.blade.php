@@ -9,20 +9,19 @@
             <div class="product-image">
                 <img src="{{ asset('storage/img/pictures/' . $images->thumbnail) }}" alt="" class="product-pic">
             </div>
-
             <div class="product-details">
                 <header>
                     <h1 class="title">{{ $images->products[0]->name }}</h1>
-                    <span class="colorCat">mint green</span>
+                    <span class="colorCat">{{ $colors->name }}</span>
                     <div class="prices">
-                        <span class="before">{{ $images->products[0]->price }}</span>
+                        <span class="before">{{ $images->products[0]->price * 1.1 }}</span>
                         <span class="current">{{ $images->products[0]->price }}</span>
                     </div>
                     <div class="rate">
                         <a href="#!" class="active">★</a>
                         <a href="#!" class="active">★</a>
                         <a href="#!" class="active">★</a>
-                        <a href="#!">★</a>
+                        <a href="#!" class="active">★</a>
                         <a href="#!">★</a>
                     </div>
                 </header>
@@ -33,18 +32,7 @@
                 <div class="controls">
                     <div class="color">
                         <h5>color</h5>
-                        <ul>
-                            <li><a href="#!" class="colors color-bdot1 active"></a></li>
-                            <li><a href="#!" class="colors color-bdot2"></a></li>
-                            <li><a href="#!" class="colors color-bdot3"></a></li>
-                            <li><a href="#!" class="colors color-bdot4"></a></li>
-                            <li><a href="#!" class="colors color-bdot5"></a></li>
-                            @foreach ($colors as $color)
-                                <li>
-                                    <a href="#!" class="colors {{ $color->slug }} active"></a>
-                                </li>
-                            @endforeach
-                        </ul>
+                        <a href="#!" class="option">{{ $colors->name }}</a>
                     </div>
                     <div class="size">
                         <h5>size</h5>
@@ -56,12 +44,11 @@
                     </div>
                 </div>
                 <div class="footer">
-                    <button type="button">
+                    <a href="{{ route('addToCart', ['id' => $images->id]) }}" type="button">
                         <img src="http://co0kie.github.io/codepen/nike-product-page/cart.png" alt="">
                         <span>add to cart</span>
-                    </button>
+                    </a>
                     <a href="{{ route('catalog') }}" type="button">
-                        <img src="http://co0kie.github.io/codepen/nike-product-page/cart.png" alt="">
                         <span>Catalog</span>
                     </a>
                     <div class="row mt-5">
@@ -75,8 +62,6 @@
                     </div>
                 </div>
             </div>
-
         </div>
-
     </section><!-- End Portfolio Details Section -->
 @endsection

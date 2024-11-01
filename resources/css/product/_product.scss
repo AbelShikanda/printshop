@@ -172,9 +172,9 @@ $bgb: #ff4164;
 $bgt: #e16bff;
 $bdot1: #59e8c8;
 $bdot2: #ffee71;
-$purple: #6654af;
-$black: #343434;
-$white: #dfdfdf;
+$bdot3: #6654af;
+$bdot4: #343434;
+$bdot5: #dfdfdf;
 $star: #fe6067;
 $discount: #fe6168;
 
@@ -315,7 +315,7 @@ a {
             border-radius: 50%;
             display: block;
         }
-        $colors-list: $bdot1 $bdot2 $purple $black $white;
+        $colors-list: $bdot1 $bdot2 $bdot3 $bdot4 $bdot5;
         @each $current-color in $colors-list {
             $i: index($colors-list, $current-color);
             .color-bdot#{$i} {

@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\ProductColors;
 use App\Models\ProductImages;
 use App\Models\ProductSizes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PagesController extends Controller
 {
@@ -51,7 +53,7 @@ class PagesController extends Controller
         ];
 
         $images = ProductImages::with('products')->find($id);
-        $colors = ProductColors::all();
+        $colors = ProductColors::find($id);
         $sizes = ProductSizes::find($id);
 
         return view('pages.catalog_detail', with([
@@ -61,6 +63,33 @@ class PagesController extends Controller
             'colors' => $colors,
             'sizes' => $sizes,
         ]));
+    }
+
+    public function getCart()
+    {
+        $pageTitle = 'Cart';
+        $breadcrumbLinks = [
+            ['url' => '/', 'label' => 'Home'],
+            ['url' => '', 'label' => 'catalog detail'],
+            ['url' => '', 'label' => 'cart'],
+        ];
+        
+        if (!Session::has('cart')) {
+            return View('pages.catalog');
+        }
+        $oldCart = Session::get('cart');
+        $cart = new Cart($oldCart);
+        dd($cart);
+        // foreach ($cart->items as $item) {
+        //     dd($item['item']['products']['0']['price']);
+        // }
+        return View('pages.cart', [
+            'pageTitle' => $pageTitle,
+            'breadcrumbLinks' => $breadcrumbLinks,
+            'products' => $cart->items,
+            'totalPrice' => $cart->totalPrice,
+            'shipping' => 300,
+        ]);
     }
 
     /**
@@ -74,94 +103,69 @@ class PagesController extends Controller
      * @param  Parameter type  Parameter name Description of the parameter (optional)
      * @return Return type Description of the return value (optional)
      */
-    public function add_to_cart(Request $request) {
-        // $products = Products::find($id);
-        // $oldCart = Session::has('cart') ? Session::get('cart') : null;
-        // $cart = new Cart($oldCart);
-        // $cart->add($products, $products->id);
+    public function add_to_cart(Request $request, $id) 
+    {
+        $images = ProductImages::with('products')->find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->add($images, $images->id);
 
-        // $request->session()->put('cart', $cart);
-        // return redirect()->route('addToCart');
+        $request->session()->put('cart', $cart);
+
         $pageTitle = 'Cart';
         $breadcrumbLinks = [
             ['url' => '/', 'label' => 'Home'],
             ['url' => '', 'label' => 'catalog detail'],
             ['url' => '', 'label' => 'cart'],
         ];
-        return view('pages.cart', with([
-            // 'title' => 'Catalog Detail',
+        return redirect()->route('cart')->with([
             'pageTitle' => $pageTitle,
             'breadcrumbLinks' => $breadcrumbLinks,
-        ]));
+        ]);
     }
 
-    // public function getAddToCart(Request $request, $id)
-    // {
-    //     $products = Products::find($id);
-    //     $oldCart = Session::has('cart') ? Session::get('cart') : null;
-    //     $cart = new Cart($oldCart);
-    //     $cart->add($products, $products->id);
+    public function updateCart(Request $request, $id)
+    {
+        $size = $request->size;
+        $color = $request->color;
+        $images = ProductImages::find($id);
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->update($images, $images->id, $size, $color);
 
-    //     $request->session()->put('cart', $cart);
-    //     return redirect()->route('cart');
-    // }
+        Session::put('cart', $cart);
+        return redirect()->route('cart');
+    }
 
-    // public function updateCart(Request $request, $id)
-    // {
-    //     $size = $request->size;
-    //     $color = $request->color;
-    //     $products = Products::find($id);
-    //     $oldCart = Session::has('cart') ? Session::get('cart') : null;
-    //     $cart = new Cart($oldCart);
-    //     $cart->update($products, $products->id, $size, $color);
+    public function getReduceCart($id)
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->reduce($id);
 
-    //     Session::put('cart', $cart);
-    //     return redirect()->route('cart');
-    // }
-
-    // public function getReduceCart($id)
-    // {
-    //     $oldCart = Session::has('cart') ? Session::get('cart') : null;
-    //     $cart = new Cart($oldCart);
-    //     $cart->reduce($id);
-
-    //     if (count($cart->items) > 0) {
-    //         Session::put('cart', $cart);
-    //     } else {
-    //         Session::forget('cart');
-    //     }
+        if (count($cart->items) > 0) {
+            Session::put('cart', $cart);
+        } else {
+            Session::forget('cart');
+        }
 
 
-    //     return redirect()->route('cart');
-    // }
+        return redirect()->route('cart');
+    }
 
-    // public function deleteCart($id)
-    // {
-    //     $oldCart = Session::has('cart') ? Session::get('cart') : null;
-    //     $cart = new Cart($oldCart);
-    //     $cart->remove($id);
+    public function deleteCart($id)
+    {
+        $oldCart = Session::has('cart') ? Session::get('cart') : null;
+        $cart = new Cart($oldCart);
+        $cart->remove($id);
 
-    //     if (count($cart->items) > 0) {
-    //         Session::put('cart', $cart);
-    //     } else {
-    //         Session::forget('cart');
-    //     }
-    //     return redirect()->route('cart');
-    // }
-
-    // public function getCart()
-    // {
-    //     if (!Session::has('cart')) {
-    //         return View('customers.pages.cart');
-    //     }
-    //     $oldCart = Session::get('cart');
-    //     $cart = new Cart($oldCart);
-    //     return View('customers.pages.cart', [
-    //         'products' => $cart->items,
-    //         'totalPrice' => $cart->totalPrice,
-    //         'shipping' => 300,
-    //     ]);
-    // }
+        if (count($cart->items) > 0) {
+            Session::put('cart', $cart);
+        } else {
+            Session::forget('cart');
+        }
+        return redirect()->route('cart');
+    }
 
     /**
      * function to display blog detail

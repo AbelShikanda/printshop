@@ -64,7 +64,6 @@
                                                         <span class="text-muted sr-only">Action</span>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="{{ route('product_images.show', $itm->id) }}">view</a>
                                                         <a class="dropdown-item" href="{{ route('product_images.edit', $itm->id) }}">Edit</a>
                                                         <a class="dropdown-item"
                                                             href="{{ route('product_images.destroy', $itm->id) }}"

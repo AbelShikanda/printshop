@@ -13,57 +13,73 @@
                         <span class="material-icons-outlined">local_mall</span>
                         Your Shopping Cart
                     </div>
+                    @if (session()->has('message'))
+                        <div class="alert alert-success">
+                            {{ session()->get('message') }}
+                        </div>
+                    @endif
 
                     <div class="cart_list_wrap">
-                        <div class="cart_responsive">
-                            
-                            <div class="tr_item">
-                                <div class="td_item item_like">
-                                    <span class="material-icons-outlined"><i class="bi bi-heart-fill"></i></span>
-                                </div>
-                                <div class="td_item item_img">
-                                    <img src="https://i.ibb.co/vQHXcYb/b68912b3426baa0b1f4c410a02174879.jpg" />
-                                </div>
-                                <div class="td_item item_name">
-                                    <label class="main">Denim Jacket</label>
-                                    <label class="sub">Ref. 007891987</label>
-                                </div>
-                                <div class="td_item item_color">
-                                    <select>
-                                        <option value="black">black</option>
-                                        <option value="white">white</option>
-                                        <option value="grey">grey</option>
-                                    </select>
-                                </div>
-                                <div class="td_item item_size">
-                                    <select>
-                                        <option value="small">small</option>
-                                        <option value="large">large</option>
-                                        <option value="Xlarge">Xlarge</option>
-                                    </select>
-                                </div>
-                                <div class="td_item item_actions">
-                                    <span>
-                                        <i class="bi bi-cart3"><br>
-                                            <p>update</p>
-                                        </i></span>
-                                </div>
-                                <div class="td_item item_qty">
-                                    <div class="quantity">
-                                        <button class="minus" aria-label="Decrease">&minus;</button>
-                                        <input type="number" class="input-box" value="1" min="1" max="10" readonly>
-                                        <button class="plus" aria-label="Increase">&plus;</button>
-                                    </div>
-                                </div>
-                                <div class="td_item item_price">
-                                    <label>Ksh. 260.00</label>
-                                </div>
-                                <div class="td_item item_remove">
-                                    <span class="material-icons-outlined">close</span>
-                                </div>
-                            </div>
+                        @if (count($products) > 0)
+                            @foreach ($products as $product)
+                                <div class="cart_responsive">
 
-                        </div>
+                                    <div class="tr_item">
+                                        <div class="td_item item_like">
+                                            <span class="material-icons-outlined"><i class="bi bi-heart-fill"></i></span>
+                                        </div>
+                                        <div class="td_item item_img">
+                                            <img src="{{ asset('storage/img/pictures/' . $product['item']['thumbnail']) }}" alt="" />
+                                        </div>
+                                        <div class="td_item item_name">
+                                            <label class="main">{{ $product['item']['products']['0']['name'] }}</label>
+                                            <label class="sub">{{ $product['item']['products']['0']['description'] }}</label>
+                                        </div>
+                                        <div class="td_item item_color">
+                                            <select>
+                                                <option selected>
+                                                    {{ $product['item']['products']['0']['color']['0']['name'] }}
+                                                </option>
+                                                <option value="black">black</option>
+                                                <option value="white">white</option>
+                                                <option value="grey">grey</option>
+                                            </select>
+                                        </div>
+                                        <div class="td_item item_size">
+                                            <select>
+                                                <option selected>
+                                                    {{ $product['item']['products']['0']['size']['0']['name'] }}
+                                                </option>
+                                                <option value="small">small</option>
+                                                <option value="large">large</option>
+                                                <option value="Xlarge">Xlarge</option>
+                                            </select>
+                                        </div>
+                                        <div class="td_item item_actions">
+                                            <span>
+                                                <i class="bi bi-cart3"><br>
+                                                    <p>update</p>
+                                                </i></span>
+                                        </div>
+                                        <div class="td_item item_qty">
+                                            <div class="quantity">
+                                                <a href="{{ route('reduceCart', ['id' => $product['item']['id']]) }}" class="minus" aria-label="Decrease">&minus;</a>
+                                                <input type="number" class="input-box" value="{{ $product['qty'] }}" min="1"
+                                                    max="10" readonly>
+                                                <a href="{{ route('addToCart', ['id' => $product['item']['id']]) }}" class="plus" aria-label="Increase">&plus;</a>
+                                            </div>
+                                        </div>
+                                        <div class="td_item item_price">
+                                            <label>Ksh. {{ $product['item']['products']['0']['price'] }}</label>
+                                        </div>
+                                        <div class="td_item item_remove">
+                                            <span class="material-icons-outlined">close</span>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            @endforeach
+                        @endif
                         <div class="footer">
                             <div class="back_cart">
                                 <a href="#back">
@@ -109,5 +125,5 @@
             </section>
         </div>
     </section><!-- End Blog Single Section -->
-    
+
 @endsection
