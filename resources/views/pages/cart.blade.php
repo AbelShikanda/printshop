@@ -24,106 +24,157 @@
                             @foreach ($products as $product)
                                 <div class="cart_responsive">
 
-                                    <div class="tr_item">
-                                        <div class="td_item item_like">
-                                            <span class="material-icons-outlined"><i class="bi bi-heart-fill"></i></span>
-                                        </div>
-                                        <div class="td_item item_img">
-                                            <img src="{{ asset('storage/img/pictures/' . $product['item']['thumbnail']) }}" alt="" />
-                                        </div>
-                                        <div class="td_item item_name">
-                                            <label class="main">{{ $product['item']['products']['0']['name'] }}</label>
-                                            <label class="sub">{{ $product['item']['products']['0']['description'] }}</label>
-                                        </div>
-                                        <div class="td_item item_color">
-                                            <select>
-                                                <option selected>
-                                                    {{ $product['item']['products']['0']['color']['0']['name'] }}
-                                                </option>
-                                                <option value="black">black</option>
-                                                <option value="white">white</option>
-                                                <option value="grey">grey</option>
-                                            </select>
-                                        </div>
-                                        <div class="td_item item_size">
-                                            <select>
-                                                <option selected>
-                                                    {{ $product['item']['products']['0']['size']['0']['name'] }}
-                                                </option>
-                                                <option value="small">small</option>
-                                                <option value="large">large</option>
-                                                <option value="Xlarge">Xlarge</option>
-                                            </select>
-                                        </div>
-                                        <div class="td_item item_actions">
-                                            <span>
-                                                <i class="bi bi-cart3"><br>
-                                                    <p>update</p>
-                                                </i></span>
-                                        </div>
-                                        <div class="td_item item_qty">
-                                            <div class="quantity">
-                                                <a href="{{ route('reduceCart', ['id' => $product['item']['id']]) }}" class="minus" aria-label="Decrease">&minus;</a>
-                                                <input type="number" class="input-box" value="{{ $product['qty'] }}" min="1"
-                                                    max="10" readonly>
-                                                <a href="{{ route('addToCart', ['id' => $product['item']['id']]) }}" class="plus" aria-label="Increase">&plus;</a>
+                                    <form action="{{ route('updateCart', ['id' => $product['item']['id']]) }}"method="POST">
+                                        @csrf
+                                        <div class="tr_item">
+                                            <div class="td_item item_like">
+                                                <span class="material-icons-outlined"><i
+                                                        class="bi bi-heart-fill"></i></span>
                                             </div>
-                                        </div>
-                                        <div class="td_item item_price">
-                                            <label>Ksh. {{ $product['item']['products']['0']['price'] }}</label>
-                                        </div>
-                                        <div class="td_item item_remove">
-                                            <span class="material-icons-outlined">close</span>
+                                            <div class="td_item item_img">
+                                                <img src="{{ asset('storage/img/pictures/' . $product['item']['thumbnail']) }}"
+                                                    alt="" />
+                                            </div>
+                                            <div class="td_item item_name">
+                                                <label
+                                                    class="main">{{ $product['item']['products']['0']['name'] }}</label>
+                                                <label
+                                                    class="sub">{{ $product['item']['products']['0']['description'] }}</label>
+                                            </div>
+                                            <div class="td_item item_color">
+                                                <select name="color">
+                                                    <option selected>
+                                                        {{ $product['item']['products']['0']['color']['0']['name'] }}
+                                                    </option>
+                                                    <option value="black">black</option>
+                                                    <option value="white">white</option>
+                                                    <option value="grey">grey</option>
+                                                </select>
+                                            </div>
+                                            <div class="td_item item_size">
+                                                <select name="size">
+                                                    <option selected>
+                                                        {{ $product['item']['products']['0']['size']['0']['name'] }}
+                                                    </option>
+                                                    <option value="small">small</option>
+                                                    <option value="large">large</option>
+                                                    <option value="Xlarge">Xlarge</option>
+                                                </select>
+                                            </div>
+                                            <div class="td_item item_actions">
+                                                <span>
+                                                    <button type="submit" class="btn btn-light"
+                                                        style="background-color: transparent; border: none;">
+                                                        <i class="bi bi-cart3"></i>
+                                                        <p>update</p>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                    </form>
+                                    <div class="td_item item_qty">
+                                        <div class="quantity">
+                                            <a href="{{ route('reduceCart', ['id' => $product['item']['id']]) }}"
+                                                class="minus" aria-label="Decrease">&minus;</a>
+                                            <input type="number" class="input-box" value="{{ $product['qty'] }}"
+                                                min="1" max="10" readonly>
+                                            <a href="{{ route('addToCart', ['id' => $product['item']['id']]) }}"
+                                                class="plus" aria-label="Increase">&plus;</a>
                                         </div>
                                     </div>
-
+                                    <div class="td_item item_price">
+                                        <label>Ksh. {{ $product['item']['products']['0']['price'] }}</label>
+                                    </div>
+                                    <div class="td_item item_remove">
+                                        <span class="material-icons-outlined">
+                                            <a href="{{ route('deleteCart', ['id' => $product['item']['id']]) }}">
+                                                <i class="bi bi-x"></i>
+                                            </a>
+                                        </span>
+                                    </div>
                                 </div>
-                            @endforeach
-                        @endif
-                        <div class="footer">
-                            <div class="back_cart">
-                                <a href="#back">
-                                    <span class="material-icons-outlined">west</span>
-                                    Back to Shop
-                                </a>
-                            </div>
-                            <div class="subtotal">
-                                <label>Total: </label>
-                                <strong>Ksh 451.00</strong>
-                                <br>
-                                <label>Shipping: </label>
-                                <strong>Ksh 451.00</strong>
-                                <br>
-                                <label>Subtotal: </label>
-                                <strong>Ksh 451.00</strong>
-                            </div>
+
+                    </div>
+                    @endforeach
+                    @endif
+                    <div class="footer">
+                        <div class="back_cart">
+                            <a href="{{ route('catalog') }}">
+                                <span class="material-icons-outlined">west</span>
+                                Back to Shop
+                            </a>
+                        </div>
+                        <div class="subtotal">
+                            <label>Total: </label>
+                            <strong>Ksh {{ $totalPrice }}</strong>
+                            <br>
+                            <label>Shipping: </label>
+                            <strong>Ksh {{ $shipping }}</strong>
+                            <br>
+                            <label>Subtotal: </label>
+                            <strong>Ksh {{ $totalPrice + $shipping }}</strong>
                         </div>
                     </div>
                 </div>
-
-                <div class="cart_details">
-                    <div class="cart_title">
-                        Cart Details
-                    </div>
-                    <div class="form_row">
-                        <div class="form_group">
-                            <label class="input_label">Phone Number</label>
-                            <input type="text" class="input" id="card_number" name='card' min="16"
-                                max="16" placeholder="0000 0000 0000 0000" onkeypress="return checkDigit(event)"
-                                autocomplete="off" required />
-                        </div>
-
-                        <div class="form_group w_100 mb-5">
-                            <label class="input_label">Location</label>
-                            <input type="text" class="input" id="card_date" placeholder="MM / YY"
-                                onkeypress="return checkDigit(event)" autocomplete="off" required />
-                        </div>
-
-                        <button class="btn">Checkout</button>
-                    </div>
-                </div>
-            </section>
         </div>
+
+        <div class="cart_details">
+            <div class="cart_title">
+                Cart Details
+            </div>
+            <div class="form_row">
+                <div class="form_group">
+                    @foreach ($products as $product)
+                        <form action="{{ route('postCheckout', ['id' => $product['item']['id']]) }}" method="POST">
+                    @endforeach
+                    @csrf
+                    <div class="subtotal">
+                        <label>Total: </label>
+                        <strong>Ksh {{ $totalPrice }}</strong>
+                        <br>
+                        <label>Shipping: </label>
+                        <strong>Ksh {{ $shipping }}</strong>
+                        <br>
+                        <br>
+                        <br>
+                        <div>Lipa Na Mpesa</div>
+                        <div>Buy Goods</div>
+                        <div>Till: <span> 9030355 </span></div>
+                        <div>Name: <span> Javan Kush Enterprises </span></div>
+                        <label>Subtotal: </label>
+                        <strong class="text-success">Ksh {{ $totalPrice + $shipping }}</strong>
+                        <div class="form-group">
+                            <label class="col-form-label" for="inputSuccess"><i class="fas fa-check"></i> Your M-pesa
+                                Reference Number</label>
+                            <input name="mpesa_ref" type="text" value="" class="form-control is-valid"
+                                id="inputSuccess">
+
+                            @foreach ($products as $product)
+                                <input name="price" type="text" class="form-control" id=""
+                                    value="{{ $product['item']['products']['0']['price'] }}" readonly hidden>
+                                <input name="qntty" type="text" class="form-control" id=""
+                                    value="{{ $product['qty'] }}" readonly hidden>
+                                <input name="pID" type="text" class="form-control" id=""
+                                    value="{{ $product['item']['id'] }}" readonly hidden>
+                                <input name="color" type="text" class="form-control" id=""
+                                    value="{{ $product['item']['products']['0']['color']['0']['id'] }}" readonly hidden>
+                                <input name="size" type="text" class="form-control" id=""
+                                    value="{{ $product['item']['products']['0']['size']['0']['id'] }}" readonly hidden>
+                            @endforeach
+                            <input name="total" type="text" class="form-control" id=""
+                                value="{{ $totalPrice + $shipping }}" readonly hidden>
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn">Checkout</button>
+                </form>
+            </div>
+        </div>
+    </section>
+    </div>
     </section><!-- End Blog Single Section -->
 
 @endsection

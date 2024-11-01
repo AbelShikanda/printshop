@@ -309,7 +309,7 @@
                             align-items: center;
                             justify-content: center;
                             text-align: center;
-                            span {
+                            span button{
                                 font-size: 18px;
                                 opacity: 0.6;
                                 padding: 5px;
@@ -394,7 +394,7 @@
                                 right: 0px;
                                 top: 0px;
                             }
-                            span {
+                            span a{
                                 font-size: 18px;
                                 opacity: 0.6;
                                 padding: 5px;
@@ -403,7 +403,7 @@
                                 transition: all 0.2s linear;
                                 &:hover {
                                     opacity: 1;
-                                    transform: scale(1.7);
+                                    transform: scale(2);
                                 }
                             }
                         }

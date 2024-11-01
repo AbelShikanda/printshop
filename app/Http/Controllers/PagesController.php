@@ -75,13 +75,13 @@ class PagesController extends Controller
         ];
         
         if (!Session::has('cart')) {
-            return View('pages.catalog');
+            return redirect()->route('catalog')->with('message', 'There is currently nothing in your cart');
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        dd($cart);
+        // dd($cart);
         // foreach ($cart->items as $item) {
-        //     dd($item['item']['products']['0']['price']);
+        //     dd($item['item']['id']);
         // }
         return View('pages.cart', [
             'pageTitle' => $pageTitle,
@@ -133,8 +133,17 @@ class PagesController extends Controller
         $cart = new Cart($oldCart);
         $cart->update($images, $images->id, $size, $color);
 
+        $pageTitle = 'Cart';
+        $breadcrumbLinks = [
+            ['url' => '/', 'label' => 'Home'],
+            ['url' => '', 'label' => 'catalog detail'],
+            ['url' => '', 'label' => 'cart'],
+        ];
         Session::put('cart', $cart);
-        return redirect()->route('cart');
+        return redirect()->route('cart')->with([
+            'pageTitle' => $pageTitle,
+            'breadcrumbLinks' => $breadcrumbLinks,
+        ]);
     }
 
     public function getReduceCart($id)
@@ -143,14 +152,21 @@ class PagesController extends Controller
         $cart = new Cart($oldCart);
         $cart->reduce($id);
 
+        $pageTitle = 'Cart';
+        $breadcrumbLinks = [
+            ['url' => '/', 'label' => 'Home'],
+            ['url' => '', 'label' => 'catalog detail'],
+            ['url' => '', 'label' => 'cart'],
+        ];
         if (count($cart->items) > 0) {
             Session::put('cart', $cart);
         } else {
             Session::forget('cart');
         }
-
-
-        return redirect()->route('cart');
+        return redirect()->route('cart')->with([
+            'pageTitle' => $pageTitle,
+            'breadcrumbLinks' => $breadcrumbLinks,
+        ]);
     }
 
     public function deleteCart($id)
@@ -161,11 +177,72 @@ class PagesController extends Controller
 
         if (count($cart->items) > 0) {
             Session::put('cart', $cart);
+            return redirect()->route('cart');
         } else {
             Session::forget('cart');
+            return redirect()->route('catalog');
         }
-        return redirect()->route('cart');
     }
+
+    // public function postCheckout(Request $request, $id)
+    // {
+    //     if(!Session::has('cart')) {
+    //         return View('users/pages/cart');
+    //     }
+
+    //     $product = Products::find($id);
+    //     $oldCart = Session::get('cart');
+    //     $cart = new Cart($oldCart);
+
+    //     $request->validate([
+    //         'reference' => 'alpha_num|unique:orders|max:10|min:10',
+    //         'tracking_No' => '',
+    //         'total_amount' => '',
+    //         'reference' => '',
+    //         'first_name' => '',
+    //         'last_name' => '',
+    //         'landmark' => '',
+    //         'house_no' => '',
+    //         'estate' => '',
+    //         'phone' => '',
+    //         'town' => '',
+    //         ]);
+
+    //     // mpesa code here 
+
+    //     $order = new orders();
+    //     $order->tracking_No = serialize($cart);
+    //     $order->total_amount = $request->total;
+    //     $order->reference = $request->input('mpesa_ref');
+    //     $order->first_name = Auth::user()->first_name;
+    //     $order->last_name = Auth::user()->last_name;
+    //     $order->landmark = Auth::user()->landmark;
+    //     $order->house_no = Auth::user()->house_no;
+    //     $order->estate = Auth::user()->estate;
+    //     $order->phone = Auth::user()->phone; 
+    //     $order->town = Auth::user()->town;
+    //     // $order->county = 'Kenya';
+    //     // dd($order);
+
+    //     Auth::user()->orders()->save($order);
+
+    //     $order_items = [];
+    //     foreach ($cart->items as $id => $item) {
+    //         $order_items[] = [
+    //             'order_id' => $order->id,
+    //             'products_id' => $id,
+    //             'color_id' => $request->color,
+    //             'size_id' => $request->size,
+    //             'quantity' => $item['qty'],
+    //             'price' => $item['price'],
+    //         ];
+    //     }
+    //     Order_Items::insert($order_items);
+    //     // dd($order);
+
+    //     Session::forget('cart');
+    //     return redirect()->route('cart')->with('message', 'Your order has been placed Successfully.');
+    // }
 
     /**
      * function to display blog detail

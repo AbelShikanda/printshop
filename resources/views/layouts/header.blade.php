@@ -39,12 +39,10 @@
                         </a>
                         <ul>
                             <li><a href="{{ route('profile') }}">Profile</a></li>
-                            <li class="cart__menu">
-                                <a href="{{ route('addToCart') }}">
-                                    {{-- <span id="cart_qty">
+                            <li class="">
+                                <a href="{{ route('cart') }}">
                                         {{ Session::has('cart') ? Session::get('cart')->totalQty : '0' }}
-                                    </span> --}}
-                                    <div class="cartword">Cart</div>
+                                    Cart
                                 </a>
                             </li>
                             <li>

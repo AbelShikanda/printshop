@@ -61,4 +61,13 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * The attributes that should be cast.
+     *
+     *
+     */
+    public function order() {
+        return $this->hasMany(Orders::class);
+    }
 }

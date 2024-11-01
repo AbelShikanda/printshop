@@ -21,7 +21,7 @@ use App\Http\Controllers\Admin\ProductSizesController;
 use App\Http\Controllers\Admin\ProductTypesController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\UserController;
-
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ContactController;
@@ -82,11 +82,15 @@ Route::get('/blog/single', [PagesController::class, 'blog_single'])->name('blogS
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Route::post('/wishlist/{id}', [ProfileController::class, 'wishlist'])->name('wishlist');
+Route::post('/deleteWish/{id}', [ProfileController::class, 'deleteWish'])->name('deleteWish');
 Route::get('/cart', [PagesController::class, 'getCart'])->name('cart');
 Route::get('/cart/add/{id}', [PagesController::class, 'add_to_cart'])->name('addToCart');
 Route::get('/deleteCart/{id}', [PagesController::class, 'deleteCart'])->name('deleteCart');
 Route::post('/updateCart/{id}', [PagesController::class, 'updateCart'])->name('updateCart');
 Route::get('/reduceCart/{id}', [PagesController::class, 'getReduceCart'])->name('reduceCart');
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Route::post('/postCheckout/{id}', [CheckoutController::class, 'postCheckout'])->name('postCheckout');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');

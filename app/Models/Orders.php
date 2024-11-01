@@ -15,17 +15,17 @@ class Orders extends Model
      * @var array
      */
     protected $fillable = [
-        // 'reference',
-        // 'colors_id',
-        // 'sizes_id',
-        // 'materials_id',
-        // 'type_id',
-        // 'sku',
-        // 'name',
-        // 'description',
-        // 'meta_keywords',
-        // 'price',
-        // 'status',
-        // 'featured',
+        'reference',
+        'colors_id',
+        'sizes_id',
+        'materials_id',
+        'type_id',
+        'sku',
+        'name',
+        'description',
+        'meta_keywords',
+        'price',
+        'status',
+        'featured',
     ];
 }

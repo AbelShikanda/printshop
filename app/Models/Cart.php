@@ -24,41 +24,39 @@ class Cart
     {
         $storedItem = [
             'qty' => 0,
-            'price' => $item->price,
+            'price' => $item->products['0']['price'],
             'item' => $item,
         ];
-        dd($storedItem);
         if($this->items) {
             if(array_key_exists($id, $this->items)) {
                 $storedItem = $this->items[$id];
             }
         }
         $storedItem['qty']++;
-        $storedItem['price'] = $item->price * $storedItem['qty'];
+        $storedItem['price'] = $item->products['0']['price'] * $storedItem['qty'];
         $this->totalQty++;
         $this->items[$id] = $storedItem;
-        $this->totalPrice += $item->price;
+        $this->totalPrice += $item->products['0']['price'];
     }
 
     public function update($item, $id, $size, $color) 
     {
         $storedItem = [
             'qty' => 0,
-            'price' => $item->price,
+            'price' => $item->products['0']['price'],
             'item' => $item,
         ];
-        if($this->items) {
-            if(array_key_exists($id, $this->items)) {
-                $storedItem = $this->items[$id];
-            }
+        if (array_key_exists($id, $this->items)) {
+            $storedItem = $this->items[$id];
         }
-        $storedItem['item']['Size']['0']['name'] = $size;
-        $storedItem['item']['Color']['0']['name'] = $color;
-        // $storedItem['price'] = (int)$item->price * (int)$qnty;
+        $storedItem['item']['products']['0']['size']['0']['name'] = $size;
+        $storedItem['item']['products']['0']['color']['0']['name'] = $color;
+        // $storedItem['price'] = (int)$item->products['0']['price'] * (int)$qnty;
 
         
-        $storedItem['item']['Size']['0']['name'] = $this->items[$id]['item']['Size']['0']['name']['0'];
-        $storedItem['item']['Color']['0']['name'] = $this->items[$id]['item']['Color']['0']['name']['0'];
+        $storedItem['item']['products']['0']['size']['0']['name'] = $this->items[$id]['item']['products']['0']['size']['0']['name'];
+        $storedItem['item']['products']['0']['color']['0']['name'] = $this->items[$id]['item']['products']['0']['color']['0']['name'];
+
     }
 
     public function reduce($id) 
