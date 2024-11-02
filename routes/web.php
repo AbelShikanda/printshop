@@ -32,7 +32,7 @@ use App\Http\Controllers\ProfileController;
 
 
 Route::get('/admin_', function () {
-    return view('dashboard.index');})
+    return redirect()->route('dashboard.index');})
     ->middleware('adminauth');
 
 Route::group(['prefix' => '/admin'], function() {
