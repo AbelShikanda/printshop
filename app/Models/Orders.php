@@ -28,4 +28,15 @@ class Orders extends Model
         'status',
         'featured',
     ];
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItems::class, 'order_id');
+    }
+
+    // Assuming each order belongs to a user
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

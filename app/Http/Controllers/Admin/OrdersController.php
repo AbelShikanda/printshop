@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\OrderItems;
 use App\Models\Orders;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -13,7 +15,17 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        return view('admin.orders.index');
+        $orders = Orders::with(['user', 'orderItems.products'])->orderBy('created_at', 'DESC')->get();
+        // $ordersItems = OrderItems::orderBy('id', 'DESC')->get();
+        // $users = User::latest()->get();
+
+        dd($orders);
+
+        return view('admin.orders.index', with([
+            'orders' => $orders,
+            // 'ordersItems' => $ordersItems,
+            // 'users' => $users,
+        ]));
     }
 
     /**
