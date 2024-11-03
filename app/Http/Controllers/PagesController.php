@@ -90,13 +90,12 @@ class PagesController extends Controller
         $cart = new Cart($oldCart);
         // dd($cart, $cart->items, $cart->items['6']['item']['products']);
         // dd($cart->items['item']['products']['0']['name']);
-        foreach ($cart->items as $item) {
-            foreach ($item['item']['products'] as $item) {
-                dd($item['color']);
-                // dd($item['item']['id']);
-            }
-            // dd($item['item']['id']);
-        }
+        // foreach ($cart->items as $item) {
+        //     foreach ($item['item']['products'] as $item) {
+        //         dd($item['size']);
+        //     }
+        //     // dd($item['item']['id']);
+        // }
         // $products_id = $cart->items['item']['products']['0']['id'];
         return View('pages.cart', [
             'pageTitle' => $pageTitle,
@@ -120,7 +119,14 @@ class PagesController extends Controller
      */
     public function add_to_cart(Request $request, $id) 
     {
-        $images = ProductImages::with('products')->find($id);
+        // $images = ProductImages::with('products')->find($id);
+        $images = ProductImages::with([
+            'products' => function($query) {
+                $query->with('color'); // example for product color
+                $query->with('size'); // example for product color
+            }
+        ])->find($id);
+        // dd($images);
         $oldCart = Session::has('cart') ? Session::get('cart') : null;
         $cart = new Cart($oldCart);
         $cart->add($images, $images->id);

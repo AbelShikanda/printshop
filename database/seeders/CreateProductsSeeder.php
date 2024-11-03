@@ -2,6 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\ProductProductCategories;
+use App\Models\ProductProductColors;
+use App\Models\ProductProductMaterials;
+use App\Models\ProductProductSizes;
+use App\Models\ProductProductTypes;
 use App\Models\Products;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -152,8 +157,34 @@ class CreateProductsSeeder extends Seeder
         ];
 
         // Insert each product
-        foreach ($products as $product) {
-            Products::create($product);
+        foreach ($products as $productData) {
+            $product = Products::create($productData);
+
+            // Populate pivot tables
+            ProductProductCategories::create([
+                'products_id' => $product->id,
+                'product_categories_id' => $productData['categories_id'],
+            ]);
+
+            ProductProductColors::create([
+                'products_id' => $product->id,
+                'product_colors_id' => $productData['colors_id'],
+            ]);
+
+            ProductProductSizes::create([
+                'products_id' => $product->id,
+                'product_sizes_id' => $productData['sizes_id'],
+            ]);
+
+            ProductProductMaterials::create([
+                'products_id' => $product->id,
+                'product_materials_id' => $productData['materials_id'],
+            ]);
+
+            ProductProductTypes::create([
+                'products_id' => $product->id,
+                'product_types_id' => $productData['type_id'],
+            ]);
         }
     }
 }

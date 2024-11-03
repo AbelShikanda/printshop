@@ -37,26 +37,26 @@
                                             </div>
                                             @foreach ($product['item']['products'] as $prod)
                                                 <div class="td_item item_name">
-                                                    <label class="main">{{ $prod['name'] }}</label>
-                                                    <label class="sub">{{ $prod['description'] }}</label>
+                                                    <label class="main">{{ Str::words($prod['name'], 2, '...') }}</label>
+                                                    <label class="sub">{{ Str::words($prod['description'], 3, '...') }}</label>
                                                 </div>
-                                                @foreach ($prod['color'] as $prod)
+                                                @foreach ($prod['color'] as $color)
                                                     <div class="td_item item_color">
                                                         <select name="color">
                                                             <option selected>
-                                                                {{ $prod['name'] }}
+                                                                {{ $color['name'] }}
                                                             </option>
                                                             <option value="black">black</option>
                                                             <option value="white">white</option>
                                                             <option value="grey">grey</option>
                                                         </select>
                                                     </div>
-                                                    @endforeach
-                                                    @foreach ($prod['sizes'] as $prod)
+                                                @endforeach
+                                                @foreach ($prod['size'] as $size)
                                                     <div class="td_item item_size">
                                                         <select name="size">
                                                             <option selected>
-                                                                {{ $prod['name'] }}
+                                                                {{ $size['name'] }}
                                                             </option>
                                                             <option value="small">small</option>
                                                             <option value="large">large</option>
@@ -77,22 +77,22 @@
                                     </form>
                                     <div class="td_item item_qty">
                                         <div class="quantity">
-                                            {{-- <a href="{{ route('reduceCart', ['id' => $product['item']['id']]) }}"
+                                            <a href="{{ route('reduceCart', ['id' => $product['item']['id']]) }}"
                                                 class="minus" aria-label="Decrease">&minus;</a>
                                             <input type="number" class="input-box" value="{{ $product['qty'] }}"
                                                 min="1" max="10" readonly>
                                             <a href="{{ route('addToCart', ['id' => $product['item']['id']]) }}"
-                                                class="plus" aria-label="Increase">&plus;</a> --}}
+                                                class="plus" aria-label="Increase">&plus;</a>
                                         </div>
                                     </div>
                                     <div class="td_item item_price">
-                                        {{-- <label>Ksh. {{ $product['item']['products']['0']['price'] }}</label> --}}
+                                        <label>Ksh. {{ $product['item']['products']['0']['price'] }}</label>
                                     </div>
                                     <div class="td_item item_remove">
                                         <span class="material-icons-outlined">
-                                            {{-- <a href="{{ route('deleteCart', ['id' => $product['item']['id']]) }}">
+                                            <a href="{{ route('deleteCart', ['id' => $product['item']['id']]) }}">
                                                 <i class="bi bi-x"></i>
-                                            </a> --}}
+                                            </a>
                                         </span>
                                     </div>
                                 </div>
@@ -152,18 +152,19 @@
                             <input name="mpesa_ref" type="text" value="" class="form-control is-valid"
                                 id="inputSuccess">
 
-                            {{-- @foreach ($products as $product)
+                            @foreach ($products as $product)
                                 <input name="price" type="text" class="form-control" id=""
-                                    value="{{ $product['item']['products']['0']['price'] }}" readonly hidden>
+                                    value="{{ $product['item']['products']['0']['price'] }}" readonly hidden >
                                 <input name="qntty" type="text" class="form-control" id=""
-                                    value="{{ $product['qty'] }}" readonly hidden>
+                                    value="{{ $product['qty'] }}" readonly hidden >
                                 <input name="pID" type="text" class="form-control" id=""
-                                    value="{{ $product['item']['id'] }}" readonly hidden>
+                                    value="{{ $product['item']['id'] }}" readonly hidden >
                                 <input name="color" type="text" class="form-control" id=""
-                                    value="{{ $product['item']['products']['0']['color']['0']['id'] }}" readonly hidden>
+                                    value="{{ $product['item']['products']['0']['color']['0']['id'] }}" readonly hidden >
                                 <input name="size" type="text" class="form-control" id=""
-                                    value="{{ $product['item']['products']['0']['size']['0']['id'] }}" readonly hidden>
-                            @endforeach --}}
+                                    value="{{ $product['item']['products']['0']['size']['0']['id'] }}" readonly hidden >
+                            @endforeach
+
                             <input name="total" type="text" class="form-control" id=""
                                 value="{{ $totalPrice + $shipping }}" readonly hidden>
                         </div>

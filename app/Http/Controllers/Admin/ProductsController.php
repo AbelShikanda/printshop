@@ -89,22 +89,22 @@ class ProductsController extends Controller
 
             ProductProductCategories::create([
                 'products_id' => $product->id,
-                'category_id' => $product->categories_id,
+                'product_categories_id' => $product->categories_id,
             ]);
 
             ProductProductColors::create([
                 'products_id' => $product->id,
-                'color_id' => $product->colors_id,
+                'product_colors_id' => $product->colors_id,
             ]);
 
             ProductProductSizes::create([
                 'products_id' => $product->id,
-                'size_id' => $product->sizes_id,
+                'product_sizes_id' => $product->sizes_id,
             ]);
 
             ProductProductMaterials::create([
                 'products_id' => $product->id,
-                'material_id' => $product->materials_id,
+                'product_materials_id' => $product->materials_id,
             ]);
 
             ProductProductTypes::create([

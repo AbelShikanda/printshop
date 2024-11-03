@@ -341,7 +341,7 @@
                                 border-radius: 4px;
                                 overflow: hidden;
                                 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-                                span {
+                                a {
                                     background-color: #3498db;
                                     color: #fff;
                                     border: none;
@@ -352,7 +352,7 @@
                                     text-align: center;
                                     transition: background-color 0.2s;
                                 }
-                                span:hover {
+                                a:hover {
                                     background-color: #2980b9;
                                 }
                                 .input-box {
