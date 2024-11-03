@@ -119,8 +119,9 @@
                         </div>
                     </div>
                 </div>
+            </section>
         </div>
-
+        <section class="cart_wrapper">
         <div class="cart_details">
             <div class="cart_title">
                 Cart Details
@@ -177,7 +178,9 @@
                 <button type="submit" class="btn">Checkout</button>
                 </form>
             </div>
-        </div>
+        
+        </section>
+    </div>
     </section>
     </div>
     </section><!-- End Blog Single Section -->

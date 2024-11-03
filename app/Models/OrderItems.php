@@ -14,7 +14,7 @@ class OrderItems extends Model
     */
     public function orders()
     {
-        return $this->belongsTo(orders::class, 'order_id');
+        return $this->belongsTo(Orders::class, 'order_id');
     }
     
     /**
@@ -22,22 +22,22 @@ class OrderItems extends Model
     */
     public function products()
     {
-        return $this->hasMany(Products::class, 'id');
+        return $this->belongsTo(Products::class, 'product_id');
     }
     
     /**
     * Get the Size.
     */
-    public function Size()
+    public function size()
     {
-        return $this->belongsTo(Size::class);
+        return $this->belongsTo(ProductSizes::class);
     }
     
     /**
     * Get the Color.
     */
-    public function Color()
+    public function color()
     {
-        return $this->belongsTo(Color::class);
+        return $this->belongsTo(ProductColors::class);
     }
 }

@@ -15,11 +15,25 @@ class OrdersController extends Controller
      */
     public function index()
     {
-        $orders = Orders::with(['user', 'orderItems.products'])->orderBy('created_at', 'DESC')->get();
+        $orders = Orders::with([
+            'user',
+            'orderItems.products.producttype',
+            'orderItems.products.color',
+            'orderItems.products.size',
+        ])
+        ->orderBy('created_at', 'DESC')
+        ->get();
         // $ordersItems = OrderItems::orderBy('id', 'DESC')->get();
         // $users = User::latest()->get();
 
-        dd($orders);
+        // foreach ($orders as $order) {
+        //     foreach ($order->orderItems as $items) {
+        //             dump($items->products->producttype);
+        //         foreach ($items->products as $prods) {
+        //                 // dump($prods->name);
+        //         }
+        //     }
+        // }
 
         return view('admin.orders.index', with([
             'orders' => $orders,

@@ -103,7 +103,7 @@ class Products extends Model
      *
      *
      */
-    public function Order_Items() {
-        return $this->hasMany(Order_Items::class, 'product_id');
+    public function orderItems() {
+        return $this->belongsToMany(OrderItems::class);
     }
 }

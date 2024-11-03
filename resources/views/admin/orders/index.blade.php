@@ -16,7 +16,7 @@
                                         <tr>
                                             <th>Date</th>
                                             <th>Customer</th>
-                                            <th>Order #</th>
+                                            <th>REf #</th>
                                             <th>Status</th>
                                             <th>Sub Total</th>
                                             <th>Action</th>
@@ -28,9 +28,16 @@
                                                 data-parent="#c-2474" href="#collap-2474">
                                                 <td>{{ $order->created_at }}</td>
                                                 <td>{{ $order->user->first_name }} {{ $order->user->last_name }}</td>
-                                                <td>{{ $order->id }}</td>
-                                                <td><span class="badge badge-pill badge-success mr-2">S</span><small
-                                                        class="text-muted">Paid</small></td>
+                                                <td>{{ $order->reference }}</td>
+                                                <td>
+                                                    @if ($order->complete == 1)
+                                                        <span class="badge badge-pill badge-success mr-2">S</span>
+                                                        <small class="text-muted">Paid</small>
+                                                    @else
+                                                        <span class="badge badge-pill badge-danger mr-2">X</span>
+                                                        <small class="text-muted">Unconformed</small>
+                                                    @endif
+                                                </td>
                                                 <td>Ksh {{ $order->price }}</td>
                                                 <td><button class="btn btn-sm dropdown-toggle more-horizontal"
                                                         type="button" data-toggle="dropdown" aria-haspopup="true"
@@ -44,28 +51,35 @@
                                                     </div>
                                                 </td>
                                             </tr>
-                                            @foreach ($order->orderItems as $item)
-                                                <tr id="collap-2474" class="collapse show in p-3 bg-grey">
-                                                    <td colspan="8">
-                                                        <dl class="row mb-0 mt-1">
-                                                            <dt class="col-sm-3">{{ $item->products->name }}</dt>
-                                                            <dt class="col-sm-3">color</dt>
-                                                            <dd class="col-sm-3">Size</dd>
-                                                            <dt class="col-sm-3">Quantity</dt>
-                                                    </td>
-                                                    </dl>
-                                                </tr>
-                                            @endforeach
-                                            <tr id="collap-2474" class="collapse show in p-3 bg-light">
+                                            <tr id="collap-2474" class="collapse show in p-3 bg-gry">
                                                 <td colspan="8">
                                                     <dl class="row mb-0 mt-1">
-                                                        <dt class="col-sm-3">Email</dt>
-                                                        <dt class="col-sm-3">Phone</dt>
-                                                        <dt class="col-sm-3">town</dt>
-                                                        <dd class="col-sm-3">location</dd>
+                                                        <dt class="col-sm-3">{{ $order->user->email }}</dt>
+                                                        <dt class="col-sm-3">{{ $order->user->phone }}</dt>
+                                                        <dt class="col-sm-3">{{ $order->user->town }}</dt>
+                                                        <dd class="col-sm-3">{{ $order->user->location }}</dd>
                                                     </dl>
                                                 </td>
                                             </tr>
+                                            @foreach ($order->orderItems as $item)
+                                                <tr id="collap-2474" class="collapse show in p-3 bg-light">
+                                                    <td colspan="8">
+                                                        <dl class="row mb-0 mt-1">
+                                                            <dt class="col-sm-3">{{ Str::words($item->products->name, 3, '...') }}</dt>
+                                                            @foreach ($item->products->producttype as $type)
+                                                                <dt class="col-sm-3">{{ Str::words($type->name, 3, '...') }}</dt>
+                                                            @endforeach
+                                                            @foreach ($item->products->color as $colors)
+                                                                <dt class="col-sm-2">{{ $colors->name }}</dt>
+                                                            @endforeach
+                                                            @foreach ($item->products->size as $sizes)
+                                                                <dt class="col-sm-2">{{ $sizes->name }}</dt>
+                                                            @endforeach
+                                                            <dt class="col-sm-2">{{ $item->quantity }}</dt>
+                                                        </dl>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
                                         @endforeach
                                     </tbody>
                                 </table>
