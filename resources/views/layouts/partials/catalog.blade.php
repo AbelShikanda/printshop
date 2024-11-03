@@ -1,5 +1,5 @@
 <div class="box"
-    style="background: url('{{ asset('storage/img/pictures/' . $item->thumbnail) }}'); background-size: cover; background-position: center;">
+    style="background: url('{{ asset('storage/img/products/' . $item->thumbnail) }}'); background-size: cover; background-position: center;">
     <div class="overlay">
         <div class = "items"></div>
         <div class = "items head">

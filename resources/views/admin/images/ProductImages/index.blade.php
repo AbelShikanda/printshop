@@ -55,7 +55,7 @@
                                             <tr>
                                                 <td>{{ $itm->id }}</td>
                                                 <td>
-                                                    <img src="{{ asset('storage/img/pictures/'.$itm->thumbnail) }}" style="width:50px;" alt="image">
+                                                    <img src="{{ asset('storage/img/products/'.$itm->thumbnail) }}" style="width:50px;" alt="image">
                                                 </td>
                                                 <td>{{ $itm->full }}</td>
                                                 <td><button class="btn btn-sm dropdown-toggle more-horizontal"

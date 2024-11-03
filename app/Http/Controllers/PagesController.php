@@ -27,7 +27,16 @@ class PagesController extends Controller
             ['url' => '/', 'label' => 'Home'],
             ['url' => '', 'label' => 'Catalog'],
         ];
-        $images = ProductImages::latest()->get();
+
+        $images = ProductImages::with('Products')
+        ->latest()
+        ->get();
+        // dd($images);
+        // $images = ProductImages::with('Products')
+        // ->latest()
+        // ->get();
+        // dd($images);
+
         return view('pages.catalog', with([
             'pageTitle' => $pageTitle,
             'breadcrumbLinks' => $breadcrumbLinks,
@@ -79,10 +88,16 @@ class PagesController extends Controller
         }
         $oldCart = Session::get('cart');
         $cart = new Cart($oldCart);
-        // dd($cart);
-        // foreach ($cart->items as $item) {
-        //     dd($item['item']['id']);
-        // }
+        // dd($cart, $cart->items, $cart->items['6']['item']['products']);
+        // dd($cart->items['item']['products']['0']['name']);
+        foreach ($cart->items as $item) {
+            foreach ($item['item']['products'] as $item) {
+                dd($item['color']);
+                // dd($item['item']['id']);
+            }
+            // dd($item['item']['id']);
+        }
+        // $products_id = $cart->items['item']['products']['0']['id'];
         return View('pages.cart', [
             'pageTitle' => $pageTitle,
             'breadcrumbLinks' => $breadcrumbLinks,
