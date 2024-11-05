@@ -7,7 +7,7 @@
             <hr>
         </div>
         <div class = "items price">
-            <p class="old">Ksh {{ $item->products[0]->price }}</p>
+            <p class="old">Ksh {{ $item->products[0]->price * 1.15}}</p>
             <p class="new">Ksh {{ $item->products[0]->price }}</p>
         </div>
         <div class="items cart">

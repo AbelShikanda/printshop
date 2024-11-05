@@ -203,7 +203,7 @@
                             @include size(sm-device) {
                                 top: -2%;
                             }
-                            span {
+                            span, i{
                                 font-size: 18px;
                                 opacity: 0.6;
                                 padding: 5px;
@@ -212,7 +212,7 @@
                                 transition: all 0.2s linear;
                                 &:hover {
                                     opacity: 1;
-                                    transform: scale(1.7);
+                                    transform: scale(1.9);
                                 }
                             }
                         }

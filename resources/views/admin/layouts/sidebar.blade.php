@@ -41,10 +41,6 @@
                         <a class="nav-link pl-3" href="{{ route('orders.index') }}"><span class="ml-1 item-text">Order</span>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link pl-3" href="{{ route('order_items.index') }}"><span class="ml-1 item-text">Order
-                                Details</span></a>
-                    </li>
                 </ul>
             </li>
             <li class="nav-item dropdown">

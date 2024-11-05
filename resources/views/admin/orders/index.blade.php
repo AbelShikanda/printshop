@@ -24,8 +24,11 @@
                                     </thead>
                                     <tbody>
                                         @foreach ($orders as $order)
-                                            <tr class="accordion-toggle collapsed" id="c-2474" data-toggle="collapse"
-                                                data-parent="#c-2474" href="#collap-2474">
+                                            @php
+                                                $orderId = 'order-' . $order->id;
+                                            @endphp
+                                            <tr class="accordion-toggle collapsed" id="{{ $orderId }}" data-toggle="collapse"
+                                                data-parent="#{{ $orderId }}" href="#collap-{{ $orderId }}">
                                                 <td>{{ $order->created_at }}</td>
                                                 <td>{{ $order->user->first_name }} {{ $order->user->last_name }}</td>
                                                 <td>{{ $order->reference }}</td>
@@ -45,13 +48,11 @@
                                                         <span class="text-muted sr-only">Action</span>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Edit</a>
-                                                        <a class="dropdown-item" href="#">Remove</a>
-                                                        <a class="dropdown-item" href="#">Assign</a>
+                                                        <a class="dropdown-item" href="#">View</a>
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr id="collap-2474" class="collapse show in p-3 bg-gry">
+                                            <tr id="collap-{{ $orderId }}" class="collapse in p-3 bg-light">
                                                 <td colspan="8">
                                                     <dl class="row mb-0 mt-1">
                                                         <dt class="col-sm-3">{{ $order->user->email }}</dt>
@@ -62,12 +63,14 @@
                                                 </td>
                                             </tr>
                                             @foreach ($order->orderItems as $item)
-                                                <tr id="collap-2474" class="collapse show in p-3 bg-light">
+                                                <tr id="collap-{{ $orderId }}" class="collapse in p-3 bg-light">
                                                     <td colspan="8">
                                                         <dl class="row mb-0 mt-1">
-                                                            <dt class="col-sm-3">{{ Str::words($item->products->name, 3, '...') }}</dt>
+                                                            <dt class="col-sm-3">
+                                                                {{ Str::words($item->products->name, 3, '...') }}</dt>
                                                             @foreach ($item->products->producttype as $type)
-                                                                <dt class="col-sm-3">{{ Str::words($type->name, 3, '...') }}</dt>
+                                                                <dt class="col-sm-3">
+                                                                    {{ Str::words($type->name, 3, '...') }}</dt>
                                                             @endforeach
                                                             @foreach ($item->products->color as $colors)
                                                                 <dt class="col-sm-2">{{ $colors->name }}</dt>
