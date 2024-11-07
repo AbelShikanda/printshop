@@ -88,17 +88,17 @@
                                     </div>
                                     <div class="more-info">
                                         <p class="lead">
-                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis dolorum
-                                            dolorem soluta quidem
-                                            expedita aperiam aliquid at.
-                                            Totam magni ipsum suscipit amet? Autem nemo esse laboriosam ratione nobis
-                                            mollitia inventore?
+                                            To get in touch <br>
+                                            Fill out the form <br>
+                                            send us an email. <br>
+                                            We are passionate about our customers and are always 
+                                            ready to help with all your needs!
                                         </p>
                                         <ul class="list-ico">
-                                            <li><span class="bi bi-geo-alt"></span> 329 WASHINGTON ST BOSTON, MA 02108
+                                            <li><span class="bi bi-geo-alt"></span> Nairobi Kenya
                                             </li>
-                                            <li><span class="bi bi-phone"></span> (617) 557-0089</li>
-                                            <li><span class="bi bi-envelope"></span> contact@example.com</li>
+                                            <li><span class="bi bi-phone"></span> +254 728 157 164</li>
+                                            <li><span class="bi bi-envelope"></span> info@printshopeld.com</li>
                                         </ul>
                                     </div>
                                     <div class="socials">

@@ -154,7 +154,7 @@
                     </li>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="{{ route('blog_images.index') }}"><span
+                        <a class="nav-link pl-3" href="{{ route('comments.index') }}"><span
                                 class="ml-1 item-text">Comments</span></a>
                     </li>
                 </ul>

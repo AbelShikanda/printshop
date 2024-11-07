@@ -37,7 +37,6 @@ class BlogsController extends Controller
         $blogs = $request->validate([
             'category' => 'required',
             'title' => 'required',
-            'intro' => 'required',
             'body' => 'required',
         ]);
 
@@ -46,24 +45,23 @@ class BlogsController extends Controller
             
             $blogs = Blogs::create([
                 'title' => $request->title,
-                'intro' => $request->intro,
                 'body' => $request->body,
                 'blog_categories_id' => $request->category,
             ]);
 
             BlogBlogCategories::create([
                 'blogs_id' => $blogs->id,
-                'blogcategory_id' => $blogs->blog_categories_id,
+                'blog_categories_id' => $blogs->blog_categories_id,
             ]);
 
             if(!$blogs){
                 DB::rollBack();
 
-                return back()->with('error', 'Something went wrong while saving user data');
+                return back()->with('error', 'Something went wrong while saving blog data');
             }
 
             DB::commit();
-            return redirect()->route('blogs.index')->with('success', 'User Stored Successfully.');
+            return redirect()->route('blogs.index')->with('success', 'blog Created Successfully.');
 
 
         } catch (\Throwable $th) {
@@ -89,9 +87,14 @@ class BlogsController extends Controller
     public function edit(string $id)
     {
         $blogs = Blogs::find( $id );
+        $category = BlogCategories::find($id);
+        $categories = BlogCategories::all();
 
-		return view( 'admin.blogs.edit' )
-			->with( 'blogs', $blogs );
+		return view('admin.blogs.edit', with([
+            'blogs' => $blogs,
+            'categories' => $categories,
+            'category' => $category,
+        ]));
     }
 
     /**
@@ -100,10 +103,10 @@ class BlogsController extends Controller
     public function update(Request $request, string $id)
     {
         $blogs = $request->validate([
-            'category' => 'required',
-            'title' => 'required',
-            'slug' => 'required',
-            'body' => 'required',
+            'category' => '',
+            'title' => '',
+            'slug' => '',
+            'body' => '',
         ]);
 
         try {
@@ -114,14 +117,14 @@ class BlogsController extends Controller
                 $blogs->blog_categories_id = $request->category;
                 $blogs->title = $request->title;
                 $blogs->body = $request->body;
-                $blogs->type_id = $request->slug;
+                $blogs->slug = $request->slug;
                 
                 $blogs->save();
             } else {
                 dd("Product not found");
             }
             
-            BlogBlogCategories::where('blog_categories_id', $id)->delete();
+            BlogBlogCategories::where('blogs_id', $blogs->id)->delete();
             BlogBlogCategories::create([
                 'blogs_id' => $blogs->id,
                 'blog_categories_id' => $blogs->blog_categories_id,
@@ -130,11 +133,11 @@ class BlogsController extends Controller
             if(!$blogs){
                 DB::rollBack();
 
-                return back()->with('error', 'Something went wrong while saving user data');
+                return back()->with('error', 'Something went wrong while saving blogs data');
             }
 
             DB::commit();
-            return redirect()->route('blogs.index')->with('success', 'User Stored Successfully.');
+            return redirect()->route('blogs.index')->with('success', 'Blogs Stored Successfully.');
 
 
         } catch (\Throwable $th) {

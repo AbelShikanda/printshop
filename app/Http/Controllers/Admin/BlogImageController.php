@@ -19,7 +19,7 @@ class BlogImageController extends Controller
      */
     public function index()
     {
-        $blogImages = BlogImages::all();
+        $blogImages = BlogImages::latest()->get();
         return view('admin.images.blogImages.index', with([
             'blogImages' => $blogImages,
         ]));
@@ -30,7 +30,9 @@ class BlogImageController extends Controller
      */
     public function create()
     {
-        $blogs = Blogs::all();
+        // $blogs = Blogs::all();
+        $blogIdsWithImages = BlogImages::pluck('blogs_id')->toArray();
+        $blogs = Blogs::whereNotIn('id', $blogIdsWithImages)->get();
         return view('admin.images.BlogImages.create', with([
             'blogs' => $blogs,
         ]));
@@ -112,9 +114,13 @@ class BlogImageController extends Controller
      */
     public function edit($id)
     {
-        $blog = BlogImages::find($id);
+        $image = BlogImages::find($id);
+        $blog = Blogs::where('id', $image->blogs_id)->first();
+        $blogs = Blogs::all();
         return view('admin.images.BlogImages.edit')->with([
             'blog' => $blog,
+            'blogs' => $blogs,
+            'image' => $image,
         ]);
     }
 
@@ -143,7 +149,7 @@ class BlogImageController extends Controller
             $image = $manager->read($file->getPathname());
 
             // Resize and crop the image to a 2:3 aspect ratio (800x1200)
-            $croppedImage = $image->resize(853, 1280);
+            $croppedImage = $image->resize(1001, 667);
 
             if (!Storage::disk('public')->exists('img/blogs')) {
                 Storage::disk('public')->makeDirectory('img/blogs');

@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\Auth\AdminAuthController;
 use App\Http\Controllers\Admin\BlogCategoriesController;
 use App\Http\Controllers\Admin\BlogImageController;
 use App\Http\Controllers\Admin\BlogsController;
+use App\Http\Controllers\Admin\CommentsController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderItemsController;
 use App\Http\Controllers\Admin\OrdersController;
@@ -59,6 +60,7 @@ Route::group(['middleware' => 'adminauth'], function() {
     Route::resource('blog_images', BlogImageController::class);
     Route::resource('contact', ContactController::class);
     Route::resource('prices', PricesController::class);
+    Route::resource('comments', CommentsController::class);
 
     Route::resource('permissions', PermissionsController::class);
     Route::resource('roles', RolesController::class);

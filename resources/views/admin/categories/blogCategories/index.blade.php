@@ -12,7 +12,7 @@
                         </p>
                     </div>
                     <div class="col-md-6">
-                        <a type="button" class=" float-right btn mb-2 btn-outline-primary">Add Blog Category</a>
+                        <a href="{{ route("blog_categories.create") }}" type="button" class=" float-right btn mb-2 btn-outline-primary">Add Blog Category</a>
                     </div>
                 </div>
                 <div class="row my-4">
@@ -43,8 +43,20 @@
                                                         <span class="text-muted sr-only">Action</span>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Edit</a>
-                                                        <a class="dropdown-item" href="#">Remove</a>
+                                                        <a class="dropdown-item" href="{{ route('blog_categories.edit', $item->id) }}">Edit</a>
+                                                        
+
+                                                        <a class="dropdown-item" href="{{ route('blog_categories.destroy', $item->id) }}"
+                                                            onclick="event.preventDefault();
+                                                            document.getElementById('destroy-category').submit();">
+                                                            {{ __('Remove') }}
+                                                        </a>
+
+                                                        <form id="destroy-category" action="{{ route('blog_categories.destroy', $item->id) }}"
+                                                            method="POST" class="d-none">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>

@@ -48,11 +48,11 @@ class BlogCategoriesController extends Controller
             if(!$blogs){
                 DB::rollBack();
 
-                return back()->with('error', 'Something went wrong while saving user data');
+                return back()->with('error', 'Something went wrong while saving blog category data');
             }
 
             DB::commit();
-            return redirect()->route('blog_categories.index')->with('success', 'User Stored Successfully.');
+            return redirect()->route('blog_categories.index')->with('success', 'blog category Stored Successfully.');
 
 
         } catch (\Throwable $th) {
@@ -74,10 +74,10 @@ class BlogCategoriesController extends Controller
      */
     public function edit($id)
     {
-        $blogs = BlogCategories::find( $id );
+        $category = BlogCategories::find( $id );
 
-		return view( 'admin.blogs.categories.edit' )
-			->with( 'blogs', $blogs );
+		return view( 'admin.categories.blogCategories.edit' )
+			->with( 'category', $category );
     }
 
     /**
@@ -106,11 +106,11 @@ class BlogCategoriesController extends Controller
             if(!$blogs){
                 DB::rollBack();
 
-                return back()->with('error', 'Something went wrong while saving user data');
+                return back()->with('error', 'Something went wrong while saving blog category data');
             }
 
             DB::commit();
-            return redirect()->route('blog_categories.index')->with('success', 'User Stored Successfully.');
+            return redirect()->route('blog_categories.index')->with('success', 'blog category updated Successfully.');
 
 
         } catch (\Throwable $th) {
@@ -126,6 +126,6 @@ class BlogCategoriesController extends Controller
     {
         $category = BlogCategories::find($id);
         $category->delete();
-        return redirect()->route('product_categories.index')->with('message', 'category Deleted Successfully.');
+        return redirect()->route('blogs_categories.index')->with('message', 'category Deleted Successfully.');
     }
 }

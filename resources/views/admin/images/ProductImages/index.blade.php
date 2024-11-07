@@ -47,7 +47,7 @@
                                             <th>#</th>
                                             <th>Image</th>
                                             <th>Thumbnail</th>
-                                            <th>Caption</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
