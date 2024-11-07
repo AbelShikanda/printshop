@@ -18,27 +18,46 @@
                                         <h5 class="title-left">
                                             Send Message Us
                                         </h5>
+                                        @if (count($errors) > 0)
+                                            <div class="alert alert-danger col-md-8 offset-md-3">
+                                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                                <ul>
+                                                    @foreach ($errors->all() as $error)
+                                                        <li>{{ $error }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        @endif
+                    
+                                        <div class="pt-3">
+                                            @if (session()->has('message'))
+                                                <div class="alert alert-success">
+                                                    {{ session()->get('message') }}
+                                                </div>
+                                            @endif
+                                        </div>
                                     </div>
                                     <div>
-                                        <form action="forms/contact.php" method="post" role="form"
-                                            class="php-email-form">
+                                        <form class="php-email-form" action="{{ route('contactStore') }}" method="POST" role="form">
+                                            @csrf
+                                            @method('post')
                                             <div class="row">
                                                 <div class="col-md-12 mb-3">
                                                     <div class="form-group">
                                                         <input type="text" name="name" class="form-control"
-                                                            id="name" placeholder="Your Name" required>
+                                                            placeholder="Your Name" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 mb-3">
                                                     <div class="form-group">
                                                         <input type="email" class="form-control" name="email"
-                                                            id="email" placeholder="Your Email" required>
+                                                            placeholder="Your Email" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12 mb-3">
                                                     <div class="form-group">
                                                         <input type="text" class="form-control" name="subject"
-                                                            id="subject" placeholder="Subject" required>
+                                                            placeholder="Subject" required>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-12">
@@ -84,13 +103,13 @@
                                     </div>
                                     <div class="socials">
                                         <ul>
-                                            <li><a href=""><span class="ico-circle"><i
+                                            <li><a href="https://www.facebook.com/printshopeldofficial/"><span class="ico-circle"><i
                                                             class="bi bi-facebook"></i></span></a></li>
-                                            <li><a href=""><span class="ico-circle"><i
+                                            <li><a href="https://www.instagram.com/printshopeld/"><span class="ico-circle"><i
                                                             class="bi bi-instagram"></i></span></a></li>
-                                            <li><a href=""><span class="ico-circle"><i
-                                                            class="bi bi-twitter"></i></span></a></li>
-                                            <li><a href=""><span class="ico-circle"><i
+                                            {{-- <li><a href=""><span class="ico-circle"><i
+                                                            class="bi bi-twitter"></i></span></a></li> --}}
+                                            <li><a href="https://www.linkedin.com/in/abel-shikanda-4a68a582/"><span class="ico-circle"><i
                                                             class="bi bi-linkedin"></i></span></a></li>
                                         </ul>
                                     </div>

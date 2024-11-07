@@ -78,9 +78,10 @@ Route::get('/catalog/show/{id}', [PagesController::class, 'catalog_detail'])->na
 Route::get('/blog', [PagesController::class, 'blog'])->name('blog');
 Route::get('/blog/single/{id}', [PagesController::class, 'blog_single'])->name('blogSingle');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
+Route::get('/contacts', [PagesController::class, 'contacts'])->name('contacts');
+Route::post('/contact/store', [PagesController::class, 'contactStore'])->name('contactStore');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Route::Post('/comments', [PagesController::class, 'comments'])->name('comments');
+Route::post('/comments', [PagesController::class, 'comments'])->name('comments');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Route::post('/wishlist/{id}', [ProfileController::class, 'wishlist'])->name('wishlist');
 Route::post('/deleteWish/{id}', [ProfileController::class, 'deleteWish'])->name('deleteWish');

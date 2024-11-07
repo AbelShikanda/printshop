@@ -81,6 +81,10 @@
                         <a class="nav-link pl-3" href="{{ route('prices.index') }}"><span
                                 class="ml-1 item-text">Prices</span></a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link pl-3" href="{{ route('prices.index') }}"><span
+                                class="ml-1 item-text">Ratings</span></a>
+                    </li>
                 </ul>
             </li>
         </ul>
@@ -97,6 +101,10 @@
                     <li class="nav-item">
                         <a class="nav-link pl-3" href="{{ route('users.index') }}"><span
                                 class="ml-1 item-text">Users</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link pl-3" href="{{ route('users.index') }}"><span
+                                class="ml-1 item-text">Contacts</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link pl-3" href="{{ route('admins.index') }}"><span
@@ -143,6 +151,11 @@
                     <li class="nav-item">
                         <a class="nav-link pl-3" href="{{ route('blog_images.index') }}"><span
                                 class="ml-1 item-text">Images</span></a>
+                    </li>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link pl-3" href="{{ route('blog_images.index') }}"><span
+                                class="ml-1 item-text">Comments</span></a>
                     </li>
                 </ul>
             </li>

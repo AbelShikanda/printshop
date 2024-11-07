@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BlogImages;
 use App\Models\Cart;
 use App\Models\Comments;
+use App\Models\Contact;
 use App\Models\ProductColors;
 use App\Models\ProductImages;
 use App\Models\ProductSizes;
@@ -345,7 +346,7 @@ class PagesController extends Controller
      * @param  Parameter type  Parameter name Description of the parameter (optional)
      * @return Return type Description of the return value (optional)
      */
-    public function contact()
+    public function contacts(Request $request)
     {
         $pageTitle = 'Contact';
         $breadcrumbLinks = [
@@ -353,13 +354,61 @@ class PagesController extends Controller
             ['url' => '', 'label' => 'Contact'],
         ];
         return view('pages.contact', with([
-            //
             'pageTitle' => $pageTitle,
             'breadcrumbLinks' => $breadcrumbLinks,
         ]));
     }
 
-    
+
+    /**
+     * function for the contact page
+     *
+     * This function does the following:
+     * - send email to the site
+     * - store the message in the database
+     *
+     * @param  Parameter type  Parameter name Description of the parameter (optional)
+     * @return Return type Description of the return value (optional)
+     */
+    public function contactStore(Request $request)
+    {
+        $contacts = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'subject' => 'required',
+            'message' => 'required',
+        ]);
+        // dd($contacts);
+
+        try {
+            DB::beginTransaction();
+            // Logic For Save User Data
+
+            $contacts = Contact::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'subject' => $request->subject,
+                'message' => $request->message,
+            ]);
+
+            if (!$contacts) {
+                DB::rollBack();
+                return back()->with([
+                    'message' => 'Something went wrong while saving user data.',
+                ]);
+            }
+
+            DB::commit();
+            return redirect()->back()->with([
+                'message' => 'Your contact has been sent successfully.',
+            ]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
+    }
+
+
     /**
      * Store a newly created resource in storage.
      */
@@ -370,18 +419,18 @@ class PagesController extends Controller
             'user_id' => 'required',
             'blog_id' => 'required',
         ]);
-        
+
         try {
             DB::beginTransaction();
             // Logic For Save User Data
-            
+
             $comments = Comments::create([
                 'content' => $request->message,
                 'user_id' => $request->user_id,
                 'blog_id' => $request->blog_id,
             ]);
 
-            if(!$comments){
+            if (!$comments) {
                 DB::rollBack();
 
                 return back()->with('message', 'Something went wrong while saving user data');
@@ -389,8 +438,6 @@ class PagesController extends Controller
 
             DB::commit();
             return redirect()->back()->with('message', 'your comment has been sent Successfully.');
-
-
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;

@@ -14,8 +14,8 @@
                         href="{{ url('/catalog') }}">Catalog</a></li>
                 <li><a class="nav-link {{ request()->is('blog') ? 'active' : '' }}" href="{{ url('/blog') }}">Stories</a>
                 </li>
-                <li><a class="nav-link {{ request()->is('contact') ? 'active' : '' }}"
-                        href="{{ url('/contact') }}">Contact</a></li>
+                <li><a class="nav-link {{ request()->is('contacts') ? 'active' : '' }}"
+                        href="{{ url('/contacts') }}">Contact</a></li>
                 <!-- Authentication Links -->
                 @guest
                     @if (Route::has('login'))
