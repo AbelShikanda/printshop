@@ -61,10 +61,10 @@ class ProductImageController extends Controller
             $image = $manager->read($file->getPathname());
 
             // Resize and crop the image to a 2:3 aspect ratio (800x1200)
-            $croppedImage = $image->resize(1280, 853);
+            $croppedImage = $image->resize(320, 370);
 
             // Save the resized and cropped image to storage
-            $croppedImagePath = 'img/pictures/' . $fileName;
+            $croppedImagePath = 'img/products/' . $fileName;
             Storage::disk('public')->put($croppedImagePath, (string) $croppedImage->toJpeg());
         } else {
             return response()->json(['error' => 'No file uploaded'], 400);
@@ -140,11 +140,22 @@ class ProductImageController extends Controller
             $currentDate = now()->toDateString();
             $fileName = $currentDate . '-' . uniqid() . '.' . $file->getClientOriginalExtension();
 
-            if (!Storage::disk('public')->exists('img/pictures')) {
-                Storage::disk('public')->makeDirectory('img/pictures');
+            // Create new ImageManager instance with desired driver
+            $manager = new ImageManager(Driver::class); // or ['driver' => 'gd']
+
+            // Read the image
+            $image = $manager->read($file->getPathname());
+
+            // Resize and crop the image to a 2:3 aspect ratio (800x1200)
+            $croppedImage = $image->resize(853, 1280);
+
+            if (!Storage::disk('public')->exists('img/products')) {
+                Storage::disk('public')->makeDirectory('img/products');
             }
-            $postFile = file_get_contents($file);
-            Storage::disk('public')->put('img/pictures/' . $fileName, $postFile);
+            
+            // Save the resized and cropped image to storage
+            $croppedImagePath = 'img/products/' . $fileName;
+            Storage::disk('public')->put($croppedImagePath, (string) $croppedImage->toJpeg());
         } else {
             $fileName = '';
         }
@@ -156,6 +167,7 @@ class ProductImageController extends Controller
             $img = ProductImages::find($id);
             if ($img) {
                 if ($file) {
+                    Storage::delete($img->thumbnail);
                     $img->thumbnail = $fileName;
                 }
                 $img->full = $request->full;

@@ -27,9 +27,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PricesController;
 use App\Http\Controllers\ProfileController;
-
-
-
+use App\Models\Comments;
 
 Route::get('/admin_', function () {
     return redirect()->route('dashboard.index');})
@@ -78,9 +76,11 @@ Route::get('/catalog', [PagesController::class, 'catalog'])->name('catalog');
 Route::get('/catalog/show/{id}', [PagesController::class, 'catalog_detail'])->name('catalogDetail');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Route::get('/blog', [PagesController::class, 'blog'])->name('blog');
-Route::get('/blog/single', [PagesController::class, 'blog_single'])->name('blogSingle');
+Route::get('/blog/single/{id}', [PagesController::class, 'blog_single'])->name('blogSingle');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Route::get('/contact', [PagesController::class, 'contact'])->name('contact');
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Route::Post('/comments', [PagesController::class, 'comments'])->name('comments');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Route::post('/wishlist/{id}', [ProfileController::class, 'wishlist'])->name('wishlist');
 Route::post('/deleteWish/{id}', [ProfileController::class, 'deleteWish'])->name('deleteWish');

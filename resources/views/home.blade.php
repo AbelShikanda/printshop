@@ -46,10 +46,10 @@
                         <div class="service-content">
                             <h2 class="s-title">APPAREL PRINTING</h2>
                             <p class="s-description text-center">
-                                Promote yourself, connect and create awareness about your brand to your audience
-                                with custom t-shirts, sweatshirts, hoodies, caps and polos. Digital media print with
-                                excellent
-                                quality on 100% cotton. br
+                                Promote yourself, create awareness
+                                with custom t-shirts, sweatshirts, hoodies, caps and polos.
+                                Excellent quality. 100% cotton.
+                                <br>
                                 #PickNPrint
                             </p>
                         </div>
@@ -63,9 +63,10 @@
                         <div class="service-content">
                             <h2 class="s-title">GRAPHIC DESIGN</h2>
                             <p class="s-description text-center">
-                                We stay up-to date with emerging trends so you can create the foundation of your
-                                image. Place no limits on your designs.
-                                Be memorable through your logo, your colors and your brand. <br>
+                                Stay up-to date with trends.
+                                Place no limits on your designs.
+                                Be memorable through your logo, your colors and your brand.
+                                <br>
                                 #BeNoticed
                             </p>
                         </div>
@@ -79,10 +80,10 @@
                         <div class="service-content">
                             <h2 class="s-title">TEMPLATE DESIGN</h2>
                             <p class="s-description text-center">
-                                We also provide visual designs to help guide your business decisions. Blueprints to
-                                help stanrdardize your brand, guide and
-                                create inspiration while saving on time and energy.
-                                Valuable for visual, digital and writing content. <br>
+                                Get visual designs.
+                                Create your blueprint and inspiration.
+                                Elevate for visual, digital and writing content.
+                                <br>
                                 #printshopeld
                             </p>
                         </div>
@@ -192,12 +193,11 @@
                 </div>
             </div>
             <div class="row mb-5">
-                <div class="mt-2 mb-2 col-12 col-md-6 col-lg-6">
-                    @include('layouts.partials.blog')
-                </div>
-                <div class="mt-2 mb-2 col-12 col-md-6 col-lg-6">
-                    @include('layouts.partials.blog')
-                </div>
+                @foreach ($blogs as $blog)
+                    <div class="mt-2 mb-2 col-12 col-md-6 col-lg-6">
+                        @include('layouts.partials.blog')
+                    </div>
+                @endforeach
             </div>
         </div>
     </section><!-- End Blog Section -->
@@ -250,8 +250,8 @@
                     </div> --}}
 
                     <!-- <div id="testimonial-mf" class="owl-carousel owl-theme">
-                                                  
-                                                </div> -->
+                                                      
+                                                    </div> -->
                 </div>
             </div>
         </div>

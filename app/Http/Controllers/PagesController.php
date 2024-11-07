@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BlogImages;
 use App\Models\Cart;
+use App\Models\Comments;
 use App\Models\ProductColors;
 use App\Models\ProductImages;
 use App\Models\ProductSizes;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class PagesController extends Controller
@@ -21,7 +24,8 @@ class PagesController extends Controller
      * @param  Parameter type  Parameter name Description of the parameter (optional)
      * @return Return type Description of the return value (optional)
      */
-    public function catalog() {
+    public function catalog()
+    {
         $pageTitle = 'Catalog';
         $breadcrumbLinks = [
             ['url' => '/', 'label' => 'Home'],
@@ -29,8 +33,8 @@ class PagesController extends Controller
         ];
 
         $images = ProductImages::with('Products')
-        ->latest()
-        ->get();
+            ->latest()
+            ->get();
         // dd($images);
         // $images = ProductImages::with('Products')
         // ->latest()
@@ -54,7 +58,8 @@ class PagesController extends Controller
      * @param  Parameter type  Parameter name Description of the parameter (optional)
      * @return Return type Description of the return value (optional)
      */
-    public function catalog_detail($id) {
+    public function catalog_detail($id)
+    {
         $pageTitle = 'Catalog Detail';
         $breadcrumbLinks = [
             ['url' => '/', 'label' => 'Home'],
@@ -82,7 +87,7 @@ class PagesController extends Controller
             ['url' => '', 'label' => 'catalog detail'],
             ['url' => '', 'label' => 'cart'],
         ];
-        
+
         if (!Session::has('cart')) {
             return redirect()->route('catalog')->with('message', 'There is currently nothing in your cart');
         }
@@ -117,11 +122,11 @@ class PagesController extends Controller
      * @param  Parameter type  Parameter name Description of the parameter (optional)
      * @return Return type Description of the return value (optional)
      */
-    public function add_to_cart(Request $request, $id) 
+    public function add_to_cart(Request $request, $id)
     {
         // $images = ProductImages::with('products')->find($id);
         $images = ProductImages::with([
-            'products' => function($query) {
+            'products' => function ($query) {
                 $query->with('color'); // example for product color
                 $query->with('size'); // example for product color
             }
@@ -275,16 +280,20 @@ class PagesController extends Controller
      * @param  Parameter type  Parameter name Description of the parameter (optional)
      * @return Return type Description of the return value (optional)
      */
-    public function blog() {
-        $pageTitle = 'blog';
+    public function blog()
+    {
+        $pageTitle = 'stories';
         $breadcrumbLinks = [
             ['url' => '/', 'label' => 'Home'],
             ['url' => '', 'label' => 'blog'],
         ];
+        $blogs = BlogImages::with('blogs')->orderBy('id', 'DESC')->get();
+        // dd($blogs);
+
         return view('pages.blog', with([
-            // 'title' => 'Blog Detail',
             'pageTitle' => $pageTitle,
             'breadcrumbLinks' => $breadcrumbLinks,
+            'blogs' => $blogs,
         ]));
     }
 
@@ -298,16 +307,31 @@ class PagesController extends Controller
      * @param  Parameter type  Parameter name Description of the parameter (optional)
      * @return Return type Description of the return value (optional)
      */
-    public function blog_single() {
-        $pageTitle = 'Blog Single';
+    public function blog_single($id)
+    {
+        $pageTitle = 'Single Stories';
         $breadcrumbLinks = [
             ['url' => '/', 'label' => 'Home'],
             ['url' => '', 'label' => 'blog single'],
         ];
+        $blog = BlogImages::with(
+            'blogs',
+            'blogs.blogCategories',
+            'blogs.comments',
+        )
+            ->where('id', $id)
+            ->orderBy('id', 'DESC')
+            ->first();
+        $comments = Comments::with('blog', 'user')->where('blog_id', $id)
+            ->orderBy('id', 'DESC')
+            ->get();
+        // dd($comments);
+
         return view('pages.blog_single', with([
-            //
             'pageTitle' => $pageTitle,
             'breadcrumbLinks' => $breadcrumbLinks,
+            'blog' => $blog,
+            'comments' => $comments,
         ]));
     }
 
@@ -321,7 +345,8 @@ class PagesController extends Controller
      * @param  Parameter type  Parameter name Description of the parameter (optional)
      * @return Return type Description of the return value (optional)
      */
-    public function contact() {
+    public function contact()
+    {
         $pageTitle = 'Contact';
         $breadcrumbLinks = [
             ['url' => '/', 'label' => 'Home'],
@@ -332,5 +357,43 @@ class PagesController extends Controller
             'pageTitle' => $pageTitle,
             'breadcrumbLinks' => $breadcrumbLinks,
         ]));
+    }
+
+    
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function comments(Request $request)
+    {
+        $comments = $request->validate([
+            'message' => 'required',
+            'user_id' => 'required',
+            'blog_id' => 'required',
+        ]);
+        
+        try {
+            DB::beginTransaction();
+            // Logic For Save User Data
+            
+            $comments = Comments::create([
+                'content' => $request->message,
+                'user_id' => $request->user_id,
+                'blog_id' => $request->blog_id,
+            ]);
+
+            if(!$comments){
+                DB::rollBack();
+
+                return back()->with('message', 'Something went wrong while saving user data');
+            }
+
+            DB::commit();
+            return redirect()->back()->with('message', 'your comment has been sent Successfully.');
+
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 }

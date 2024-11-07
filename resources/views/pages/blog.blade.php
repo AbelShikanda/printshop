@@ -8,27 +8,13 @@
         <div class="container">
             <div class="row">
                 <div class="row  mb-5">
-                    <div class="mt-2 mb-2 col-12 col-md-6 col-lg-6">
-                        @include('layouts.partials.blog')
-                    </div>
-                    <div class="mt-2 mb-2 col-12 col-md-6 col-lg-6">
-                        @include('layouts.partials.blog')
-                    </div>
-                    <div class="mt-2 mb-2 col-12 col-md-6 col-lg-6">
-                        @include('layouts.partials.blog')
-                    </div>
-                    <div class="mt-2 mb-2 col-12 col-md-6 col-lg-6">
-                        @include('layouts.partials.blog')
-                    </div>
-                    <div class="mt-2 mb-2 col-12 col-md-6 col-lg-6">
-                        @include('layouts.partials.blog')
-                    </div>
-                    <div class="mt-2 mb-2 col-12 col-md-6 col-lg-6">
-                        @include('layouts.partials.blog')
-                    </div>
+                    @foreach ($blogs as $blog)
+                        <div class="mt-2 mb-2 col-12 col-md-6 col-lg-6">
+                            @include('layouts.partials.blog')
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>
     </section><!-- End Blog Single Section -->
-    
 @endsection

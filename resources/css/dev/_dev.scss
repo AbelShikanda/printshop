@@ -245,6 +245,7 @@ body {
   .blog-wrapper .post-meta ul,
   .list-ico,
   .socials ul {
+    overflow-wrap: anywhere;
     list-style: none;
     padding-left: 0;
     margin-bottom: 0;
@@ -1456,6 +1457,7 @@ body {
   .form-comments,
   .box-comments,
   .widget-sidebar {
+    overflow-wrap: anywhere;
     padding: 2rem;
     background-color: #000000;
     margin-bottom: 3rem;

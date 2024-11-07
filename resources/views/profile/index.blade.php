@@ -77,9 +77,9 @@
 
                     <div class="artist__listeners">
 
-                        <div class="artist__listeners__count">15,662,810</div>
+                        {{-- <div class="artist__listeners__count">15,662,810</div>
 
-                        <div class="artist__listeners__label">Monthly Listeners</div>
+                        <div class="artist__listeners__label">Monthly Listeners</div> --}}
 
                     </div>
 
@@ -116,18 +116,20 @@
 
                         <div class="artist__navigation__friends">
 
-                            <a href="#">
+                            <div class="artist__listeners__label">Monthly</div>
+
+                            {{-- <a href="#">
                                 <img src="http://zblogged.com/wp-content/uploads/2015/11/17.jpg" alt="" />
-                            </a>
+                            </a> --}}
 
-                            <a href="#">
+                            {{-- <a href="#">
                                 <img src="http://zblogged.com/wp-content/uploads/2015/11/5.png" alt="" />
-                            </a>
+                            </a> --}}
 
-                            <a href="#">
+                            {{-- <a href="#">
                                 <img src="http://cdn.devilsworkshop.org/files/2013/01/enlarged-facebook-profile-picture.jpg"
                                     alt="" />
-                            </a>
+                            </a> --}}
 
                         </div>
 
@@ -201,6 +203,14 @@
                                                     <div class="track__plays"><small>{{ $item->price }}</small></div>
                                                 @endforeach
                                                 <div class="track__plays">
+                                                    <div class="">
+                                                        <a href="{{ route('addToCart', $list->id) }}"><span>
+                                                                <i class="bi bi-cart"></i>
+                                                            </span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="track__plays">
 
                                                     <form method="post" action="{{ route('deleteWish', $list->id) }}">
                                                         @csrf
@@ -267,7 +277,7 @@
 
                                                 <div class="tracks__heading__number">#</div>
 
-                                                <div class="tracks__heading__title">Song</div>
+                                                <div class="tracks__heading__title">Item</div>
 
                                                 <div class="tracks__heading__length">
 
@@ -295,7 +305,8 @@
 
                                                         </div>
 
-                                                        <div class="track__title">{{ Str::words($items->products->name, 2, '...') }}</div>
+                                                        <div class="track__title">
+                                                            {{ Str::words($items->products->name, 2, '...') }}</div>
 
                                                         <div class="track__explicit">
 

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\ProductProductImages;
+use App\Models\BlogBlogImages;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
 
-class CreateProductImagesSeeder extends Seeder
+class CreateBlogImagesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -21,64 +21,63 @@ class CreateProductImagesSeeder extends Seeder
         $imagesData = [
             [
                 'id' => 1,
-                'thumbnail' => 'legends-2023-02-02-63dc14ca434a3.jpg',
-                'full' => 'Legends',
-                'products_id' => 1,
+                'thumbnail' => 'istockphoto-1185540944-612x612.jpg',
+                'full' => 'The Walking Dad',
+                'blogs_id' => 1,
                 'created_at' => Carbon::create('2022', '11', '26', '14', '41', '19'),
                 'updated_at' => Carbon::create('2022', '11', '26', '14', '41', '19'),
             ],
             [
                 'id' => 2,
-                'thumbnail' => 'never-give-up-praying-2023-02-02-63dc1db9bfd5d.jpg',
-                'full' => 'Never Give Up Praying',
-                'products_id' => 2,
+                'thumbnail' => 'istockphoto-1185540944-612x612.jpg',
+                'full' => 'Don\'t Be A Suck Up',
+                'blogs_id' => 2,
                 'created_at' => Carbon::create('2022', '11', '26', '14', '41', '39'),
                 'updated_at' => Carbon::create('2022', '11', '26', '14', '41', '39'),
             ],
             [
                 'id' => 3,
-                'thumbnail' => 'you-matter-2023-02-02-63dc20b492e36.jpg',
-                'full' => 'You Matter',
-                'products_id' => 3,
+                'thumbnail' => 'how-to-make-embroidery.jpg',
+                'full' => 'Choose Kind',
+                'blogs_id' => 3,
                 'created_at' => Carbon::create('2022', '11', '26', '14', '41', '55'),
                 'updated_at' => Carbon::create('2022', '11', '26', '14', '41', '55'),
             ],
             [
                 'id' => 4,
-                'thumbnail' => 'relationship-goals-2023-02-02-63dc21f933e32.jpg',
-                'full' => 'Relationship Goals',
-                'products_id' => 4,
+                'thumbnail' => 'post-1.jpg',
+                'full' => 'Millenial',
+                'blogs_id' => 4,
                 'created_at' => Carbon::create('2022', '11', '26', '14', '42', '04'),
                 'updated_at' => Carbon::create('2022', '11', '26', '14', '42', '04'),
             ],
             [
                 'id' => 5,
-                'thumbnail' => 'blue-fire-2023-02-02-63dc23a9396d3.jpg',
-                'full' => 'Blue Fire',
-                'products_id' => 5,
+                'thumbnail' => 'top_custom_embroidery_tips_for_your_embroidery_business.png',
+                'full' => 'Be His Queen',
+                'blogs_id' => 5,
                 'created_at' => Carbon::create('2022', '11', '26', '14', '42', '20'),
                 'updated_at' => Carbon::create('2022', '11', '26', '14', '42', '20'),
             ],
             [
                 'id' => 6,
-                'thumbnail' => 'good-leader-2023-02-02-63dc24fadf6dc.jpg',
-                'full' => 'Good Leader',
-                'products_id' => 6,
+                'thumbnail' => 'Embroidery-Services-2-1.jpg',
+                'full' => 'A Life Without Prayer Is  A Life Without Power',
+                'blogs_id' => 6,
                 'created_at' => Carbon::create('2022', '11', '26', '14', '42', '35'),
                 'updated_at' => Carbon::create('2022', '11', '26', '14', '42', '35'),
             ],
             [
                 'id' => 7,
-                'thumbnail' => 'bad-choices-make-good-stories-2023-02-10-63e652057504f.jpg',
-                'full' => 'Bad Choices Make Good Stories',
-                'products_id' => 7,
+                'thumbnail' => 'istockphoto-614950614-612x612.jpg',
+                'full' => 'Energy Is Contagious',
+                'blogs_id' => 7,
                 'created_at' => Carbon::create('2022', '11', '26', '14', '43', '16'),
                 'updated_at' => Carbon::create('2022', '11', '26', '14', '43', '16'),
             ],
         ];
         foreach ($imagesData as $index => $imageData) {
-            $sourcePath = public_path("assets/img/products/{$imageData['thumbnail']}");
-            // dd($sourcePath);
+            $sourcePath = public_path("assets/img/blogs/{$imageData['thumbnail']}");
 
             if (file_exists($sourcePath)) {
                 // Process the image with Intervention Image
@@ -87,9 +86,9 @@ class CreateProductImagesSeeder extends Seeder
                 
                 $manager = new ImageManager(Driver::class);
                 $interventionImage = $manager->read($sourcePath);
-                $croppedImage = $interventionImage->resize(320, 370);;
+                $croppedImage = $interventionImage->resize(1001, 667);;
                 
-                $croppedImagePath = "img/products/". $fileName;
+                $croppedImagePath = "img/blogs/". $fileName;
                 
                 Storage::disk('public')->put($croppedImagePath, (string) $croppedImage->toJpeg());
 
@@ -98,20 +97,19 @@ class CreateProductImagesSeeder extends Seeder
                 echo "Source image not found at path: {$sourcePath}\n";
             }
 
-            // Insert record into database
-            DB::table('product_images')->insert([
+            DB::table('blog_images')->insert([
                 'id' => $imageData['id'],
                 'thumbnail' => $imageData['thumbnail'],
                 'full' => $imageData['full'],
-                'products_id' => $imageData['products_id'],
+                'blogs_id' => $imageData['blogs_id'],
                 'created_at' => $imageData['created_at'],
                 'updated_at' => $imageData['updated_at'],
             ]);
 
-            // Add related entry in the ProductProductImages table
-            ProductProductImages::create([
-                'products_id' => $imageData['products_id'],
-                'product_images_id' => $imageData['id'],
+            // Add related entry in the blogblogImages table
+            BlogBlogImages::create([
+                'blogs_id' => $imageData['blogs_id'],
+                'blog_images_id' => $imageData['id'],
             ]);
         }
     }

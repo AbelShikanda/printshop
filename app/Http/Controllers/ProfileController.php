@@ -44,15 +44,15 @@ class ProfileController extends Controller
             return $order;
         });
         // dd($orders);
-        foreach ($orders as $order) {
-            // dd($order);
-            foreach ($order->orderItems as $items) {
-                // dd($items->products);
-                // foreach ($items->products as $product) {
-                //     dd($product);
-                // }
-            }
-        }
+        // foreach ($orders as $order) {
+        //     // dd($order);
+        //     foreach ($order->orderItems as $items) {
+        //         // dd($items->products);
+        //         // foreach ($items->products as $product) {
+        //         //     dd($product);
+        //         // }
+        //     }
+        // }
 
         $latest = ProductImages::with('products')
             ->latest()

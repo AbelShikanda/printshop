@@ -3,7 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\BlogBlogCategories;
+use App\Models\BlogCategories;
+use App\Models\Blogs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BlogsController extends Controller
 {
@@ -12,7 +16,8 @@ class BlogsController extends Controller
      */
     public function index()
     {
-        return view('admin.blogs.index');
+        $blogs = Blogs::orderBy('id', 'DESC')->paginate(7);
+        return view('admin.blogs.index', compact('blogs'));
     }
 
     /**
@@ -20,7 +25,8 @@ class BlogsController extends Controller
      */
     public function create()
     {
-        return view('admin.blogs.create');
+        $categories = BlogCategories::all();
+        return view('admin.blogs.create', compact('categories'));
     }
 
     /**
@@ -28,7 +34,42 @@ class BlogsController extends Controller
      */
     public function store(Request $request)
     {
-        // return view('admin.blogs.index');
+        $blogs = $request->validate([
+            'category' => 'required',
+            'title' => 'required',
+            'intro' => 'required',
+            'body' => 'required',
+        ]);
+
+        try {
+            DB::beginTransaction();
+            
+            $blogs = Blogs::create([
+                'title' => $request->title,
+                'intro' => $request->intro,
+                'body' => $request->body,
+                'blog_categories_id' => $request->category,
+            ]);
+
+            BlogBlogCategories::create([
+                'blogs_id' => $blogs->id,
+                'blogcategory_id' => $blogs->blog_categories_id,
+            ]);
+
+            if(!$blogs){
+                DB::rollBack();
+
+                return back()->with('error', 'Something went wrong while saving user data');
+            }
+
+            DB::commit();
+            return redirect()->route('blogs.index')->with('success', 'User Stored Successfully.');
+
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
     /**
@@ -36,7 +77,10 @@ class BlogsController extends Controller
      */
     public function show(string $id)
     {
-        return view('admin.blogs.show');
+        $blogs = Blogs::where('id', $id)->first();
+        $category = BlogCategories::where('id', $blogs->blog_categories_id)->first();
+
+		return view( 'admin.blogs.show', compact('blogs', 'category'));
     }
 
     /**
@@ -44,7 +88,10 @@ class BlogsController extends Controller
      */
     public function edit(string $id)
     {
-        return view('admin.blogs.edit');
+        $blogs = Blogs::find( $id );
+
+		return view( 'admin.blogs.edit' )
+			->with( 'blogs', $blogs );
     }
 
     /**
@@ -52,7 +99,48 @@ class BlogsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        // return view('admin.blogs.index');
+        $blogs = $request->validate([
+            'category' => 'required',
+            'title' => 'required',
+            'slug' => 'required',
+            'body' => 'required',
+        ]);
+
+        try {
+            DB::beginTransaction();
+
+            $blogs = Blogs::find($id);
+            if ($blogs) {
+                $blogs->blog_categories_id = $request->category;
+                $blogs->title = $request->title;
+                $blogs->body = $request->body;
+                $blogs->type_id = $request->slug;
+                
+                $blogs->save();
+            } else {
+                dd("Product not found");
+            }
+            
+            BlogBlogCategories::where('blog_categories_id', $id)->delete();
+            BlogBlogCategories::create([
+                'blogs_id' => $blogs->id,
+                'blog_categories_id' => $blogs->blog_categories_id,
+            ]);
+
+            if(!$blogs){
+                DB::rollBack();
+
+                return back()->with('error', 'Something went wrong while saving user data');
+            }
+
+            DB::commit();
+            return redirect()->route('blogs.index')->with('success', 'User Stored Successfully.');
+
+
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
     /**
@@ -60,6 +148,8 @@ class BlogsController extends Controller
      */
     public function destroy(string $id)
     {
-        // return view('admin.blogs.index');
+        $blogs = Blogs::find($id);
+        $blogs->delete();
+        return redirect()->route('blogs.index');
     }
 }

@@ -21,6 +21,7 @@ class Blogs extends Model
         'title',
         'body',
         'slug',
+        'meta_keywords',
     ];
 
     /**
@@ -43,19 +44,27 @@ class Blogs extends Model
     //     return 'slug';
     // }
 
-    // /**
-    // * Get the images.
-    // */
-    // public function BlogImage()
-    // {
-    //     return $this->belongsToMany(BlogImage::class, 'blogs_blog_images', 'blogs_id', 'image_id');
-    // }
+    /**
+    * Get the images.
+    */
+    public function BlogImage()
+    {
+        return $this->belongsToMany(BlogImages::class, 'blog_blog_images', 'blogs_id', 'blog_images_id');
+    }
 
-    // /**
-    // * Get the Category.
-    // */
-    // public function BlogCategory()
-    // {
-    //     return $this->belongsToMany(BlogCategory::class, 'categories_blogs', 'blogs_id', 'blogcategory_id');
-    // }
+    /**
+    * Get the Category.
+    */
+    public function blogCategories()
+    {
+        return $this->belongsToMany(BlogCategories::class, 'Blog_Blog_categories', 'blogs_id', 'blog_categories_id');
+    }
+
+    /**
+    * Get the comments.
+    */
+    public function comments()
+    {
+        return $this->hasMany(Comments::class, 'blog_id');
+    }
 }

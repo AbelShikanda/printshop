@@ -1,6 +1,10 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('layouts.hero_single')
+    <br>
+    <br>
+    <br>
     @if (count($errors) > 0)
         <div class="alert alert-danger col-md-8 offset-md-3">
             <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -19,7 +23,6 @@
             </div>
         @endif
     </div>
-    @include('layouts.hero_single')
 
     <!-- ======= Portfolio Details Section ======= -->
     <section id="portfolio-details" class="portfolio-details">
@@ -33,5 +36,8 @@
             </div>
         </div>
     </section><!-- End Portfolio Details Section -->
+    <br>
+    <br>
+    <br>
 
 @endsection

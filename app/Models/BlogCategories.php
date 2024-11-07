@@ -42,11 +42,12 @@ class BlogCategories extends Model
     //     return 'slug';
     // }
 
-    // /**
-    // * Get the images.
-    // */
-    // public function Blog()
-    // {
-    //     return $this->belongsToMany(BLog::class)->withPivot('name');
-    // }
+    /**
+    * Get the images.
+    */
+    public function blog()
+    {
+        return $this->belongsToMany(BLog::class, 'Blog_Blog_categories', 'blog_categories_id', 'blogs_id');
+        // return $this->belongsToMany(BLog::class);
+    }
 }

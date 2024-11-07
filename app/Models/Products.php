@@ -106,4 +106,9 @@ class Products extends Model
     public function orderItems() {
         return $this->belongsToMany(OrderItems::class);
     }
+
+    public function ratings()
+    {
+        return $this->hasMany(Ratings::class);
+    }
 }
