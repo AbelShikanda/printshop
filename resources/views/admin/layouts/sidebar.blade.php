@@ -82,7 +82,7 @@
                                 class="ml-1 item-text">Prices</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="{{ route('prices.index') }}"><span
+                        <a class="nav-link pl-3" href="{{ route('ratings.index') }}"><span
                                 class="ml-1 item-text">Ratings</span></a>
                     </li>
                 </ul>
@@ -103,7 +103,7 @@
                                 class="ml-1 item-text">Users</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link pl-3" href="{{ route('users.index') }}"><span
+                        <a class="nav-link pl-3" href="{{ route('contact.index') }}"><span
                                 class="ml-1 item-text">Contacts</span></a>
                     </li>
                     <li class="nav-item">

@@ -618,57 +618,10 @@ body {
                 height: 42px;
             }
         }
-        &__number {
-            margin-left: $margin-sm;
-            color: $grey;
-            width: 12px;
-        }
-        &__added {
-            margin-left: $margin * 2;
-            color: $sand;
-
-            .added {
-                color: $sand;
-            }
-
-            .not-added {
-                color: $grey;
-            }
-        }
         &__title {
-            width: 45%;
+            width: 30%;
             margin-left: $margin * 2;
             color: $white;
-
-            &.featured {
-                .title {
-                    &:after {
-                        content: "-";
-                        margin: 0 $margin-xs;
-                    }
-                }
-
-                .feature {
-                    color: $grey;
-
-                    &:after {
-                        content: ",";
-                        margin-right: $margin-xs;
-                    }
-
-                    &:last-child {
-                        &:after {
-                            content: "";
-                            margin-right: 0;
-                        }
-                    }
-                    &:hover {
-                        cursor: pointer;
-                        color: $sand;
-                        text-decoration: underline;
-                    }
-                }
-            }
         }
         &__explicit {
             .label {
@@ -679,19 +632,12 @@ body {
                 text-transform: uppercase;
             }
         }
-        &__plays {
-            color: $grey;
-            margin-left: auto;
-            padding-right: $padding-sm;
-        }
         &__length {
-            margin-left: auto;
+            margin-left: 10%;
             color: $grey;
         }
-        &__popularity {
-            margin-left: 46px;
-            padding-right: $padding-sm;
-            font-size: $large;
+        &__lengthened {
+            margin-left: 15%;
             color: $grey;
         }
     }
@@ -1078,3 +1024,50 @@ button {
     font-size: $x-small * 1.2;
     margin-bottom: $margin-sm;
 }
+
+
+
+
+
+// RATINGS
+
+  .rating {
+    position: relative;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 4px;
+    padding: 4px 5px;
+    border: 1px solid #111;
+    border-radius: 10px;
+    background-color: #353535;
+    box-shadow: 10px 10px 10px -10px rgba(0, 0, 0, 0.5),
+      inset 15px 15px 3px rgba(8, 8, 8, 0.1),
+      -4px -4px 15px rgba(8, 8, 8, 0.1),
+      inset -2px -2px 12px rgba(0, 0, 0, 0.75);
+  }
+  .rating input {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .rating input::before {
+    content: '\f005';
+    position: absolute;
+    font-family: fontAwesome;
+    font-size: 12px;
+    color: #111;
+    transition: 0.5s;
+  }
+  .rating input:hover ~ input::before,
+  .rating input:hover::before,
+  .rating input:checked ~ input::before,
+  .rating input:checked::before {
+    color: var(--c);
+  }
+  

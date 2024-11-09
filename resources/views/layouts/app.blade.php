@@ -22,6 +22,9 @@
     <link href="{{ asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <!-- css -->
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
@@ -59,6 +62,22 @@
 
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
+
+    <script>
+        // Select all rating inputs
+        const ratingInputs = document.querySelectorAll('.rating input[type="radio"]');
+
+        // Add event listener to each input
+        ratingInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                // Find the nearest form element for this input
+                const form = input.closest('form');
+                if (form) {
+                    form.submit(); // Submit the specific form on selection
+                }
+            });
+        });
+    </script>
 
 </body>
 

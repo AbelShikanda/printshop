@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Orders;
 use App\Models\ProductImages;
 use App\Models\Products;
+use App\Models\Ratings;
 use App\Models\User;
 use App\Models\WishList;
 use Illuminate\Http\Request;
@@ -43,9 +44,14 @@ class ProfileController extends Controller
             $order->cart = unserialize($order->tracking_No);
             return $order;
         });
-        // dd($orders);
+
+        $ratings = Ratings::where('user_id', $user->id)->first();
+        $ratedItems = Ratings::pluck('products_id')->toArray();
+
+        // $approvalStatus = $orders ? $orders->complete : 0;
+        // dd($approvalStatus);
         // foreach ($orders as $order) {
-        //     // dd($order);
+        //     dd($order);
         //     foreach ($order->orderItems as $items) {
         //         // dd($items->products);
         //         // foreach ($items->products as $product) {
@@ -64,6 +70,8 @@ class ProfileController extends Controller
             'wishlist' => $wishlist,
             'related' => $related,
             'orders' => $orders,
+            'ratings' => $ratings,
+            'ratedItems' => $ratedItems,
         ]));
     }
 

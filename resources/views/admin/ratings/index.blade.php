@@ -4,15 +4,15 @@
     <div class="container-fluid">
         <div class="row justify-content-center">
             <div class="col-12">
-                <h2 class="mb-2 page-title">comments Table</h2>
+                <h2 class="mb-2 page-title">ratings Table</h2>
                 <div class="row">
                     <div class="col-md-6">
                         <p class="card-text">
-                            comments / stories 
+                            ratings / stories 
                         </p>
                     </div>
                     <div class="col-md-6">
-                        <a href="{{ route('comments.create')}}" type="button" class=" float-right btn mb-2 btn-outline-primary">Add comment</a>
+                        {{-- <a href="{{ route('ratings.create')}}" type="button" class=" float-right btn mb-2 btn-outline-primary">Add rating</a> --}}
                     </div>
                 </div>
                 <p class="card-text">
@@ -32,52 +32,46 @@
                                 <table class="table datatables" id="dataTable-1">
                                     <thead>
                                         <tr>
-                                            <th></th>
                                             <th>#</th>
                                             <th>Product</th>
-                                            <th>User</th>
+                                            <th>Customers</th>
                                             <th>Rating</th>
-                                            <th>Action</th>
+                                            <th>Created On</th>
+                                            {{-- <th>Action</th> --}}
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($comments as $comment)
+                                        @foreach ($productsWithRatings as $rating)
                                             <tr>
-                                                <td>
-                                                    <div class="custom-control custom-checkbox">
-                                                        <input type="checkbox" class="custom-control-input">
-                                                        <label class="custom-control-label"></label>
-                                                    </div>
-                                                </td>
-                                                <td>{{ $comment->id }}</td>
-                                                <td>{{ $comment->user->first_name }}</td>
-                                                <td>{{ $comment->blog->title }}</td>
-                                                <td>{{ $comment->content }}</td>
-                                                <td>{{ $comment->created_at }}</td>
-                                                <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                <td>{{ $rating->id }}</td>
+                                                <td>{{ $rating->name }}</td>
+                                                <td>{{ $rating->ratings->count() }} rater(s)</td>
+                                                <td>{{ $rating->ratings->first()->avg_rating ?? 'No Rating' }}</td>
+                                                <td>{{ $rating->created_at }}</td>
+                                                {{-- <td><button class="btn btn-sm dropdown-toggle more-horizontal"
                                                         type="button" data-toggle="dropdown" aria-haspopup="true"
                                                         aria-expanded="false">
                                                         <span class="text-muted sr-only">Action</span>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        {{-- <a class="dropdown-item"
-                                                            href="{{ route('comments.show', $comment->id) }}">view</a> --}}
                                                         <a class="dropdown-item"
-                                                            href="{{ route('comments.edit', $comment->id) }}">Edit</a>
+                                                            href="{{ route('ratings.show', $rating->id) }}">view</a>
+                                                        <a class="dropdown-item"
+                                                            href="{{ route('ratings.edit', $rating->id) }}">Edit</a>
 
-                                                        <a class="dropdown-item" href="{{ route('comments.destroy', $comment->id) }}"
+                                                        <a class="dropdown-item" href="{{ route('ratings.destroy', $rating->id) }}"
                                                             onclick="event.preventDefault();
-                                                            document.getElementById('destroy-comment-{{ $comment->id }}').submit();">
+                                                            document.getElementById('destroy-rating-{{ $rating->id }}').submit();">
                                                             {{ __('Remove') }}
                                                         </a>
 
-                                                        <form id="destroy-comment-{{ $comment->id }}" action="{{ route('comments.destroy', $comment->id) }}"
+                                                        <form id="destroy-rating-{{ $rating->id }}" action="{{ route('ratings.destroy', $rating->id) }}"
                                                             method="post" class="d-none">
                                                             @csrf
                                                             @method('DELETE')
                                                         </form>
                                                     </div>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endforeach
                                     </tbody>

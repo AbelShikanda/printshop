@@ -200,9 +200,9 @@
 
                                                 </div>
                                                 @foreach ($list->products as $item)
-                                                    <div class="track__plays"><small>{{ $item->price }}</small></div>
+                                                    <div class="track__plays px-5"><small>{{ $item->price }}</small></div>
                                                 @endforeach
-                                                <div class="track__plays">
+                                                <div class="track__plays px-3">
                                                     <div class="">
                                                         <a href="{{ route('addToCart', $list->id) }}"><span>
                                                                 <i class="bi bi-cart"></i>
@@ -299,37 +299,69 @@
 
                                                         <div class="track__number">#</div>
 
-                                                        <div class="track__added">
-
-                                                            <i class="ion-checkmark-round added"></i>
-
-                                                        </div>
-
                                                         <div class="track__title">
                                                             {{ Str::words($items->products->name, 2, '...') }}</div>
 
                                                         <div class="track__explicit">
 
                                                             <span
-                                                                class="label">{{ Str::words($items->products->name, 5, '...') }}</span>
+                                                                class="label">{{ Str::words($items->products->name, 2, '...') }}</span>
 
                                                         </div>
 
-                                                        <div class="track__length">Approved</div>
-                                                        <div class="track__length">Review</div>
+                                                        <div class="track__length">
 
-                                                        <div class="track__popularity">
-
-                                                            <i class="ion-arrow-graph-up-right"></i>
-
+                                                            @if ($bought->complete == 1)
+                                                                <span class="badge badge-success"
+                                                                    style="background-color: green; color: white;">Success</span>
+                                                            @else
+                                                                <span class="badge badge-danger"
+                                                                    style="background-color: red; color: white;">Pending</span>
+                                                            @endif
                                                         </div>
-
+                                                        @if (!in_array($items->id, $ratedItems) && $bought->complete == 1)
+                                                            <form id="ratingForm_{{ $items->id }}"
+                                                                action="{{ route('ratings.store') }}" method="POST">
+                                                                @csrf
+                                                                @method('post')
+                                                                <div class="track__lengthened">
+                                                                    <div class="container">
+                                                                        <div class="rating">
+                                                                            <input type="radio"
+                                                                                name="rating_{{ $items->id }}"
+                                                                                value="5"
+                                                                                id="star5_{{ $items->id }}"
+                                                                                style="--c: #ff9933" />
+                                                                            <input type="radio"
+                                                                                name="rating_{{ $items->id }}"
+                                                                                value="4"
+                                                                                id="star4_{{ $items->id }}"
+                                                                                style="--c: #ff9933" />
+                                                                            <input type="radio"
+                                                                                name="rating_{{ $items->id }}"
+                                                                                value="3"
+                                                                                id="star3_{{ $items->id }}"
+                                                                                style="--c: #ff9933" />
+                                                                            <input type="radio"
+                                                                                name="rating_{{ $items->id }}"
+                                                                                value="2"
+                                                                                id="star2_{{ $items->id }}"
+                                                                                style="--c: #ff9933" />
+                                                                            <input type="radio"
+                                                                                name="rating_{{ $items->id }}"
+                                                                                value="1"
+                                                                                id="star1_{{ $items->id }}"
+                                                                                style="--c: #ff9933" />
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        @else
+                                                        @endif
                                                     </div>
                                                 @endforeach
                                             @endforeach
-
                                         </div>
-
                                     </div>
 
                                 </div>
@@ -339,34 +371,40 @@
                         </div>
 
                     </div>
-                    <!-- / -->
-
-                    <!-- Related Artists -->
-                    <span class="section-title">More Related Products</span>
-                    <br>
-                    <br>
-
-                    <div role="tabpanel" class="tab-pane" id="related-artists">
-
-                        <div class="media-cards">
-                            @foreach ($related as $item)
-                                <div class="mb-5 col-6 col-md-6 col-lg-4">
-                                    @include('layouts.partials.catalog')
-                                </div>
-                            @endforeach
-
-                        </div>
-
-                    </div>
-                    <!-- / -->
-
-                    <!-- About // Coming Soon-->
-                    <!--<div role="tabpanel" class="tab-pane" id="artist-about">About</div>-->
-                    <!-- / -->
 
                 </div>
 
             </div>
+            <!-- / -->
+
+            <!-- Related Artists -->
+            <br>
+            <br>
+            <span class="section-title">More Related Products</span>
+            <br>
+            <br>
+
+            <div role="tabpanel" class="tab-pane" id="related-artists">
+
+                <div class="media-cards">
+                    @foreach ($related as $item)
+                        <div class="mb-5 col-6 col-md-6 col-lg-4">
+                            @include('layouts.partials.catalog')
+                        </div>
+                    @endforeach
+
+                </div>
+
+            </div>
+            <!-- / -->
+
+            <!-- About // Coming Soon-->
+            <!--<div role="tabpanel" class="tab-pane" id="artist-about">About</div>-->
+            <!-- / -->
+
+        </div>
+
+        </div>
 
         </div>
 

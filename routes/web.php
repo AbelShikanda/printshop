@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\BlogCategoriesController;
 use App\Http\Controllers\Admin\BlogImageController;
 use App\Http\Controllers\Admin\BlogsController;
 use App\Http\Controllers\Admin\CommentsController;
+use App\Http\Controllers\Admin\ContactController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderItemsController;
 use App\Http\Controllers\Admin\OrdersController;
@@ -25,9 +26,9 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\PagesController;
-use App\Http\Controllers\ContactController;
 use App\Http\Controllers\PricesController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\RatingsController;
 use App\Models\Comments;
 
 Route::get('/admin_', function () {
@@ -94,6 +95,8 @@ Route::post('/updateCart/{id}', [PagesController::class, 'updateCart'])->name('u
 Route::get('/reduceCart/{id}', [PagesController::class, 'getReduceCart'])->name('reduceCart');
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Route::post('/postCheckout/{id}', [CheckoutController::class, 'postCheckout'])->name('postCheckout');
+// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Route::resource('ratings', RatingsController::class);
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');

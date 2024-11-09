@@ -11,6 +11,17 @@ class Ratings extends Model
 
     // protected $fillable = ['product_id', 'user_id', 'rating'];
 
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'products_id',
+        'user_id',
+        'rating',
+    ];
+
     public function product()
     {
         return $this->belongsTo(Products::class);
