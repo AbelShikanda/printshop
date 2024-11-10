@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Str;
 
 class Admin extends Authenticatable
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasRoles;
 
     protected static function boot()
     {
@@ -24,9 +25,14 @@ class Admin extends Authenticatable
     protected $guard = 'admin';
 
     protected $fillable = [
-        'name',         'username',     'email',
-        'avatar',       'is_admin',
-        'uuid',         'is_staff',
+        'name',
+        'username',
+        'email',
+        'password',
+        'avatar',
+        'is_admin',
+        'uuid',
+        'is_staff',
     ];
 
     /**

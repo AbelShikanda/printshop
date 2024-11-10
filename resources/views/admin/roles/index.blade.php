@@ -12,7 +12,7 @@
                         </p>
                     </div>
                     <div class="col-md-6">
-                        <a type="button" class=" float-right btn mb-2 btn-outline-primary">Add A Role</a>
+                        <a href="{{ route('roles.create') }}" type="button" class=" float-right btn mb-2 btn-outline-primary">Add A Role</a>
                     </div>
                 </div>
                 <div class="row my-4">
@@ -43,9 +43,19 @@
                                                         <span class="text-muted sr-only">Action</span>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Edit</a>
-                                                        <a class="dropdown-item" href="#">Remove</a>
-                                                        <a class="dropdown-item" href="#">view</a>
+                                                        <a class="dropdown-item" href="{{ route('roles.edit', $item->id) }}">Edit</a>
+
+                                                        <a class="dropdown-item" href="{{ route('roles.destroy', $item->id) }}"
+                                                            onclick="event.preventDefault();
+                                                            document.getElementById('destroy-role-{{ $item->id }}').submit();">
+                                                            {{ __('Remove') }}
+                                                        </a>
+
+                                                        <form id="destroy-role-{{ $item->id }}" action="{{ route('roles.destroy', $item->id) }}"
+                                                            method="post" class="d-none">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>

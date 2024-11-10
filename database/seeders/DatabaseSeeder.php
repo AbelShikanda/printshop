@@ -38,6 +38,8 @@ class DatabaseSeeder extends Seeder
             CreateCustomersSeeder::class,
             // ++++++++++++++++++++++++++++++++++++++++++++++++
             CreateCommentsSeeder::class,
+            // ++++++++++++++++++++++++++++++++++++++++++++++++
+            CreateRolesSeeder::class,
         ]);
     }
 }

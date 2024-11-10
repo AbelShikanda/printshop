@@ -12,7 +12,7 @@
                         </p>
                     </div>
                     <div class="col-md-6">
-                        <a type="button" class=" float-right btn mb-2 btn-outline-primary">Add Permissions</a>
+                        {{-- <a href="{{ route('permissions.create') }}" type="button" class=" float-right btn mb-2 btn-outline-primary">Add Permissions</a> --}}
                     </div>
                 </div>
                 <div class="row my-4">
@@ -37,7 +37,7 @@
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->created_at }}</td>
                                                 <td>{{ $item->updated_at }}</td>
-                                                <td><button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                {{-- <td><button class="btn btn-sm dropdown-toggle more-horizontal"
                                                         type="button" data-toggle="dropdown" aria-haspopup="true"
                                                         aria-expanded="false">
                                                         <span class="text-muted sr-only">Action</span>
@@ -46,7 +46,7 @@
                                                         <a class="dropdown-item" href="#">Edit</a>
                                                         <a class="dropdown-item" href="#">Remove</a>
                                                     </div>
-                                                </td>
+                                                </td> --}}
                                             </tr>
                                         @endforeach
                                     </tbody>

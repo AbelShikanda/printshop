@@ -38,15 +38,37 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $User)
+    public function show($id)
     {
-        //
+        $user = User::with([
+            'order',
+            'order.orderItems',
+            'order.orderItems.products',
+            'comments',
+            'comments.blog',
+            'ratings',
+            'ratings.product',
+        ])
+            ->where('id', $id)
+            ->first();
+        // // dd($users);
+
+        // $permissions = Permission::get();
+        // $permissions = $users->getAllPermissions();
+        // $user = $users->hasAnyPermission($permissions);
+        // $user = $user->hasRole('Super Super user');
+
+        // dd($user);
+
+        return view('admin.users.show')->with([
+            'user' => $user,
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $User)
+    public function edit($id)
     {
         //
     }
