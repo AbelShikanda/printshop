@@ -40,6 +40,8 @@ class DatabaseSeeder extends Seeder
             CreateCommentsSeeder::class,
             // ++++++++++++++++++++++++++++++++++++++++++++++++
             CreateRolesSeeder::class,
+            // ++++++++++++++++++++++++++++++++++++++++++++++++
+            CreateOrdersMirrorTriggerSeeder::class,
         ]);
     }
 }

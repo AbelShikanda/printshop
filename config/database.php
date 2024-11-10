@@ -108,6 +108,24 @@ return [
             // 'encrypt' => env('DB_ENCRYPT', 'yes'),
             // 'trust_server_certificate' => env('DB_TRUST_SERVER_CERTIFICATE', 'false'),
         ],
+        
+        'source_db' => [
+            'driver' => 'mysql',
+            'host' => 'source_db_host',
+            'database' => 'source_db_name',
+            'username' => 'user',
+            'password' => 'password',
+            // Other configurations...
+        ],
+    
+        'target_db' => [
+            'driver' => 'mysql',
+            'host' => 'target_db_host',
+            'database' => 'target_db_name',
+            'username' => 'user',
+            'password' => 'password',
+            // Other configurations...
+        ],
 
     ],
 
