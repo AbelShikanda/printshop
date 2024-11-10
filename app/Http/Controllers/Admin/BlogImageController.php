@@ -194,7 +194,7 @@ class BlogImageController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('blog_images.index')->with('message', 'Image Stored Successfully.');
+            return redirect()->route('blog_images.index')->with('message', 'Image Updated Successfully.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;

@@ -40,16 +40,14 @@ class CreateOrdersMirrorTriggerSeeder extends Seeder
             BEGIN
                 DECLARE action_type VARCHAR(50);
                 SET action_type = "insert";
-
-                -- Insert into order_mirrors table
+                
                 INSERT INTO order_mirrors (
                     id, order_items_id, user_id, product_id, quantity, price, reference,
                     complete, updated_by, change_type, changed_at
                 )
                 VALUES (
                     NEW.id, NULL, NEW.user_id, NULL, NULL, NEW.price, NEW.reference,
-                    NEW.complete, COALESCE((SELECT user_id FROM orders WHERE id = NEW.id), 0),
-                    action_type, NOW()
+                    NEW.complete, user(), action_type, NOW()
                 );
             END;
         ');
@@ -62,17 +60,16 @@ class CreateOrdersMirrorTriggerSeeder extends Seeder
             BEGIN
                 DECLARE action_type VARCHAR(50);
                 SET action_type = "insert";
-
-                -- Insert into order_mirrors table
+                
                 INSERT INTO order_mirrors (
                     order_id, order_items_id, user_id, product_id, quantity, price, reference,
                     complete, updated_by, change_type, changed_at
                 )
                 VALUES (
-                    NEW.order_id, NEW.id, (SELECT user_id FROM orders WHERE id = NEW.order_id), 
-                    NEW.product_id, NEW.quantity, NEW.price, (SELECT reference FROM orders WHERE id = NEW.order_id), 
-                    (SELECT complete FROM orders WHERE id = NEW.order_id), COALESCE((SELECT user_id FROM orders WHERE id = NEW.order_id), 0),
-                    action_type, NOW()
+                    NEW.order_id, NEW.id, (SELECT user_id FROM orders WHERE id = NEW.order_id), NEW.product_id, 
+                    NEW.quantity, NEW.price, (SELECT reference FROM orders WHERE id = NEW.order_id), 
+                    (SELECT complete FROM orders WHERE id = NEW.order_id), 
+                    user(), action_type, NOW()
                 );
             END;
         ');
@@ -91,8 +88,7 @@ class CreateOrdersMirrorTriggerSeeder extends Seeder
                 )
                 VALUES (
                     NEW.id, NULL, NEW.user_id, NULL, NULL, NEW.price, NEW.reference,
-                    NEW.complete, COALESCE((SELECT user_id FROM orders WHERE id = NEW.id), 0),
-                    action_type, NOW()
+                    NEW.complete, user(), action_type, NOW()
                 );
             END;
         ');
@@ -110,10 +106,9 @@ class CreateOrdersMirrorTriggerSeeder extends Seeder
                     complete, updated_by, change_type, changed_at
                 )
                 VALUES (
-                    NEW.order_id, NEW.id, (SELECT user_id FROM orders WHERE id = NEW.order_id), 
-                    NEW.product_id, NEW.quantity, NEW.price, (SELECT reference FROM orders WHERE id = NEW.order_id), 
-                    (SELECT complete FROM orders WHERE id = NEW.order_id), COALESCE((SELECT user_id FROM orders WHERE id = NEW.order_id), 0),
-                    action_type, NOW()
+                    NEW.order_id, NEW.id, (SELECT user_id FROM orders WHERE id = NEW.order_id), NEW.product_id, 
+                    NEW.quantity, NEW.price, (SELECT reference FROM orders WHERE id = NEW.order_id), 
+                    (SELECT complete FROM orders WHERE id = NEW.order_id), user(), action_type, NOW()
                 );
             END;
         ');
@@ -132,10 +127,9 @@ class CreateOrdersMirrorTriggerSeeder extends Seeder
                 )
                 VALUES (
                     OLD.id, NULL, OLD.user_id, NULL, NULL, OLD.price, OLD.reference,
-                    OLD.complete, COALESCE((SELECT user_id FROM orders WHERE id = OLD.id), 0),
-                    action_type, NOW()
+                    OLD.complete, user(), action_type, NOW()
                 );
-            END;
+            END
         ');
 
         DB::unprepared('DROP TRIGGER IF EXISTS trg_order_mirror_delete');
@@ -153,8 +147,7 @@ class CreateOrdersMirrorTriggerSeeder extends Seeder
                 VALUES (
                     OLD.order_id, OLD.id, (SELECT user_id FROM orders WHERE id = OLD.order_id), 
                     OLD.product_id, OLD.quantity, OLD.price, (SELECT reference FROM orders WHERE id = OLD.order_id), 
-                    (SELECT complete FROM orders WHERE id = OLD.order_id), COALESCE((SELECT user_id FROM orders WHERE id = OLD.order_id), 0),
-                    action_type, NOW()
+                    (SELECT complete FROM orders WHERE id = OLD.order_id), user(), action_type, NOW()
                 );
             END;
         ');

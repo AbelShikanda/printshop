@@ -192,7 +192,7 @@ class ProductImageController extends Controller
             }
 
             DB::commit();
-            return redirect()->route('product_images.index')->with('message', 'Image Stored Successfully.');
+            return redirect()->route('product_images.index')->with('message', 'Image updated Successfully.');
         } catch (\Throwable $th) {
             DB::rollBack();
             throw $th;

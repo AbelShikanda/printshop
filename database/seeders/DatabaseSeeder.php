@@ -42,6 +42,14 @@ class DatabaseSeeder extends Seeder
             CreateRolesSeeder::class,
             // ++++++++++++++++++++++++++++++++++++++++++++++++
             CreateOrdersMirrorTriggerSeeder::class,
+            CreateBlogsMirrorTriggerSeeder::class,
+            CreateProductsMirrorTriggerSeeder::class,
+            CreateUsersMirrorTriggerSeeder::class,
+            CreateWishlistMirrorTriggerSeeder::class,
+            // ++++++++++++++++++++++++++++++++++++++++++++++++
+            CreatePersonalAcessTokensMirrorTriggerSeeder::class,
+            CreateFailedJobsMirrorTriggerSeeder::class,
+            CreatePasswordResetTokensMirrorTriggerSeeder::class,
         ]);
     }
 }
