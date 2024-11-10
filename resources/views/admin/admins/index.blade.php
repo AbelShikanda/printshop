@@ -12,7 +12,7 @@
                         </p>
                     </div>
                     <div class="col-md-6">
-                        <a type="button" class=" float-right btn mb-2 btn-outline-primary">Add Admin</a>
+                        <a href="{{ route('admins.create') }}" type="button" class=" float-right btn mb-2 btn-outline-primary">Add Admin</a>
                     </div>
                 </div>
                 <div class="row my-4">
@@ -25,10 +25,11 @@
                                     <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>First Name</th>
-                                            <th>Last Name</th>
+                                            <th>User Name</th>
+                                            <th>Nick Name</th>
                                             <th>Email</th>
-                                            <th>location</th>
+                                            <th>Roles</th>
+                                            <th>modified</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -38,15 +39,34 @@
                                                 <td>{{ $item->username }}</td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->email }}</td>
-                                                <td>{{ $item->created_at }}</td>
+                                                <td>
+                                                    @if (!@empty($item->getRoleNames()))
+                                                        @foreach ($item->getRoleNames() as $rolename)
+                                                            <label class="badge bg-primary">{{ $rolename }}</label>
+                                                        @endforeach
+                                                    @endif
+                                                </td>
+                                                <td>{{ $item->updated_at }}</td>
                                                 <td><button class="btn btn-sm dropdown-toggle more-horizontal"
                                                         type="button" data-toggle="dropdown" aria-haspopup="true"
                                                         aria-expanded="false">
                                                         <span class="text-muted sr-only">Action</span>
                                                     </button>
                                                     <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">Edit</a>
-                                                        <a class="dropdown-item" href="#">Remove</a>
+                                                        <a class="dropdown-item" href="{{ route('admins.show', $item->id) }}">View</a>
+                                                        <a class="dropdown-item" href="{{ route('admins.edit', $item->id) }}">Edit</a>
+
+                                                        <a class="dropdown-item" href="{{ route('admins.destroy', $item->id) }}"
+                                                            onclick="event.preventDefault();
+                                                            document.getElementById('destroy-admin').submit();">
+                                                            {{ __('Remove') }}
+                                                        </a>
+
+                                                        <form id="destroy-admin" action="{{ route('admins.destroy', $item->id) }}"
+                                                            method="post" class="d-none">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
                                                     </div>
                                                 </td>
                                             </tr>
