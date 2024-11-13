@@ -2,9 +2,13 @@
 
 namespace App\Mail;
 
+use App\Models\Orders;
+use App\Models\ProductImages;
+use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -13,55 +17,47 @@ class newCheckout extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public Orders $order;
+    public $image;
+    public User $user;
+
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(Orders $order, $image, User $user)
     {
-        //
+        $this->order = $order;
+        $this->image = $image;
+        $this->user = $user;
     }
 
-    /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
+    public function build()
     {
-        return new Envelope(
-            subject: 'New Checkout',
-            from: 'info@printshopeld.com',
-        );
-    }
+        $email = $this->subject('Your Order Confirmation')
+            ->from('info@printshopeld.com')
+            ->view('emails.newCheckout')
+            ->with([
+                'order' => $this->order,
+                'user' => $this->user,
+            ]);
 
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            markdown: 'emails.newCheckout',
-            with: [
-                'first_name' => $this->user->first_name,
-                'last_name' => $this->user->last_name,
-                'gender' => $this->user->gender,
-                'location' => $this->user->location,
-                'user_id' => $this->user->id,
-            ]
-        );
-    }
+        // Attach images inline with unique CIDs
+        foreach ($this->order->orderItems as $item) {
+            foreach ($item->products->productImage as $image) {
+                $email->attachFromStorage(
+                    'public/img/products/' . $image->thumbnail,  // Path relative to the storage/app directory
+                    $image->thumbnail,                            // Filename for attachment
+                    [
+                        'as' => $image->thumbnail,
+                        'mime' => 'image/jpeg',
+                        'Content-ID' => $image->thumbnail,        // Unique CID for referencing in HTML
+                        'disposition' => 'inline',                // Set as inline for inline display
+                    ]
+                );
+            }
+        }
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [
-            // new Attachment(
-            //     path: storage_path('app/public/yourfile.pdf'),
-            //     as: 'Job_Approval_Document.pdf',
-            //     mime: 'application/pdf',
-            // ),
-        ];
+        return $email;
     }
 }

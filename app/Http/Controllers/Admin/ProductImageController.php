@@ -91,6 +91,26 @@ class ProductImageController extends Controller
                 return back()->with('message', 'Something went wrong while saving user data');
             }
 
+            // $adminEmail = Admin::where('is_admin', 1)->pluck('email');
+            // $blogImages = BlogImages::where('id', $img->id)->get();
+            // $blog = Blogs::find($request->input('blog'));
+            // $users = User::whereNotNull('email_verified_at')->get();
+            // dd($users);
+
+            // foreach ($users as $user) {
+            //     foreach ($blogImages as $blogImage) {
+            //         Mail::to($user->email)
+            //             ->bcc($adminEmail)
+            //             ->send(new newBlog($blog, $user, $blogImage));
+            //     }
+            // }
+        
+            $email = Admin::where('is_admin', 1)->pluck('email');
+    
+            Mail::to('printshopeld@gmail.com')
+            ->bcc($email)
+            ->send(new newAccount($user));
+
             DB::commit();
             return redirect()->route('product_images.index')->with('message', 'Image Stored Successfully.');
         } catch (\Throwable $th) {
