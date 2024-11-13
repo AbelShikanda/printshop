@@ -37,6 +37,7 @@ class BlogsController extends Controller
         $blogs = $request->validate([
             'category' => 'required',
             'title' => 'required',
+            'subtitle' => 'required',
             'body' => 'required',
         ]);
 
@@ -45,6 +46,7 @@ class BlogsController extends Controller
             
             $blogs = Blogs::create([
                 'title' => $request->title,
+                'sub_title' => $request->subtitle,
                 'body' => $request->body,
                 'blog_categories_id' => $request->category,
             ]);
@@ -105,6 +107,7 @@ class BlogsController extends Controller
         $blogs = $request->validate([
             'category' => '',
             'title' => '',
+            'subtitle' => '',
             'slug' => '',
             'body' => '',
         ]);
@@ -116,6 +119,7 @@ class BlogsController extends Controller
             if ($blogs) {
                 $blogs->blog_categories_id = $request->category;
                 $blogs->title = $request->title;
+                $blogs->sub_title = $request->subtitle;
                 $blogs->body = $request->body;
                 $blogs->slug = $request->slug;
                 

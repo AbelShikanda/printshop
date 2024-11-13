@@ -13,7 +13,7 @@
                                 <strong class="card-title">Edit product_images Posts</strong>
                             </div>
                             <div class="card-body">
-                                <form action={{ route('product_images.update', $image->id) }} method="POST"
+                                <form action="{{ route('product_images.update', $image->id) }}" method="POST"
                                     class="needs-validation" novalidate enctype="multipart/form-data">
                                     @csrf
                                     @method('patch')
@@ -34,7 +34,7 @@
                                             <div class="row">
                                                 <div class="col-md-12 mb-3">
                                                     @if ($image->thumbnail)
-                                                        <img src="{{ asset('storage/img/pictures/' . $image->thumbnail) }}"
+                                                        <img src="{{ asset('storage/img/products/' . $image->thumbnail) }}"
                                                             alt="Current Image"
                                                             style="max-width: 200px; margin-right: 10px;">
                                                     @endif

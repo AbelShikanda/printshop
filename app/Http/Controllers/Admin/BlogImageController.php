@@ -3,11 +3,16 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\newBlog;
+use App\Models\Admin;
 use App\Models\BlogBlogImages;
 use App\Models\BlogImages;
 use App\Models\Blogs;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
@@ -93,6 +98,22 @@ class BlogImageController extends Controller
                 return back()->with('message', 'Something went wrong while saving user data');
             }
 
+
+
+            $adminEmail = Admin::where('is_admin', 1)->pluck('email');
+            $blogImages = BlogImages::where('id', $img->id)->get();
+            $blog = Blogs::find($request->input('blog'));
+            $users = User::whereNotNull('email_verified_at')->get();
+            // dd($users);
+
+            foreach ($users as $user) {
+                foreach ($blogImages as $blogImage) {
+                    Mail::to($user->email)
+                        ->bcc($adminEmail)
+                        ->send(new newBlog($blog, $user, $blogImage));
+                }
+            }
+
             DB::commit();
             return redirect()->route('blog_images.index')->with('message', 'Image Stored Successfully.');
         } catch (\Throwable $th) {
@@ -154,7 +175,7 @@ class BlogImageController extends Controller
             if (!Storage::disk('public')->exists('img/blogs')) {
                 Storage::disk('public')->makeDirectory('img/blogs');
             }
-            
+
             // Save the resized and cropped image to storage
             $croppedImagePath = 'img/blogs/' . $fileName;
             Storage::disk('public')->put($croppedImagePath, (string) $croppedImage->toJpeg());

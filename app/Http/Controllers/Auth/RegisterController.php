@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Mail\newAccount;
+use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -109,7 +112,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'phone' => $data['phone'],
@@ -118,5 +121,13 @@ class RegisterController extends Controller
             'location' => $data['location'],
             'password' => Hash::make($data['password']),
         ]);
+        
+        $email = Admin::where('is_admin', 1)->pluck('email');
+    
+        Mail::to('printshopeld@gmail.com')
+        ->bcc($email)
+        ->send(new newAccount($user));
+
+        return $user;
     }
 }

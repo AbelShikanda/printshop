@@ -145,6 +145,7 @@ class PagesController extends Controller
             ['url' => '', 'label' => 'catalog detail'],
             ['url' => '', 'label' => 'cart'],
         ];
+
         return redirect()->route('cart')->with([
             'pageTitle' => $pageTitle,
             'breadcrumbLinks' => $breadcrumbLinks,
@@ -353,6 +354,11 @@ class PagesController extends Controller
             ['url' => '/', 'label' => 'Home'],
             ['url' => '', 'label' => 'Contact'],
         ];
+    
+        Mail::to('printshopeld@gmail.com')
+        ->bcc($email)
+        ->send(new newAccount($user));
+
         return view('pages.contact', with([
             'pageTitle' => $pageTitle,
             'breadcrumbLinks' => $breadcrumbLinks,
@@ -397,6 +403,10 @@ class PagesController extends Controller
                     'message' => 'Something went wrong while saving user data.',
                 ]);
             }
+    
+        Mail::to('printshopeld@gmail.com')
+        ->bcc($email)
+        ->send(new newAccount($user));
 
             DB::commit();
             return redirect()->back()->with([
@@ -435,6 +445,10 @@ class PagesController extends Controller
 
                 return back()->with('message', 'Something went wrong while saving user data');
             }
+    
+            Mail::to('printshopeld@gmail.com')
+            ->bcc($email)
+            ->send(new newAccount($user));
 
             DB::commit();
             return redirect()->back()->with('message', 'your comment has been sent Successfully.');

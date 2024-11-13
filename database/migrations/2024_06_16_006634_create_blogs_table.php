@@ -16,6 +16,7 @@ return new class extends Migration
 
             $table->foreignId('blog_categories_id')->constrained('blog_categories');
             $table->string('title');
+            $table->string('sub_title');
             $table->text('body');
             $table->string('slug');
             $table->text('meta_keywords')->nullable();

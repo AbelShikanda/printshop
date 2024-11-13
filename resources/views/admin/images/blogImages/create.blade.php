@@ -12,6 +12,16 @@
                             <div class="card-header">
                                 <strong class="card-title">blog_images Posts</strong>
                             </div>
+                            @if (count($errors) > 0)
+                                <div class="alert alert-danger col-md-8 offset-md-3">
+                                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <div class="card-body">
                                 <form action={{ route('blog_images.store') }} method="POST" class="needs-validation" novalidate enctype="multipart/form-data">
                                     @csrf

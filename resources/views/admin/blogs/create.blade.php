@@ -35,6 +35,12 @@
                                         <div class="valid-feedback"> Looks good! </div>
                                     </div>
                                     <div class="col-md-12 mb-3">
+                                        <label for="validationCustom01">Sub Title</label>
+                                        <input type="text" name="subtitle" class="form-control" id="validationCustom01" value="caption"
+                                            required>
+                                        <div class="valid-feedback"> Looks good! </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
                                         <label for="validationCustom01">category</label>
                                         <select class="form-control select2" style="width: 100%;" name="category">
                                             @foreach ($categories as $category)

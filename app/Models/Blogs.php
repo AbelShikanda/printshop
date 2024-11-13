@@ -19,6 +19,7 @@ class Blogs extends Model
     protected $fillable = [
         'blog_categories_id',
         'title',
+        'sub_title',
         'body',
         'slug',
         'meta_keywords',

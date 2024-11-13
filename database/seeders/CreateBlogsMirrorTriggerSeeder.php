@@ -19,7 +19,7 @@ class CreateBlogsMirrorTriggerSeeder extends Seeder
             $table->bigIncrements('id');
             $table->string('thumbnail')->nullable();
             $table->string('full')->nullable();
-            $table->foreignId('blogs_id')->constrained('blogs');
+            $table->foreignId('blogs_id')->constrained('blogs')->onDelete('cascade')->onUpdate('cascade');
             $table->string('updated_by')->nullable();
             $table->string('change_type')->nullable();
             $table->timestamp('changed_at')->nullable();
