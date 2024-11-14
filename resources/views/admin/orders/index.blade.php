@@ -8,6 +8,12 @@
                     <div class="col-md-12 my-4">
                         <h2 class="h4 mb-1">Expandable rows</h2>
                         <p class="mb-3">Child rows with additional detailed information</p>
+
+                        @if (Session('message'))
+                            <div class="text-success text-center">
+                                <strong>{{ Session('message') }}</strong>
+                            </div>
+                        @endif
                         <div class="card shadow">
                             <div class="card-body">
                                 <!-- table -->
@@ -27,8 +33,9 @@
                                             @php
                                                 $orderId = 'order-' . $order->id;
                                             @endphp
-                                            <tr class="accordion-toggle collapsed" id="{{ $orderId }}" data-toggle="collapse"
-                                                data-parent="#{{ $orderId }}" href="#collap-{{ $orderId }}">
+                                            <tr class="accordion-toggle collapsed" id="{{ $orderId }}"
+                                                data-toggle="collapse" data-parent="#{{ $orderId }}"
+                                                href="#collap-{{ $orderId }}">
                                                 <td>{{ $order->created_at }}</td>
                                                 <td>{{ $order->user->first_name }} {{ $order->user->last_name }}</td>
                                                 <td>{{ $order->reference }}</td>
@@ -42,14 +49,29 @@
                                                     @endif
                                                 </td>
                                                 <td>Ksh {{ $order->price }}</td>
-                                                <td><button class="btn btn-sm dropdown-toggle more-horizontal"
-                                                        type="button" data-toggle="dropdown" aria-haspopup="true"
-                                                        aria-expanded="false">
-                                                        <span class="text-muted sr-only">Action</span>
-                                                    </button>
-                                                    <div class="dropdown-menu dropdown-menu-right">
-                                                        <a class="dropdown-item" href="#">View</a>
-                                                    </div>
+                                                <td>
+                                                    @if ($order->complete == 1)
+                                                    @else
+                                                        <button class="btn btn-sm dropdown-toggle more-horizontal"
+                                                            type="button" data-toggle="dropdown" aria-haspopup="true"
+                                                            aria-expanded="false">
+                                                            <span class="text-muted sr-only">Action</span>
+                                                        </button>
+                                                        <div class="dropdown-menu dropdown-menu-right">
+
+                                                            <a class="dropdown-item" href="{{ route('orders.update', $order->id) }}"
+                                                                onclick="event.preventDefault();
+                                                                document.getElementById('update-order-{{ $order->id }}').submit();">
+                                                                {{ __('Confirm Order') }}
+                                                            </a>
+    
+                                                            <form id="update-order-{{ $order->id }}" action="{{ route('orders.update', $order->id) }}"
+                                                                method="post" class="d-none">
+                                                                @csrf
+                                                                @method('patch')
+                                                            </form>
+                                                        </div>
+                                                    @endif
                                                 </td>
                                             </tr>
                                             <tr id="collap-{{ $orderId }}" class="collapse in p-3 bg-light">

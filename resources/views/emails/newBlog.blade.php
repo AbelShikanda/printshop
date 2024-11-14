@@ -1,7 +1,7 @@
 <x-mail::message>
 # New Story Alert!
  
-Hi {{ $user->first_name }}
+Hi {{ $user->first_name }} !
 <br>
 <br>
 {{ $blog->sub_title}}

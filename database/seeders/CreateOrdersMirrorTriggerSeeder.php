@@ -18,10 +18,10 @@ class CreateOrdersMirrorTriggerSeeder extends Seeder
     {
         Schema::create('order_mirrors', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('order_id')->constrained('orders')->nullable();
-            $table->foreignId('order_items_id')->constrained('order_items')->nullable();
-            $table->foreignId('user_id')->constrained('users')->nullable();
-            $table->foreignId('product_id')->constrained('products')->nullable();
+            $table->foreignId('order_id')->constrained('orders')->onUpdate('cascade')->onDelete('cascade')->nullable();
+            $table->foreignId('order_items_id')->constrained('order_items')->onUpdate('cascade')->onDelete('cascade')->nullable();
+            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade')->nullable();
+            $table->foreignId('product_id')->constrained('products')->onUpdate('cascade')->onDelete('cascade')->nullable();
             $table->string('quantity')->nullable();
             $table->decimal('price', 10, 2);
             $table->string('reference');

@@ -319,12 +319,13 @@
                                                                     style="background-color: red; color: white;">Pending</span>
                                                             @endif
                                                         </div>
-                                                        @if (!in_array($items->id, $ratedItems) && $bought->complete == 1)
+                                                        @if (!in_array($items->products->id, $ratedItems) && $bought->complete == 1)
                                                             <form id="ratingForm_{{ $items->id }}"
                                                                 action="{{ route('ratings.store') }}" method="POST">
                                                                 @csrf
                                                                 @method('post')
                                                                 <div class="track__lengthened">
+                                                                    <input type="text" name="productId" value="{{ $items->products->id }}" readonly hidden>
                                                                     <div class="container">
                                                                         <div class="rating">
                                                                             <input type="radio"

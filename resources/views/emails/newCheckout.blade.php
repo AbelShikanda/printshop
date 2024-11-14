@@ -26,6 +26,8 @@
                 <tr style="background-color: #f9f9f9;">
                     <th style="border: 1px solid #ddd; text-align: left;">Image</th>
                     <th style="border: 1px solid #ddd; text-align: left;">Name</th>
+                    <th style="border: 1px solid #ddd; text-align: left;">Color</th>
+                    <th style="border: 1px solid #ddd; text-align: left;">Size</th>
                     <th style="border: 1px solid #ddd; text-align: left;">Quantity</th>
                     <th style="border: 1px solid #ddd; text-align: left;">Price</th>
                 </tr>
@@ -39,6 +41,12 @@
                             @endforeach
                         </td>
                         <td style="border: 1px solid #ddd;">{{ $o->products->name }}</td>
+                        @foreach ($o->products->color as $color)
+                        <td style="border: 1px solid #ddd;">{{ $color->name }}</td>
+                        @endforeach
+                        @foreach ($o->products->size as $size)
+                        <td style="border: 1px solid #ddd;">{{ $size->name }}</td>
+                        @endforeach
                         <td style="border: 1px solid #ddd;">{{ $o->quantity }}</td>
                         <td style="border: 1px solid #ddd;">Ksh{{ number_format($o->price, 2) }}</td>
                     </tr>

@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\newComment;
+use App\Models\Admin;
 use App\Models\Comments;
 use App\Models\Ratings;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class CommentsController extends Controller
 {
@@ -46,7 +49,7 @@ class CommentsController extends Controller
             'rating' => $request->rating,
         ]);
     
-        return back()->with('message', 'Thank you for rating!');
+        return back()->with('message', 'Thank you for your comment');
     }
 
     /**

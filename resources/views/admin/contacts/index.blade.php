@@ -51,7 +51,7 @@
                                                 <td>{{ $contact->name }}</td>
                                                 <td>{{ $contact->email }}</td>
                                                 <td>{{ Str::words($contact->subject, 3, '...') }}</td>
-                                                <td>{{ Str::words($contact->message, 10, '...') }}</td>
+                                                <td>{{ Str::words($contact->message, 3, '...') }}</td>
                                                 <td><button class="btn btn-sm dropdown-toggle more-horizontal"
                                                         type="button" data-toggle="dropdown" aria-haspopup="true"
                                                         aria-expanded="false">

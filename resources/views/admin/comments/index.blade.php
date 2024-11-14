@@ -52,8 +52,8 @@
                                                 </td>
                                                 <td>{{ $comment->id }}</td>
                                                 <td>{{ $comment->user->first_name }}</td>
-                                                <td>{{ $comment->blog->title }}</td>
-                                                <td>{{ $comment->content }}</td>
+                                                <td>{{ Str::words($comment->blog->title, 3, '...') }}</td>
+                                                <td>{{ Str::words($comment->content, 3, '...') }}</td>
                                                 <td>{{ $comment->created_at }}</td>
                                                 <td><button class="btn btn-sm dropdown-toggle more-horizontal"
                                                         type="button" data-toggle="dropdown" aria-haspopup="true"
@@ -64,15 +64,15 @@
                                                         {{-- <a class="dropdown-item"
                                                             href="{{ route('comments.show', $comment->id) }}">view</a> --}}
                                                         <a class="dropdown-item"
-                                                            href="{{ route('comments.edit', $comment->id) }}">Edit</a>
+                                                            href="{{ route('comment.edit', $comment->id) }}">Edit</a>
 
-                                                        <a class="dropdown-item" href="{{ route('comments.destroy', $comment->id) }}"
+                                                        <a class="dropdown-item" href="{{ route('comment.destroy', $comment->id) }}"
                                                             onclick="event.preventDefault();
                                                             document.getElementById('destroy-comment-{{ $comment->id }}').submit();">
                                                             {{ __('Remove') }}
                                                         </a>
 
-                                                        <form id="destroy-comment-{{ $comment->id }}" action="{{ route('comments.destroy', $comment->id) }}"
+                                                        <form id="destroy-comment-{{ $comment->id }}" action="{{ route('comment.destroy', $comment->id) }}"
                                                             method="post" class="d-none">
                                                             @csrf
                                                             @method('DELETE')

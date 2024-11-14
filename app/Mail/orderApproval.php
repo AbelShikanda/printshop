@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Models\Orders;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -13,55 +14,25 @@ class orderApproval extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public Orders $order;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct(Orders $order)
     {
-        //
+        $this->order = $order;
     }
 
-    /**
-     * Get the message envelope.
-     */
-    public function envelope(): Envelope
+    public function build()
     {
-        return new Envelope(
-            subject: 'Order Approval',
-            from: 'info@printshopeld.com',
-        );
-    }
+        $email = $this->subject('Order Confirmation')
+            ->from('info@printshopeld.com')
+            ->view('emails.orderApproval')
+            ->with([
+                'order' => $this->order,
+            ]);
 
-    /**
-     * Get the message content definition.
-     */
-    public function content(): Content
-    {
-        return new Content(
-            markdown: 'emails.orderApproval',
-            with: [
-                'first_name' => $this->user->first_name,
-                'last_name' => $this->user->last_name,
-                'gender' => $this->user->gender,
-                'location' => $this->user->location,
-                'user_id' => $this->user->id,
-            ]
-        );
-    }
-
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
-    public function attachments(): array
-    {
-        return [
-            // new Attachment(
-            //     path: storage_path('app/public/yourfile.pdf'),
-            //     as: 'Job_Approval_Document.pdf',
-            //     mime: 'application/pdf',
-            // ),
-        ];
+        return $email;
     }
 }

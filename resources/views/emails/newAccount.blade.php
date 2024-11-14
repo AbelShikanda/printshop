@@ -10,7 +10,7 @@ He resides in: {{ $location }}<br>
 @elseif ($gender == 'female')
 She resides in: {{ $location }}<br> 
 @else
-They resides in: {{ $location }}<br> 
+They reside in: {{ $location }}<br> 
 @endif
 <br>
 <br>

@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\orderApproval;
 use App\Models\OrderItems;
 use App\Models\Orders;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class OrdersController extends Controller
 {
@@ -61,7 +64,7 @@ class OrdersController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Orders $orders)
+    public function show($id)
     {
         return view('admin.orders.show');
     }
@@ -69,7 +72,7 @@ class OrdersController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Orders $orders)
+    public function edit($id)
     {
         return view('admin.orders.edit');
     }
@@ -77,15 +80,36 @@ class OrdersController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Orders $orders)
+    public function update(Request $request, $id)
     {
-        // return view('admin.orders.index');
+        try {
+            $order = Orders::with('user')->find($id);
+            $order->complete = 1;
+            $order->save();
+            
+            $email = User::where('id', $order->user->id)->pluck('email')->first();
+            
+            Mail::to($email)
+                ->send(new orderApproval($order));
+
+            if (!$order) {
+                DB::rollBack();
+
+                return back()->with('message', 'Something went wrong while saving user data');
+            }
+
+            DB::commit();
+            return redirect()->route('orders.index')->with('message', 'Order updated Successfully.');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            throw $th;
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Orders $orders)
+    public function destroy($id)
     {
         // return view('admin.orders.index');
     }

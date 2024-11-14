@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Mail\newPost;
 use App\Models\ProductImages;
 use App\Models\ProductProductImages;
 use App\Models\Products;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
@@ -19,7 +22,7 @@ class ProductImageController extends Controller
      */
     public function index()
     {
-        $productImages = ProductImages::all();
+        $productImages = ProductImages::latest()->get();
         return view('admin.images.productImages.index', with([
             'productImages' => $productImages,
         ]));
@@ -30,7 +33,8 @@ class ProductImageController extends Controller
      */
     public function create()
     {
-        $products = Products::all();
+        $productIdsWithImages = ProductImages::pluck('products_id')->toArray();
+        $products = Products::whereNotIn('id', $productIdsWithImages)->get();
         return view('admin.images.productImages.create', with([
             'products' => $products,
         ]));
@@ -90,26 +94,14 @@ class ProductImageController extends Controller
 
                 return back()->with('message', 'Something went wrong while saving user data');
             }
-
-            // $adminEmail = Admin::where('is_admin', 1)->pluck('email');
-            // $blogImages = BlogImages::where('id', $img->id)->get();
-            // $blog = Blogs::find($request->input('blog'));
-            // $users = User::whereNotNull('email_verified_at')->get();
-            // dd($users);
-
-            // foreach ($users as $user) {
-            //     foreach ($blogImages as $blogImage) {
-            //         Mail::to($user->email)
-            //             ->bcc($adminEmail)
-            //             ->send(new newBlog($blog, $user, $blogImage));
-            //     }
-            // }
         
-            $email = Admin::where('is_admin', 1)->pluck('email');
+            $email = User::whereNotNull('email_verified_at')->pluck('email');
+            $product_id = ProductProductImages::where('product_images_id', $img->id)->pluck('products_id');
+            $product = Products::with('ProductImage')->find($product_id)->first();
     
             Mail::to('printshopeld@gmail.com')
             ->bcc($email)
-            ->send(new newAccount($user));
+            ->send(new newPost($product));
 
             DB::commit();
             return redirect()->route('product_images.index')->with('message', 'Image Stored Successfully.');

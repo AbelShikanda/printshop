@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\newWishlist;
+use App\Models\Admin;
 use App\Models\Orders;
+use App\Models\ProductImage;
 use App\Models\ProductImages;
 use App\Models\Products;
 use App\Models\Ratings;
@@ -11,6 +14,7 @@ use App\Models\WishList;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class ProfileController extends Controller
 {
@@ -44,21 +48,10 @@ class ProfileController extends Controller
             $order->cart = unserialize($order->tracking_No);
             return $order;
         });
+        // dd($orders);
 
         $ratings = Ratings::where('user_id', $user->id)->first();
         $ratedItems = Ratings::pluck('products_id')->toArray();
-
-        // $approvalStatus = $orders ? $orders->complete : 0;
-        // dd($approvalStatus);
-        // foreach ($orders as $order) {
-        //     dd($order);
-        //     foreach ($order->orderItems as $items) {
-        //         // dd($items->products);
-        //         // foreach ($items->products as $product) {
-        //         //     dd($product);
-        //         // }
-        //     }
-        // }
 
         $latest = ProductImages::with('products')
             ->latest()
@@ -82,7 +75,8 @@ class ProfileController extends Controller
      */
     public function wishlist(Request $request)
     {
-        $product_id = $request->product_id;
+        $productImage_id = $request->product_id;
+        $product_id = ProductImages::where('id', $productImage_id)->pluck('products_id')->first();
         $user = Auth::user();
 
         if (WishList::where('user_id', $user->id)->where('product_id', $product_id)->exists()) {
@@ -92,6 +86,14 @@ class ProfileController extends Controller
             $wishlist->product_id = $product_id;
             $wishlist->user_id = Auth::id();
             $wishlist->save();
+        
+            $email = Admin::where('is_admin', 1)->pluck('email');
+            $product = Products::with('ProductImage')->find($product_id)->first();
+        
+            Mail::to('printshopeld@gmail.com')
+            ->bcc($email)
+            ->send(new newWishlist($product));
+            
             return redirect()->back()->with('message', 'Your product has been successfully added to the wishlist');
         }
     }

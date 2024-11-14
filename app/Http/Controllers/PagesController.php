@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\newComment;
+use App\Mail\newContact;
+use App\Models\Admin;
 use App\Models\BlogImages;
 use App\Models\Cart;
 use App\Models\Comments;
@@ -11,6 +14,7 @@ use App\Models\ProductImages;
 use App\Models\ProductSizes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class PagesController extends Controller
@@ -354,10 +358,6 @@ class PagesController extends Controller
             ['url' => '/', 'label' => 'Home'],
             ['url' => '', 'label' => 'Contact'],
         ];
-    
-        Mail::to('printshopeld@gmail.com')
-        ->bcc($email)
-        ->send(new newAccount($user));
 
         return view('pages.contact', with([
             'pageTitle' => $pageTitle,
@@ -403,14 +403,17 @@ class PagesController extends Controller
                     'message' => 'Something went wrong while saving user data.',
                 ]);
             }
-    
-        Mail::to('printshopeld@gmail.com')
-        ->bcc($email)
-        ->send(new newAccount($user));
+
+            $email = Admin::where('is_admin', 1)->pluck('email');
+            $contacts = Contact::where('id', $contacts->id)->first();
+
+            Mail::to('printshopeld@gmail.com')
+                ->bcc($email)
+                ->send(new newContact($contacts));
 
             DB::commit();
             return redirect()->back()->with([
-                'message' => 'Your contact has been sent successfully.',
+                'message' => 'Your message has been sent successfully.',
             ]);
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -445,10 +448,16 @@ class PagesController extends Controller
 
                 return back()->with('message', 'Something went wrong while saving user data');
             }
-    
+
+            $email = Admin::where('is_admin', 1)->pluck('email');
+
+            $comments = Comments::with('blog')->where('id', $comments->id)->first();
+
+            // dd($comments->blog->title);
+
             Mail::to('printshopeld@gmail.com')
-            ->bcc($email)
-            ->send(new newAccount($user));
+                ->bcc($email)
+                ->send(new newComment($comments));
 
             DB::commit();
             return redirect()->back()->with('message', 'your comment has been sent Successfully.');

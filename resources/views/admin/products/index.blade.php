@@ -46,9 +46,9 @@
                                                 <td>{{ $p->id }}</td>
                                                 <td>{{ $p->name }}</td>
                                                 @foreach ($p->ProductType as $item)
-                                                    <td>{{ $item->name }}</td>
+                                                    <td>{{ Str::words($item->name, 3, '...') }}</td>
                                                 @endforeach
-                                                <td>{{ $p->description }}</td>
+                                                <td>{{ Str::words($p->description, 3, '...') }}</td>
                                                 <td>{{ $p->price }}</td>
                                                 <td><button class="btn btn-sm dropdown-toggle more-horizontal"
                                                         type="button" data-toggle="dropdown" aria-haspopup="true"

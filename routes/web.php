@@ -61,7 +61,7 @@ Route::group(['middleware' => 'adminauth'], function() {
     Route::resource('blog_images', BlogImageController::class);
     Route::resource('contact', ContactController::class);
     Route::resource('prices', PricesController::class);
-    Route::resource('comments', CommentsController::class);
+    Route::resource('comment', CommentsController::class);
 
     Route::resource('permissions', PermissionsController::class);
     Route::resource('roles', RolesController::class);

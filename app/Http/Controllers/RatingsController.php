@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\newRating;
+use App\Models\Admin;
+use App\Models\ProductImages;
 use App\Models\Products;
 use App\Models\Ratings;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 
 class RatingsController extends Controller
 {
@@ -43,22 +47,33 @@ class RatingsController extends Controller
      */
     public function store(Request $request)
     {
+        $product_id = $request->input('productId');
+
         $ratings = [];
+
         foreach ($request->all() as $key => $value) {
             if (str_starts_with($key, 'rating_')) {
                 $itemId = str_replace('rating_', '', $key);
-                $ratings[$itemId] = $value; // Store rating by item ID
+                $ratings[$itemId] = $value; // Store the rating by item ID
             }
         }
 
-
         foreach ($ratings as $itemId => $rating) {
-            Ratings::create([
-                'products_id' => $itemId,
-                'user_id' => Auth::user()->id,
-                'rating' => $rating,
-            ]);
+                $rate = Ratings::create([
+                    'products_id' => $product_id,
+                    'user_id' => Auth::user()->id,
+                    'rating' => $rating,
+                ]);
         }
+
+        $email = Admin::where('is_admin', 1)->pluck('email');
+        $rate = Ratings::with('user')->find($rate->id);
+        $product = Products::with('ProductImage')->find($product_id)->first();
+
+        Mail::to('printshopeld@gmail.com')
+            ->bcc($email)
+            ->send(new newRating($rate, $product));
+
         return redirect()->back()->with('success', 'Ratings submitted successfully!');
     }
 

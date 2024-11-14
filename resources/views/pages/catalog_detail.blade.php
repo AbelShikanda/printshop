@@ -12,7 +12,7 @@
             <div class="product-details">
                 <header>
                     <h1 class="title">{{ $images->products[0]->name }}</h1>
-                    <span class="colorCat">{{ $colors->name }}</span>
+                    <span class="colorCat">{{ $images->products[0]->color[0]->name }}</span>
                     <div class="prices">
                         <span class="before">{{ $images->products[0]->price * 1.1 }}</span>
                         <span class="current">{{ $images->products[0]->price }}</span>
@@ -32,15 +32,15 @@
                 <div class="controls">
                     <div class="color">
                         <h5>color</h5>
-                        <a href="#!" class="option">{{ $colors->name }}</a>
+                        <a href="#!">{{ $images->products[0]->color[0]->name }}</a>
                     </div>
                     <div class="size">
                         <h5>size</h5>
-                        <a href="#!" class="option">{{ $sizes->name }}</a>
+                        <a href="#!">{{ $images->products[0]->size[0]->name }}</a>
                     </div>
                     <div class="qty">
                         <h5>qty</h5>
-                        <a href="#!" class="option">(1)</a>
+                        <a href="#!">(1)</a>
                     </div>
                 </div>
                 <div class="footer">
@@ -51,7 +51,7 @@
                     <a href="{{ route('catalog') }}" type="button">
                         <span>Catalog</span>
                     </a>
-                    <div class="row mt-5">
+                    {{-- <div class="row mt-5">
                         <div class="col mb-5">
                             <a href="#!" alt=""><i class="bi bi-share-fill"></i></a>
                         </div>
@@ -59,7 +59,7 @@
                         <div class="col mb-5">
                             <a href="#!" alt=""><i class="bi bi-chevron-double-right"></i></a>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
