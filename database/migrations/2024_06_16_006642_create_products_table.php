@@ -22,7 +22,10 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug');
             $table->text('description')->nullable();
-            $table->text('meta_keywords')->nullable();
+            $table->string('meta_title')->nullable();
+            $table->text('meta_description')->nullable();
+            $table->string('meta_keywords')->nullable();
+            $table->string('meta_image')->nullable();
             $table->tinyInteger('whatsapp')->default(0);
             $table->tinyInteger('telegram')->default(0);
             $table->tinyInteger('website')->default(0);

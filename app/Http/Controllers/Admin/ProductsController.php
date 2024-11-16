@@ -57,7 +57,10 @@ class ProductsController extends Controller
     {
         $product = $request->validate([
             'name' => 'required',
-            'meta' => 'required',
+            'meta_title' => 'required',
+            'meta_description' => 'required',
+            'meta_keywords' => 'required',
+            'meta_image' => 'required',
             'category' => 'required',
             'type' => 'required',
             'color' => 'required',
@@ -79,7 +82,10 @@ class ProductsController extends Controller
                 'type_id' => $request->type,
                 'name' => $request->input('name'),
                 'description' => $request->input('description'),
-                'meta_keywords' => $request->input('meta'),
+                'meta_title' => $request->input('meta_title'),
+                'meta_description' => $request->input('meta_description'),
+                'meta_keywords' => $request->input('meta_keywords'),
+                'meta_image' => $request->input('meta_image'),
                 'price' => $price,
                 'whatsapp' => 0,
                 'telegram' => 0,
@@ -139,11 +145,11 @@ class ProductsController extends Controller
             'Size',
             'Category',
             'ProductImage',
-            )
+        )
             ->where('id', $id)
             ->orderBy('id', 'DESC')
             ->first();
-            
+
         return view('admin.products.show', with([
             'product' => $product,
         ]));
@@ -170,7 +176,7 @@ class ProductsController extends Controller
 
         $product_type = ProductTypes::where('id', $products->type_id)->first();
         $product_types = ProductTypes::all();
-        
+
 
         return view('admin.products.edit', with([
             'category' => $category,
@@ -194,7 +200,10 @@ class ProductsController extends Controller
     {
         $product = $request->validate([
             'name' => '',
-            'meta' => '',
+            'meta_title' => '',
+            'meta_description' => '',
+            'meta_keywords' => '',
+            'meta_image' => '',
             'category' => '',
             'type' => '',
             'color' => '',
@@ -219,17 +228,20 @@ class ProductsController extends Controller
                 $product->type_id = $request->type;
                 $product->name = $request->input('name');
                 $product->description = $request->input('description');
-                $product->meta_keywords = $request->input('meta');
+                $product->meta_title = $request->input('meta_title');
+                $product->meta_description = $request->input('meta_description');
+                $product->meta_keywords = $request->input('meta_keywords');
+                $product->meta_image = $request->input('meta_image');
                 $product->whatsapp = !empty($request->whatsapp) ? 1 : 0;
                 $product->telegram = !empty($request->telegram) ? 1 : 0;
                 $product->website = !empty($request->website) ? 1 : 0;
                 $product->promotion = !empty($request->promotion) ? 1 : 0;
-                
+
                 $product->save();
             } else {
                 dd("Product not found");
             }
-            
+
 
 
             ProductProductCategories::where('products_id', $id)->delete();

@@ -28,7 +28,7 @@ class CreateCustomersSeeder extends Seeder
                 'phone' => $faker->phoneNumber,
                 'town' => $faker->city,
                 'location' => $faker->address,
-                // 'email_verified_at' => now(),
+                'email_verified_at' => now(),
                 'password' => bcrypt('Qwerty123.'), // Encrypted password
                 // 'remember_token' => Str::random(10),
             ]);

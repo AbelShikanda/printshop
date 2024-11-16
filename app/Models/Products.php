@@ -25,7 +25,10 @@ class Products extends Model
         'name',
         'slug',
         'description',
+        'meta_title',
+        'meta_description',
         'meta_keywords',
+        'meta_image',
         'price',
     ];
 

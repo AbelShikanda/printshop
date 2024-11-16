@@ -37,7 +37,11 @@ class BlogsController extends Controller
         $blogs = $request->validate([
             'category' => 'required',
             'title' => 'required',
-            'subtitle' => 'required',
+            'subtitle' => '',
+            'meta_title' =>'',
+            'meta_description' =>'',
+            'meta_keywords' =>'required',
+            'meta_image' =>'required',
             'body' => 'required',
         ]);
 
@@ -47,6 +51,10 @@ class BlogsController extends Controller
             $blogs = Blogs::create([
                 'title' => $request->title,
                 'sub_title' => $request->subtitle,
+                'meta_title' => $request->input('meta_title'),
+                'meta_description' => $request->input('meta_description'),
+                'meta_keywords' => $request->input('meta_keywords'),
+                'meta_image' => $request->input('meta_image'),
                 'body' => $request->body,
                 'blog_categories_id' => $request->category,
             ]);
@@ -80,7 +88,9 @@ class BlogsController extends Controller
         $blogs = Blogs::where('id', $id)->first();
         $category = BlogCategories::where('id', $blogs->blog_categories_id)->first();
 
-		return view( 'admin.blogs.show', compact('blogs', 'category'));
+		return view( 'admin.blogs.show', with([
+            'blogs' => $blogs,
+        ]));
     }
 
     /**
@@ -109,6 +119,10 @@ class BlogsController extends Controller
             'title' => '',
             'subtitle' => '',
             'slug' => '',
+            'meta_title' =>'',
+            'meta_description' =>'',
+            'meta_keywords' =>'',
+            'meta_image' =>'',
             'body' => '',
         ]);
 
@@ -121,6 +135,10 @@ class BlogsController extends Controller
                 $blogs->title = $request->title;
                 $blogs->sub_title = $request->subtitle;
                 $blogs->body = $request->body;
+                $blogs->meta_title = $request->input('meta_title');
+                $blogs->meta_description = $request->input('meta_description');
+                $blogs->meta_keywords = $request->input('meta_keywords');
+                $blogs->meta_image = $request->input('meta_image');
                 $blogs->slug = $request->slug;
                 
                 $blogs->save();

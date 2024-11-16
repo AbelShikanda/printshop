@@ -22,7 +22,10 @@ class Blogs extends Model
         'sub_title',
         'body',
         'slug',
+        'meta_title',
+        'meta_description',
         'meta_keywords',
+        'meta_image',
     ];
 
     /**

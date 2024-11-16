@@ -41,6 +41,30 @@
                                         <div class="valid-feedback"> Looks good! </div>
                                     </div>
                                     <div class="col-md-12 mb-3">
+                                        <label for="validationCustom01">meta_title</label>
+                                        <input type="text" name="meta_title" class="form-control" id="validationCustom01" value="meta_title"
+                                            >
+                                        <div class="valid-feedback"> Looks good! </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="validationCustom01">meta_description</label>
+                                        <input type="text" name="meta_description" class="form-control" id="validationCustom01" value="meta_description"
+                                            >
+                                        <div class="valid-feedback"> Looks good! </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="validationCustom01">meta_keywords</label>
+                                        <input type="text" name="meta_keywords" class="form-control" id="validationCustom01" value="meta_keywords"
+                                            >
+                                        <div class="valid-feedback"> Looks good! </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="validationCustom01">meta_image</label>
+                                        <input type="text" name="meta_image" class="form-control" id="validationCustom01" value="meta_image"
+                                            >
+                                        <div class="valid-feedback"> Looks good! </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
                                         <label for="validationCustom01">category</label>
                                         <select class="form-control select2" style="width: 100%;" name="category">
                                             @foreach ($categories as $category)

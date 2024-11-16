@@ -1,2 +1,6 @@
 User-agent: *
-Disallow:
+Disallow: /admin/
+Disallow: /admin_/
+Disallow: /admin/login/
+Allow: /
+Sitemap: https://printshopeld.com/sitemap.xml

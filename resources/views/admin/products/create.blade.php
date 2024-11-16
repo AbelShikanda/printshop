@@ -31,13 +31,31 @@
                                     <div class="col-md-12 mb-3">
                                         <label for="validationCustom01">Name</label>
                                         <input type="text" name="name" class="form-control" id="validationCustom01" value="caption"
-                                            required>
+                                            >
                                         <div class="valid-feedback"> Looks good! </div>
                                     </div>
                                     <div class="col-md-12 mb-3">
-                                        <label for="validationCustom01">Tags</label>
-                                        <input type="text" name="meta" class="form-control" id="validationCustom01" value="tags"
-                                            required>
+                                        <label for="validationCustom01">meta_title</label>
+                                        <input type="text" name="meta_title" class="form-control" id="validationCustom01" value="meta_title"
+                                            >
+                                        <div class="valid-feedback"> Looks good! </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="validationCustom01">meta_description</label>
+                                        <input type="text" name="meta_description" class="form-control" id="validationCustom01" value="meta_description"
+                                            >
+                                        <div class="valid-feedback"> Looks good! </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="validationCustom01">meta_keywords</label>
+                                        <input type="text" name="meta_keywords" class="form-control" id="validationCustom01" value="meta_keywords"
+                                            >
+                                        <div class="valid-feedback"> Looks good! </div>
+                                    </div>
+                                    <div class="col-md-12 mb-3">
+                                        <label for="validationCustom01">meta_image</label>
+                                        <input type="text" name="meta_image" class="form-control" id="validationCustom01" value="meta_image"
+                                            >
                                         <div class="valid-feedback"> Looks good! </div>
                                     </div>
                                     <div class="col-md-12 mb-3">

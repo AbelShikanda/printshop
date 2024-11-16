@@ -81,6 +81,11 @@ class PagesController extends Controller
             'images' => $images,
             'colors' => $colors,
             'sizes' => $sizes,
+            'metaTitle' => $images->products[0]->meta_title,
+            'metaDescription' => $images->products[0]->meta_description,
+            'metaKeywords' => $images->products[0]->meta_keywords,
+            'metaImage' => $images->thumbnail ? asset('storage/img/products/' . $images->thumbnail) : asset('default-meta-image.jpg'),
+            'metaUrl' => route('catalogDetail', $images->id),
         ]));
     }
 
@@ -216,66 +221,6 @@ class PagesController extends Controller
         }
     }
 
-    // public function postCheckout(Request $request, $id)
-    // {
-    //     if(!Session::has('cart')) {
-    //         return View('users/pages/cart');
-    //     }
-
-    //     $product = Products::find($id);
-    //     $oldCart = Session::get('cart');
-    //     $cart = new Cart($oldCart);
-
-    //     $request->validate([
-    //         'reference' => 'alpha_num|unique:orders|max:10|min:10',
-    //         'tracking_No' => '',
-    //         'total_amount' => '',
-    //         'reference' => '',
-    //         'first_name' => '',
-    //         'last_name' => '',
-    //         'landmark' => '',
-    //         'house_no' => '',
-    //         'estate' => '',
-    //         'phone' => '',
-    //         'town' => '',
-    //         ]);
-
-    //     // mpesa code here 
-
-    //     $order = new orders();
-    //     $order->tracking_No = serialize($cart);
-    //     $order->total_amount = $request->total;
-    //     $order->reference = $request->input('mpesa_ref');
-    //     $order->first_name = Auth::user()->first_name;
-    //     $order->last_name = Auth::user()->last_name;
-    //     $order->landmark = Auth::user()->landmark;
-    //     $order->house_no = Auth::user()->house_no;
-    //     $order->estate = Auth::user()->estate;
-    //     $order->phone = Auth::user()->phone; 
-    //     $order->town = Auth::user()->town;
-    //     // $order->county = 'Kenya';
-    //     // dd($order);
-
-    //     Auth::user()->orders()->save($order);
-
-    //     $order_items = [];
-    //     foreach ($cart->items as $id => $item) {
-    //         $order_items[] = [
-    //             'order_id' => $order->id,
-    //             'products_id' => $id,
-    //             'color_id' => $request->color,
-    //             'size_id' => $request->size,
-    //             'quantity' => $item['qty'],
-    //             'price' => $item['price'],
-    //         ];
-    //     }
-    //     Order_Items::insert($order_items);
-    //     // dd($order);
-
-    //     Session::forget('cart');
-    //     return redirect()->route('cart')->with('message', 'Your order has been placed Successfully.');
-    // }
-
     /**
      * function to display blog detail
      *
@@ -320,6 +265,7 @@ class PagesController extends Controller
             ['url' => '/', 'label' => 'Home'],
             ['url' => '', 'label' => 'blog single'],
         ];
+
         $blog = BlogImages::with(
             'blogs',
             'blogs.blogCategories',
@@ -328,16 +274,21 @@ class PagesController extends Controller
             ->where('id', $id)
             ->orderBy('id', 'DESC')
             ->first();
+            
         $comments = Comments::with('blog', 'user')->where('blog_id', $id)
             ->orderBy('id', 'DESC')
             ->get();
-        // dd($comments);
 
         return view('pages.blog_single', with([
             'pageTitle' => $pageTitle,
             'breadcrumbLinks' => $breadcrumbLinks,
             'blog' => $blog,
             'comments' => $comments,
+            'metaTitle' => $blog->blogs[0]->meta_title,
+            'metaDescription' => $blog->blogs[0]->meta_description,
+            'metaKeywords' => $blog->blogs[0]->meta_keywords,
+            'metaImage' => $blog->thumbnail ? asset('storage/img/blogs/' . $blog->thumbnail) : asset('default-meta-image.jpg'),
+            'metaUrl' => route('blogSingle', $blog->id),
         ]));
     }
 

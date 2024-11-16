@@ -2,15 +2,25 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+    <!-- Dynamic Meta Tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta content="" name="description">
-    <meta content="" name="keywords">
-
+    <meta name="description"
+        content="{{ $metaDescription ?? 'Print Shop Eld is the best branding option in Kenya for bringing your print to life. We offer t-shirt printing and custom apparel printing at affordable rates' }}">
+    <meta name="keywords" content="{{ $metaKeywords ?? 'print, printing, custom, brand, t-shirt printing, appareal printing' }}">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph / Social Media Tags -->
+    <meta property="og:title" content="{{ $metaTitle ?? config('app.name', 'PrintShop') }}">
+    <meta property="og:description" content="{{ $metaDescription ?? 'Print Shop Eld is the best branding option in Kenya for bringing your print to life. We offer t-shirt printing and custom apparel printing at affordable rates' }}">
+    <meta property="og:image" content="{{ asset($metaImage ?? 'default-image.jpg') }}">
+    <meta property="og:url" content="{{ $metaUrl ?? url('/') }}">
+    <meta property="og:type" content="website">
+    
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ $metaTitle ?? config('app.name', 'PrintShop') }}</title>
 
     <!-- Favicons -->
     <link href="{{ asset('assets/img/logo.png') }}" rel="icon">
