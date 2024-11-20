@@ -69,6 +69,7 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: app-build
+          path: ${{ github.sha}}.tar.gz
       - name: upload
         uses: appleboy/scp-action@v0.1.7
         with:
