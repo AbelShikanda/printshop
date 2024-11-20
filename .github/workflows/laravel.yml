@@ -234,7 +234,7 @@ jobs:
             ln -s -n -f $STORAGE_PATH $LINK_RELEASE_PATH
               ls -la $ACTIVE_RELEASE_PATH
               cd $ACTIVE_RELEASE_PATH || { echo "Failed to cd into release path"; exit 1; }
-              composer install --no-scripts
+              composer install --no-dev --optimize-autoloader
   
   # Run Migrations release
   migrations-run:
