@@ -257,6 +257,7 @@ jobs:
           # in the event of trouble recognizing the changes after the link find a solution to refresh
           script: |
               cd $ACTIVE_RELEASE_PATH
+              chmod 755 artisan
               php artisan migrate --force
               php artisan db:seed
         
