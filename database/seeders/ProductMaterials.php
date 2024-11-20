@@ -14,7 +14,7 @@ class ProductMaterials extends Seeder
      */
     public function run(): void
     {
-        DB::table('product_Materials')->insert([
+        DB::table('product_materials')->insert([
             [
                 'id' => 1,
                 'name' => 'Cotton',
