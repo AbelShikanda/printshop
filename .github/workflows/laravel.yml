@@ -22,13 +22,9 @@ jobs:
       - name: Ls
         run: ls -la
 
-      # Install composer
-      - name: Install composer dependencies
-        run: composer install --no-scripts
-
       # PHPUnit tests
-      # - name: PHPUnit 
-      #   run: php artisan 
+      # - name: PHPUnit tests
+      #   run: php artisan test
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -40,6 +36,10 @@ jobs:
 
       - name: Build Assets
         run: npm run build
+
+      # Install composer
+      - name: Install composer dependencies
+        run: composer install --no-dev --optimize-autoloader
 
       - name: Create Deployment Archive
         env:
