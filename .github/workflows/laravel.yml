@@ -240,7 +240,7 @@ jobs:
     needs: [web-deploy, ssh-release, run-befor-hook, activate-release]
     steps:
       - name: run-activate-release
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.2.0
         env:
           GITHUB_SHA: ${{ github.sha }}
           RELEASE_PATH: /home/printsh1/printshopeld/release/${{github.sha}}
