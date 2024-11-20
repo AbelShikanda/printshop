@@ -256,21 +256,23 @@ jobs:
           envs: GITHUB_SHA,RELEASE_PATH,ACTIVE_RELEASE_PATH,STORAGE_PATH,BASE_PATH,LARAVEL_ENV
           # in the event of trouble recognizing the changes after the link find a solution to refresh
           script: |
-              # Debug: Check if the active release path exists
+              # Ensure directory exists
+              if [ ! -d "$ACTIVE_RELEASE_PATH" ]; then
+                echo "Directory $ACTIVE_RELEASE_PATH does not exist!"
+                exit 1
+              fi
+            
+              # Move to the active release path
+              cd $ACTIVE_RELEASE_PATH || exit 1
               ls -la $ACTIVE_RELEASE_PATH
+              echo $ACTIVE_RELEASE_PATH
             
-              # Navigate to the release directory
-              cd $ACTIVE_RELEASE_PATH || { echo "Failed to cd into release path"; exit 1; }
-            
-              # Debug: Check if necessary files exist
-              ls -la
-            
-              # Check PHP version
+              # Ensure PHP is available
               php -v
             
-              # Run migrations and seeders
-              php artisan migrate --force || { echo "Migrate failed"; exit 1; }
-              php artisan db:seed || { echo "Seeding failed"; exit 1; }
+              # Run migrations and seeding
+              php artisan migrate --force
+              php artisan db:seed
         
   
   # Run activate release
