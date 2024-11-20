@@ -38,10 +38,11 @@
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <small class="text-muted mb-1">Page Views</small>
-                                        <h3 class="card-title mb-0">1168</h3>
+                                        <h3 class="card-title mb-0">{{ $thisWeekViews }}</h3>
                                         <p class="small text-muted mb-0"><span
-                                                class="fe fe-arrow-down fe-12 text-danger"></span><span>-18.9% Last
-                                                week</span></p>
+                                                class="fe fe-arrow-{{ $percentageViewChange < 0 ? 'down' : 'up' }} fe-12 text-{{ $percentageViewChange < 0 ? 'danger' : 'success' }}"></span>
+                                            <span>{{ number_format($percentageViewChange, 2) }}% Last week</span>
+                                        </p>
                                     </div>
                                     <div class="col-4 text-right">
                                         <span class="sparkline inlineline"></span>
@@ -56,10 +57,11 @@
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <small class="text-muted mb-1">Conversion</small>
-                                        <h3 class="card-title mb-0">68</h3>
+                                        <h3 class="card-title mb-0">{{ $thisWeekConversions }}</h3>
                                         <p class="small text-muted mb-0"><span
-                                                class="fe fe-arrow-up fe-12 text-warning"></span><span>+1.9% Last
-                                                week</span></p>
+                                                class="fe fe-arrow-{{ $percentageConversionChange < 0 ? 'down' : 'up' }} fe-12 text-{{ $percentageConversionChange < 0 ? 'danger' : 'success' }}"></span>
+                                            <span>{{ number_format($percentageConversionChange, 2) }}% Last week</span>
+                                        </p>
                                     </div>
                                     <div class="col-4 text-right">
                                         <span class="sparkline inlinepie"></span>
@@ -74,10 +76,11 @@
                                 <div class="row align-items-center">
                                     <div class="col">
                                         <small class="text-muted mb-1">Visitors</small>
-                                        <h3 class="card-title mb-0">108</h3>
+                                        <h3 class="card-title mb-0">{{ $thisWeekVisitorsCount }}</h3>
                                         <p class="small text-muted mb-0"><span
-                                                class="fe fe-arrow-up fe-12 text-success"></span><span>37.7% Last
-                                                week</span></p>
+                                                class="fe fe-arrow-{{ $percentageVisitorChange < 0 ? 'down' : 'up' }} fe-12 text-{{ $percentageVisitorChange < 0 ? 'danger' : 'success' }}"></span>
+                                            <span>{{ number_format($percentageVisitorChange, 2) }}% Last week</span>
+                                        </p>
                                     </div>
                                     <div class="col-4 text-right">
                                         <span class="sparkline inlinebar"></span>
@@ -89,65 +92,10 @@
                 </div> <!-- end section -->
                 <!-- linechart -->
                 <div class="my-4">
-                    <div id="lineChart"></div>
+                    <canvas id="lineChart"></canvas> <!-- Page Views Line Chart -->
                 </div>
                 <div class="row">
-                    <div class="col-md-6">
-                        <div class="card shadow mb-4">
-                            <div class="card-header">
-                                <strong>Goal</strong>
-                            </div>
-                            <div class="card-body px-4">
-                                <div class="row border-bottom">
-                                    <div class="col-4 text-center mb-3">
-                                        <p class="mb-1 small text-muted">Completions</p>
-                                        <span class="h3">26</span><br />
-                                        <span class="small text-muted">+20%</span>
-                                        <span class="fe fe-arrow-up text-success fe-12"></span>
-                                    </div>
-                                    <div class="col-4 text-center mb-3">
-                                        <p class="mb-1 small text-muted">Goal Value</p>
-                                        <span class="h3">$260</span><br />
-                                        <span class="small text-muted">+6%</span>
-                                        <span class="fe fe-arrow-up text-success fe-12"></span>
-                                    </div>
-                                    <div class="col-4 text-center mb-3">
-                                        <p class="mb-1 small text-muted">Conversion</p>
-                                        <span class="h3">6%</span><br />
-                                        <span class="small text-muted">-2%</span>
-                                        <span class="fe fe-arrow-down text-danger fe-12"></span>
-                                    </div>
-                                </div>
-                                <table class="table table-borderless mt-3 mb-1 mx-n1 table-sm">
-                                    <thead>
-                                        <tr>
-                                            <th class="w-50">Goal</th>
-                                            <th class="text-right">Conversion</th>
-                                            <th class="text-right">Completions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>Checkout</td>
-                                            <td class="text-right">5%</td>
-                                            <td class="text-right">260</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Add to Cart</td>
-                                            <td class="text-right">55%</td>
-                                            <td class="text-right">1260</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Contact</td>
-                                            <td class="text-right">18%</td>
-                                            <td class="text-right">460</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div> <!-- .card-body -->
-                        </div> <!-- .card -->
-                    </div> <!-- .col -->
-                    <div class="col-md-6">
+                    <div class="col-md-10 offset-1">
                         <div class="card shadow mb-4">
                             <div class="card-header">
                                 <strong class="card-title">Top Selling</strong>
@@ -156,80 +104,27 @@
                             <div class="card-body">
                                 <div class="list-group list-group-flush my-n3">
                                     <div class="list-group-item">
-                                        <div class="row align-items-center">
-                                            <div class="col-3 col-md-2">
-                                                <img src="{{ asset('admin/assets/products/p1.jpg') }}" alt="..."
-                                                    class="thumbnail-sm">
-                                            </div>
-                                            <div class="col">
-                                                <strong>Fusion Backpack</strong>
-                                                <div class="my-0 text-muted small">Gear, Bags</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <strong>+85%</strong>
-                                                <div class="progress mt-2" style="height: 4px;">
-                                                    <div class="progress-bar" role="progressbar" style="width: 85%"
-                                                        aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                        @foreach ($topSellingProducts as $products)
+                                            <div class="row align-items-center">
+                                                <div class="col-3 col-md-2">
+                                                    <img src="{{ asset('storage/img/products/' . $products->productImage->first()->thumbnail) }}"
+                                                        alt="..." class="thumbnail-sm">
+                                                </div>
+                                                <div class="col">
+                                                    <strong>{{ $products->name }}</strong>
+                                                    <div class="my-0 text-muted small">{{ $products->meta_keywords }}</div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <strong>{{ number_format($products->percentage_sold, 1) }}%</strong>
+                                                    <div class="progress mt-2" style="height: 4px;">
+                                                        <div class="progress-bar" role="progressbar"
+                                                            style="width: {{ number_format($products->percentage_sold, 1) }}%"
+                                                            aria-valuenow="{{ $products->percentage_sold }}"
+                                                            aria-valuemin="0" aria-valuemax="100"></div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item">
-                                        <div class="row align-items-center">
-                                            <div class="col-3 col-md-2">
-                                                <img src="{{ asset('admin/assets/products/p2.jpg') }}" alt="..."
-                                                    class="thumbnail-sm">
-                                            </div>
-                                            <div class="col">
-                                                <strong>Luma hoodies</strong>
-                                                <div class="my-0 text-muted small">Jackets, Men</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <strong>+75%</strong>
-                                                <div class="progress mt-2" style="height: 4px;">
-                                                    <div class="progress-bar" role="progressbar" style="width: 75%"
-                                                        aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item">
-                                        <div class="row align-items-center">
-                                            <div class="col-3 col-md-2">
-                                                <img src="{{ asset('admin/assets/products/p3.jpg') }}" alt="..."
-                                                    class="thumbnail-sm">
-                                            </div>
-                                            <div class="col">
-                                                <strong>Luma shorts</strong>
-                                                <div class="my-0 text-muted small">Shorts, Men</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <strong>+62%</strong>
-                                                <div class="progress mt-2" style="height: 4px;">
-                                                    <div class="progress-bar" role="progressbar" style="width: 62%"
-                                                        aria-valuenow="62" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="list-group-item">
-                                        <div class="row align-items-center">
-                                            <div class="col-3 col-md-2">
-                                                <img src="{{ asset('admin/assets/products/p4.jpg') }}" alt="..."
-                                                    class="thumbnail-sm">
-                                            </div>
-                                            <div class="col">
-                                                <strong>Brown Trousers</strong>
-                                                <div class="my-0 text-muted small">Trousers, Women</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <strong>+24%</strong>
-                                                <div class="progress mt-2" style="height: 4px;">
-                                                    <div class="progress-bar" role="progressbar" style="width: 24%"
-                                                        aria-valuenow="24" aria-valuemin="0" aria-valuemax="100"></div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div> <!-- / .list-group -->
                             </div> <!-- / .card-body -->
@@ -240,65 +135,28 @@
                     <div class="col-md-4">
                         <div class="card shadow eq-card  mb-4">
                             <div class="card-header">
-                                <strong>Region</strong>
+                                <strong>Region Sales</strong>
                             </div>
                             <div class="card-body">
-                                <div class="map-box my-5"
-                                    style="position:relative; max-width: 320px; max-height: 200px; margin:0 auto;">
-                                    <div id="dataMapUSA"></div>
-                                </div>
-                                <div class="row align-items-bottom my-2">
-                                    <div class="col">
-                                        <p class="mb-0">France</p>
-                                        <span class="my-0 text-muted small">+10%</span>
+                                @foreach ($regionData as $data)
+                                    <div id="dataMap"
+                                        style="position:relative; max-width: 320px; max-height: 200px; margin:0 auto;">
+                                        {{-- <div id="dataMapUSA"></div> --}}
                                     </div>
-                                    <div class="col-auto text-right">
-                                        <p class="mb-0">118</p>
-                                        <div class="progress mt-2" style="height: 4px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 85%"
-                                                aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                    <div class="row align-items-bottom my-2">
+                                        <div class="col">
+                                            <p class="mb-0">{{ $data->town }}</p>
+                                            <span class="my-0 text-muted small">{{ $data->sales_percentage }}%</span>
+                                        </div>
+                                        <div class="col-auto text-right">
+                                            <p class="mb-0">{{ $data->total_sales }}</p>
+                                            <div class="progress mt-2" style="height: 4px;">
+                                                <div class="progress-bar" role="progressbar" style="width: 85%"
+                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row align-items-center my-2">
-                                    <div class="col">
-                                        <p class="mb-0">Netherlands</p>
-                                        <span class="my-0 text-muted small">+0.6%</span>
-                                    </div>
-                                    <div class="col-auto text-right">
-                                        <p class="mb-0">1008</p>
-                                        <div class="progress mt-2" style="height: 4px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 85%"
-                                                aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center my-2">
-                                    <div class="col">
-                                        <p class="mb-0">Italy</p>
-                                        <span class="my-0 text-muted small">+1.6%</span>
-                                    </div>
-                                    <div class="col-auto text-right">
-                                        <p class="mb-0">67</p>
-                                        <div class="progress mt-2" style="height: 4px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 85%"
-                                                aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row align-items-center my-2">
-                                    <div class="col">
-                                        <p class="mb-0">Spain</p>
-                                        <span class="my-0 text-muted small">+118%</span>
-                                    </div>
-                                    <div class="col-auto text-right">
-                                        <p class="mb-0">186</p>
-                                        <div class="progress mt-2" style="height: 4px;">
-                                            <div class="progress-bar" role="progressbar" style="width: 85%"
-                                                aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                        </div>
-                                    </div>
-                                </div>
+                                @endforeach
                             </div>
                         </div>
                     </div> <!-- .col -->
@@ -309,50 +167,30 @@
                                 <a class="float-right small text-muted" href="#!">View all</a>
                             </div>
                             <div class="card-body">
-                                <div class="chart-box mb-3" style="min-height:180px;">
-                                    <div id="customAngle"></div>
-                                </div> <!-- .col -->
+                                {{-- <div class="chart-box mb-3" style="min-height:180px;">
+                                    <div id="customAngle" style="width: 100%; height: 180px;"></div>
+                                </div> <!-- .col --> --}}
                                 <div class="mx-auto">
-                                    <div class="row align-items-center mb-2">
-                                        <div class="col">
-                                            <p class="mb-0">Direct</p>
-                                            <span class="my-0 text-muted small">+10%</span>
+                                    @foreach ($trafficData as $medium => $count)
+                                        <div class="row align-items-center mb-2">
+                                            <div class="col">
+                                                <p class="mb-0">{{ $medium }}</p>
+                                                <span class="my-0 text-muted small">
+                                                    @php
+                                                        $totalTraffic = array_sum($conversionBreakdown);
+                                                        $percentage =
+                                                            $totalTraffic > 0 ? ($count / $totalTraffic) * 100 : 0;
+                                                    @endphp
+                                                    +{{ number_format($percentage, 1) }}%
+                                                </span>
+                                            </div>
+                                            <div class="col-auto text-right">
+                                                <p class="mb-0">{{ $count }}</p>
+                                                <span
+                                                    class="dot dot-md {{ $medium == 'organic' ? 'bg-success' : ($medium == 'referral' ? 'bg-warning' : ($medium == 'paid' ? 'bg-primary' : 'bg-secondary')) }}"></span>
+                                            </div>
                                         </div>
-                                        <div class="col-auto text-right">
-                                            <p class="mb-0">218</p>
-                                            <span class="dot dot-md bg-success"></span>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center mb-2">
-                                        <div class="col">
-                                            <p class="mb-0">Organic Search</p>
-                                            <span class="my-0 text-muted small">+0.6%</span>
-                                        </div>
-                                        <div class="col-auto text-right">
-                                            <p class="mb-0">1002</p>
-                                            <span class="dot dot-md bg-warning"></span>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center mb-2">
-                                        <div class="col">
-                                            <p class="mb-0">Referral</p>
-                                            <span class="my-0 text-muted small">+1.6%</span>
-                                        </div>
-                                        <div class="col-auto text-right">
-                                            <p class="mb-0">67</p>
-                                            <span class="dot dot-md bg-primary"></span>
-                                        </div>
-                                    </div>
-                                    <div class="row align-items-center">
-                                        <div class="col">
-                                            <p class="mb-0">Social</p>
-                                            <span class="my-0 text-muted small">+118%</span>
-                                        </div>
-                                        <div class="col-auto text-right">
-                                            <p class="mb-0">386</p>
-                                            <span class="dot dot-md bg-secondary"></span>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                 </div>
                             </div> <!-- .card-body -->
                         </div> <!-- .card -->
@@ -363,55 +201,24 @@
                                 <strong>Browsers</strong>
                             </div>
                             <div class="card-body">
-                                <div class="chart-box mt-3 mb-5">
-                                    <div id="radarChartWidget"></div>
-                                </div> <!-- .col -->
+                                {{-- <div class="chart-box mt-3 mb-5">
+                                    <div id="radarChartWidget" width="400" height="400"></div>
+                                </div> <!-- .col --> --}}
                                 <div class="mx-auto">
                                     <div class="row align-items-center my-2">
-                                        <div class="col-6 col-xl-3 my-3">
-                                            <span class="mb-0">Safari</span>
-                                            <div class="progress my-2" style="height: 4px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 10%"
-                                                    aria-valuenow="10" aria-valuemin="0" aria-valuemax="100"></div>
+                                        @foreach ($browsers as $browser)
+                                            <div class="col-6 col-xl-3 my-3">
+                                                <span class="mb-0">{{ $browser->user_agent }}</span>
+                                                <div class="progress my-2" style="height: 4px;">
+                                                    <div class="progress-bar" role="progressbar" style="width: {{ $browser->percentage }}%"
+                                                        aria-valuenow="{{ $browser->percentage }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="col-6 col-xl-3 my-3 text-right">
-                                            <span>118</span><br />
-                                            <span class="my-0 text-muted small">+10%</span>
-                                        </div>
-                                        <div class="col-6 col-xl-3 my-3">
-                                            <span class="mb-0">Chrome</span>
-                                            <div class="progress my-2" style="height: 4px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 36%"
-                                                    aria-valuenow="36" aria-valuemin="0" aria-valuemax="100"></div>
+                                            <div class="col-6 col-xl-3 my-3 text-right">
+                                                <span>{{ $browser->count }}</span><br />
+                                                <span class="my-0 text-muted small">{{ $browser->percentage }}%</span>
                                             </div>
-                                        </div>
-                                        <div class="col-6 col-xl-3 my-3 text-right">
-                                            <span>1008</span><br />
-                                            <span class="my-0 text-muted small">+36%</span>
-                                        </div>
-                                        <div class="col-6 col-xl-3 my-3">
-                                            <span class="mb-0">Opera</span>
-                                            <div class="progress my-2" style="height: 4px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 85%"
-                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-xl-3 my-3 text-right">
-                                            <span>67</span><br />
-                                            <span class="my-0 text-muted small">+1.6%</span>
-                                        </div>
-                                        <div class="col-6 col-xl-3 my-3">
-                                            <span class="mb-0">Edge</span>
-                                            <div class="progress my-2" style="height: 4px;">
-                                                <div class="progress-bar" role="progressbar" style="width: 85%"
-                                                    aria-valuenow="85" aria-valuemin="0" aria-valuemax="100"></div>
-                                            </div>
-                                        </div>
-                                        <div class="col-6 col-xl-3 my-3 text-right">
-                                            <span>186</span><br />
-                                            <span class="my-0 text-muted small">+118%</span>
-                                        </div>
+                                        @endforeach
                                     </div>
                                 </div>
                             </div> <!-- .card-body -->
@@ -422,4 +229,209 @@
         </div> <!-- .row -->
     </div> <!-- .container-fluid -->
     @include('admin.layouts.partials.modals')
+
+    
+    <script>
+        $(document).ready(function() {
+            // Page Views Data (Line Chart)
+            var pageViewsData = @json($pageViewsTrend); // Example: [120, 150, 130, 140, 160, 170, 180]
+            $('.sparkline.inlineline').sparkline(pageViewsData, {
+                type: 'line',
+                width: '100%',
+                height: '50',
+                lineColor: '#00c292',
+                fillColor: '#e0f8f4',
+                spotColor: '#00c292',
+                minSpotColor: '#00c292',
+                maxSpotColor: '#00c292',
+            });
+
+            // Conversion Data (Pie Chart)
+            var conversionData = @json(array_values($conversionBreakdown)); // Example: [60, 30, 10]
+            $('.sparkline.inlinepie').sparkline(conversionData, {
+                type: 'pie',
+                width: '50',
+                height: '50',
+                sliceColors: ['#00c292', '#03a9f3', '#f4c22b'],
+            });
+
+            // Visitors Data (Bar Chart)
+            var visitorsData = @json($visitorTrend); // Example: [20, 30, 25, 35, 40, 50, 45]
+            $('.sparkline.inlinebar').sparkline(visitorsData, {
+                type: 'bar',
+                barColor: '#03a9f3',
+                negBarColor: '#f44336',
+                zeroColor: '#e0f8f4',
+                barWidth: 6,
+                barSpacing: 3,
+                height: '50',
+            });
+
+            // Labels for the last 7 days
+            var labels = [];
+            for (let i = 6; i >= 0; i--) {
+                let date = new Date();
+                date.setDate(date.getDate() - i); // Get each day
+                labels.push(date.toLocaleDateString()); // Format date (you can customize this)
+            }
+
+            // Your data for Page Views, Visitors, and Orders (conversionData)
+            var pageViewsData = @json($pageViewsTrend); // Example: [120, 150, 130, 140, 160, 170, 180]
+            var visitorsData = @json($visitorTrend); // Example: [20, 30, 25, 35, 40, 50, 45]
+            var conversionData = @json($conversionBreakdown); // Example: [60, 30, 10]
+
+            // Get the canvas element
+            var ctx = document.getElementById('lineChart').getContext('2d');
+
+
+            // Create the chart with multiple datasets (each line is a separate dataset)
+            var lineChart = new Chart(ctx, {
+                type: 'line', // Line chart type
+                data: {
+                    labels: labels, // Labels for each day
+                    datasets: [{
+                            label: 'Page Views', // Label for Page Views line
+                            data: pageViewsData, // Page Views data
+                            fill: false, // No fill under the line
+                            borderColor: '#00c292', // Line color
+                            tension: 0.1 // Smooth line
+                        },
+                        {
+                            label: 'Visitors', // Label for Visitors line
+                            data: visitorsData, // Visitors data
+                            fill: false, // No fill under the line
+                            borderColor: '#03a9f3', // Line color
+                            tension: 0.1 // Smooth line
+                        },
+                        {
+                            label: 'Orders', // Label for Orders (Conversion) line
+                            data: conversionData, // Orders data
+                            fill: false, // No fill under the line
+                            borderColor: '#f4c22b', // Line color
+                            tension: 0.1 // Smooth line
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true, // Responsive chart
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Days' // X-axis label
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Count' // Y-axis label (this can be changed as needed)
+                            }
+                        }
+                    },
+                    layout: {
+                        padding: {
+                            top: 10,
+                            right: 10,
+                            bottom: 10,
+                            left: 10
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+
+    <script>
+        var map = L.map('dataMap').setView([1.2921, 36.8219], 6); // Set the center to France coordinates
+
+        // Use OpenStreetMap tiles for the map background
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        // Optionally, add markers or other features to the map
+        L.marker([1.2921, 36.8219]).addTo(map) // Example: Marker for Paris
+            .bindPopup('Nairobi, Kenya')
+            .openPopup();
+    </script>
+    <script>
+        // Convert PHP data to JavaScript
+        var trafficData = @json($trafficData);
+
+        // Extract labels and values
+        var labels = Object.keys(trafficData).map(function(key) {
+            return key.charAt(0).toUpperCase() + key.slice(1); // Capitalize labels
+        });
+        var data = Object.values(trafficData);
+
+        // Define chart colors
+        var backgroundColors = [
+            'rgba(75, 192, 192, 0.6)', // Organic - Green
+            'rgba(255, 206, 86, 0.6)', // Referral - Yellow
+            'rgba(54, 162, 235, 0.6)', // Paid - Blue
+            'rgba(153, 102, 255, 0.6)' // Direct - Purple
+        ];
+
+        // Render the chart
+        var ctx = document.getElementById('customAngle').getContext('2d');
+        new Chart(ctx, {
+            type: 'doughnut', // Use 'doughnut' or 'pie'
+            data: {
+                labels: labels, // Labels from traffic data
+                datasets: [{
+                    data: data, // Values from traffic data
+                    backgroundColor: backgroundColors, // Chart colors
+                    borderWidth: 1 // Border width
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script>
+        var browserLabels = {!! json_encode($browsers->pluck('user_agent')->toArray()) !!};
+        var browserPercentages = {!! json_encode($browsers->pluck('percentage')->toArray()) !!};
+
+        // Get the radar chart canvas
+        var ctx = document.getElementById('radarChartWidget').getContext('2d');
+
+        // Create the radar chart
+        var radarChart = new Chart(ctx, {
+            type: 'radar', // Set chart type to radar
+            data: {
+                labels: browserLabels, // Browser names
+                datasets: [{
+                    label: 'Browser Usage (%)',
+                    data: browserPercentages, // Browser percentages
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // Light blue fill
+                    borderColor: 'rgba(54, 162, 235, 1)', // Blue border
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    r: {
+                        angleLines: {
+                            color: '#ddd'
+                        }, // Style for grid lines
+                        grid: {
+                            color: '#ccc'
+                        },
+                        suggestedMin: 0, // Minimum value for percentage
+                        suggestedMax: 100 // Maximum value for percentage
+                    }
+                }
+            }
+        });
+    </script>
 @endsection

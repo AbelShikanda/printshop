@@ -7,16 +7,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description"
         content="{{ $metaDescription ?? 'Print Shop Eld is the best branding option in Kenya for bringing your print to life. We offer t-shirt printing and custom apparel printing at affordable rates' }}">
-    <meta name="keywords" content="{{ $metaKeywords ?? 'print, printing, custom, brand, t-shirt printing, appareal printing' }}">
+    <meta name="keywords"
+        content="{{ $metaKeywords ?? 'print, printing, custom, brand, t-shirt printing, appareal printing' }}">
     <meta name="robots" content="index, follow">
-    
+
     <!-- Open Graph / Social Media Tags -->
     <meta property="og:title" content="{{ $metaTitle ?? config('app.name', 'PrintShop') }}">
-    <meta property="og:description" content="{{ $metaDescription ?? 'Print Shop Eld is the best branding option in Kenya for bringing your print to life. We offer t-shirt printing and custom apparel printing at affordable rates' }}">
+    <meta property="og:description"
+        content="{{ $metaDescription ?? 'Print Shop Eld is the best branding option in Kenya for bringing your print to life. We offer t-shirt printing and custom apparel printing at affordable rates' }}">
     <meta property="og:image" content="{{ asset($metaImage ?? 'default-image.jpg') }}">
     <meta property="og:url" content="{{ $metaUrl ?? url('/') }}">
     <meta property="og:type" content="website">
-    
+
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -42,6 +44,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RBL70XY3HX"></script>
 
     <!-- Scripts -->
     @vite(['resources/css/app.scss', 'resources/js/app.js'])
@@ -85,6 +88,38 @@
                 if (form) {
                     form.submit(); // Submit the specific form on selection
                 }
+            });
+        });
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-RBL70XY3HX');
+    </script>
+
+    <script>
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function() {
+                var buttonId = this.id; // Or any other identifier like class
+                fetch('/track-button-click', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                            .getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        button_id: buttonId,
+                    })
+                });
             });
         });
     </script>

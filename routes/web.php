@@ -30,16 +30,16 @@ use App\Http\Controllers\PricesController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RatingsController;
 
-
 Route::get('/sitemap.xml', function () {
     return response()->file(public_path('sitemap.xml'));
 });
 
 Route::get('/admin_', function () {
-    return redirect()->route('dashboard.index');})
+    return redirect()->route('dashboard.index');
+})
     ->middleware('adminauth');
 
-Route::group(['prefix' => '/admin'], function() {
+Route::group(['prefix' => '/admin'], function () {
     Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('getLogin');
     Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('postLogin');
     Route::post('/register', [AdminAuthController::class, 'postLogin'])->name('postLogin');
@@ -48,7 +48,7 @@ Route::group(['prefix' => '/admin'], function() {
     Route::get('/schedules', [DashboardController::class, 'schedules'])->name('schedules');
 });
 
-Route::group(['middleware' => 'adminauth'], function() {
+Route::group(['middleware' => 'adminauth'], function () {
     Route::resource('colors', ProductColorsController::class);
     Route::resource('sizes', ProductSizesController::class);
     Route::resource('types', ProductTypesController::class);
@@ -74,38 +74,39 @@ Route::group(['middleware' => 'adminauth'], function() {
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Auth::routes(['verify' => true]);
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/home', [HomeController::class, 'index'])->name('home');
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Route::get('/catalog', [PagesController::class, 'catalog'])->name('catalog');
-Route::get('/catalog/show/{id}', [PagesController::class, 'catalog_detail'])->name('catalogDetail');
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Route::get('/blog', [PagesController::class, 'blog'])->name('blog');
-Route::get('/blog/single/{id}', [PagesController::class, 'blog_single'])->name('blogSingle');
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Route::get('/contacts', [PagesController::class, 'contacts'])->name('contacts');
-Route::post('/contact/store', [PagesController::class, 'contactStore'])->name('contactStore');
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Route::post('/comments', [PagesController::class, 'comments'])->name('comments');
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Route::post('/wishlist/{id}', [ProfileController::class, 'wishlist'])->name('wishlist');
-Route::post('/deleteWish/{id}', [ProfileController::class, 'deleteWish'])->name('deleteWish');
-Route::get('/cart', [PagesController::class, 'getCart'])->name('cart');
-Route::get('/cart/add/{id}', [PagesController::class, 'add_to_cart'])->name('addToCart');
-Route::get('/deleteCart/{id}', [PagesController::class, 'deleteCart'])->name('deleteCart');
-Route::post('/updateCart/{id}', [PagesController::class, 'updateCart'])->name('updateCart');
-Route::get('/reduceCart/{id}', [PagesController::class, 'getReduceCart'])->name('reduceCart');
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Route::post('/postCheckout/{id}', [CheckoutController::class, 'postCheckout'])->name('postCheckout');
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Route::resource('ratings', RatingsController::class);
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-Route::group(['middleware' => ['auth', 'verified']], function() {
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
-    Route::get('/profile/show/{id}', [ProfileController::class, 'show'])->name('profileShow');
-    Route::get('/profile/edit/{id}', [ProfileController::class, 'edit'])->name('profileEdit');
-    Route::get('/profile/update/{id}', [ProfileController::class, 'update'])->name('profileUpdate');
+Route::group(['middleware' => 'TrackVisitorJourney'], function () {
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Route::get('/', [HomeController::class, 'index'])->name('home');
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Route::get('/catalog', [PagesController::class, 'catalog'])->name('catalog');
+    Route::get('/catalog/show/{id}', [PagesController::class, 'catalog_detail'])->name('catalogDetail');
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Route::get('/blog', [PagesController::class, 'blog'])->name('blog');
+    Route::get('/blog/single/{id}', [PagesController::class, 'blog_single'])->name('blogSingle');
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Route::get('/contacts', [PagesController::class, 'contacts'])->name('contacts');
+    Route::post('/contact/store', [PagesController::class, 'contactStore'])->name('contactStore');
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Route::post('/comments', [PagesController::class, 'comments'])->name('comments');
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Route::post('/wishlist/{id}', [ProfileController::class, 'wishlist'])->name('wishlist');
+    Route::post('/deleteWish/{id}', [ProfileController::class, 'deleteWish'])->name('deleteWish');
+    Route::get('/cart', [PagesController::class, 'getCart'])->name('cart');
+    Route::get('/cart/add/{id}', [PagesController::class, 'add_to_cart'])->name('addToCart');
+    Route::get('/deleteCart/{id}', [PagesController::class, 'deleteCart'])->name('deleteCart');
+    Route::post('/updateCart/{id}', [PagesController::class, 'updateCart'])->name('updateCart');
+    Route::get('/reduceCart/{id}', [PagesController::class, 'getReduceCart'])->name('reduceCart');
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Route::post('/postCheckout/{id}', [CheckoutController::class, 'postCheckout'])->name('postCheckout');
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Route::resource('ratings', RatingsController::class);
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    Route::group(['middleware' => ['auth', 'verified']], function () {
+        Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+        Route::get('/profile/show/{id}', [ProfileController::class, 'show'])->name('profileShow');
+        Route::get('/profile/edit/{id}', [ProfileController::class, 'edit'])->name('profileEdit');
+        Route::get('/profile/update/{id}', [ProfileController::class, 'update'])->name('profileUpdate');
+    });
+    // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 });
-// +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

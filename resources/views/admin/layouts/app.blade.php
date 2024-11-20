@@ -35,8 +35,14 @@
     <!-- App CSS -->
     <link rel="stylesheet" href=" {{ asset('admin/css/app-light.css') }} " id="lightTheme" disabled>
     <link rel="stylesheet" href=" {{ asset('admin/css/app-dark.css') }} " id="darkTheme ">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 
     <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery.sparkline@2.1.2/dist/jquery.sparkline.min.js"></script>
+
 </head>
 
 <body class="vertical dark">
@@ -262,16 +268,17 @@
         }
     </script>
     <script>
-      $('#dataTable-1').DataTable(
-      {
-        autoWidth: true,
-        "lengthMenu": [
-          [16, 32, 64, -1],
-          [16, 32, 64, "All"]
-        ]
-      });
+        $('#dataTable-1').DataTable({
+            autoWidth: true,
+            "lengthMenu": [
+                [16, 32, 64, -1],
+                [16, 32, 64, "All"]
+            ]
+        });
     </script>
     <script src="{{ asset('admin/js/apps.js') }}"></script>
+
+
 
 </body>
 

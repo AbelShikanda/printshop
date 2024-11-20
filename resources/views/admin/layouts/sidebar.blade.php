@@ -20,10 +20,10 @@
                         <a class="nav-link pl-3" href="{{ route('dashboard.index') }}"><span
                                 class="ml-1 item-text">Home</span></a>
                     </li>
-                    <li class="nav-item">
+                    {{-- <li class="nav-item">
                         <a class="nav-link pl-3" href="{{ route('schedules') }}"><span
                                 class="ml-1 item-text">schedule</span></a>
-                    </li>
+                    </li> --}}
                 </ul>
             </li>
         </ul>

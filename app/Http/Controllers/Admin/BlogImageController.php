@@ -103,13 +103,13 @@ class BlogImageController extends Controller
             $blog = Blogs::find($request->input('blog'));
             $users = User::whereNotNull('email_verified_at')->get();
 
-            foreach ($users as $user) {
-                foreach ($blogImages as $blogImage) {
-                    Mail::to($user->email)
-                        ->bcc($adminEmail)
-                        ->send(new newBlog($blog, $user, $blogImage));
-                }
-            }
+            // foreach ($users as $user) {
+            //     foreach ($blogImages as $blogImage) {
+            //         Mail::to($user->email)
+            //             ->bcc($adminEmail)
+            //             ->send(new newBlog($blog, $user, $blogImage));
+            //     }
+            // }
 
             DB::commit();
             return redirect()->route('blog_images.index')->with('message', 'Image Stored Successfully.');

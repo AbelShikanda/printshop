@@ -358,9 +358,9 @@ class PagesController extends Controller
             $email = Admin::where('is_admin', 1)->pluck('email');
             $contacts = Contact::where('id', $contacts->id)->first();
 
-            Mail::to('printshopeld@gmail.com')
-                ->bcc($email)
-                ->send(new newContact($contacts));
+            // Mail::to('printshopeld@gmail.com')
+            //     ->bcc($email)
+            //     ->send(new newContact($contacts));
 
             DB::commit();
             return redirect()->back()->with([
@@ -406,9 +406,9 @@ class PagesController extends Controller
 
             // dd($comments->blog->title);
 
-            Mail::to('printshopeld@gmail.com')
-                ->bcc($email)
-                ->send(new newComment($comments));
+            // Mail::to('printshopeld@gmail.com')
+            //     ->bcc($email)
+            //     ->send(new newComment($comments));
 
             DB::commit();
             return redirect()->back()->with('message', 'your comment has been sent Successfully.');

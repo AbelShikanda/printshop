@@ -90,9 +90,9 @@ class ProfileController extends Controller
             $email = Admin::where('is_admin', 1)->pluck('email');
             $product = Products::with('ProductImage')->find($product_id)->first();
         
-            Mail::to('printshopeld@gmail.com')
-            ->bcc($email)
-            ->send(new newWishlist($product));
+            // Mail::to('printshopeld@gmail.com')
+            // ->bcc($email)
+            // ->send(new newWishlist($product));
             
             return redirect()->back()->with('message', 'Your product has been successfully added to the wishlist');
         }

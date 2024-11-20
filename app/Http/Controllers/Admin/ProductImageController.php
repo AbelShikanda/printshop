@@ -99,9 +99,9 @@ class ProductImageController extends Controller
             $product_id = ProductProductImages::where('product_images_id', $img->id)->pluck('products_id');
             $product = Products::with('ProductImage')->find($product_id)->first();
     
-            Mail::to('printshopeld@gmail.com')
-            ->bcc($email)
-            ->send(new newPost($product));
+            // Mail::to('printshopeld@gmail.com')
+            // ->bcc($email)
+            // ->send(new newPost($product));
 
             DB::commit();
             return redirect()->route('product_images.index')->with('message', 'Image Stored Successfully.');
