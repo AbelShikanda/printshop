@@ -22,10 +22,6 @@ jobs:
       - name: Ls
         run: ls -la
 
-      # PHPUnit tests
-      - name: PHPUnit tests
-        run: php artisan test
-
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -52,6 +48,10 @@ jobs:
       # Install composer
       - name: Install composer dependencies
         run: composer install --no-scripts
+
+      # PHPUnit tests
+      - name: PHPUnit tests
+        run: php artisan test
 
       # store artifacts for distribution
       - name: store artifacts for distribution
