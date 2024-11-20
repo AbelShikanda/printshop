@@ -22,10 +22,6 @@ jobs:
       - name: Ls
         run: ls -la
 
-      # Install composer
-      - name: Install composer dependencies
-        run: composer install --no-scripts
-
       # PHPUnit tests
       - name: PHPUnit tests
         run: php artisan test
@@ -52,6 +48,10 @@ jobs:
         with:
           php-version: "8.3"
           extensions: imagick, swoole, openssl
+
+      # Install composer
+      - name: Install composer dependencies
+        run: composer install --no-scripts
 
       # store artifacts for distribution
       - name: store artifacts for distribution
