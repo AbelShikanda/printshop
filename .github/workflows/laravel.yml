@@ -266,11 +266,8 @@ jobs:
               cd $ACTIVE_RELEASE_PATH || exit 1
               ls -la 
               echo $ACTIVE_RELEASE_PATH
-            
-              # Ensure PHP is available
-              php -v
-            
-              # Run migrations and seeding
+              ls -la 
+              
               php artisan migrate --force
               php artisan db:seed
         
