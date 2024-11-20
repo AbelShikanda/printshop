@@ -245,13 +245,17 @@ jobs:
         uses: appleboy/ssh-action@master
         env:
           GITHUB_SHA: ${{ github.sha }}
+          RELEASE_PATH: /home/printsh1/printshopeld/release/${{github.sha}}
           ACTIVE_RELEASE_PATH: /home/printsh1/printshopeld/current
+          STORAGE_PATH: /home/printsh1/printshopeld/storage
+          BASE_PATH: /home/printsh1/printshopeld
+          LARAVEL_ENV: ${{ secrets.LARAVEL_ENV }}
         with:
           host: ${{ secrets.SSH_SITES_IP }}
           username: ${{ secrets.FTP_SITES_USER }}
           password: ${{ secrets.FTP_SITES_PASSWORD }}
           port: ${{ secrets.SSH_SITES_PORT }}
-          envs: GITHUB_SHA,ACTIVE_RELEASE_PATH
+          envs: GITHUB_SHA,RELEASE_PATH,ACTIVE_RELEASE_PATH,STORAGE_PATH,BASE_PATH,LARAVEL_ENV
           # in the event of trouble recognizing the changes after the link find a solution to refresh
           script: |
               cd $ACTIVE_RELEASE_PATH
