@@ -264,7 +264,7 @@ jobs:
             
               # Move to the active release path
               cd $ACTIVE_RELEASE_PATH || exit 1
-              ls -la $ACTIVE_RELEASE_PATH
+              ls -la 
               echo $ACTIVE_RELEASE_PATH
             
               # Ensure PHP is available
