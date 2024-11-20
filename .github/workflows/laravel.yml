@@ -201,7 +201,9 @@ jobs:
           port: ${{ secrets.SSH_SITES_PORT }}
           envs: GITHUB_SHA,RELEASE_PATH,ACTIVE_RELEASE_PATH,STORAGE_PATH,BASE_PATH
           script: |
-            echo "${GITHUB_SHA}"
+              echo "${GITHUB_SHA}"
+              cd $ACTIVE_RELEASE_PATH
+              composer install --no-scripts
   
   # Run activate release
   activate-release:
