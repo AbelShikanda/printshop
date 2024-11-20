@@ -203,7 +203,7 @@ jobs:
           script: |
               echo "${GITHUB_SHA}"
               cd $ACTIVE_RELEASE_PATH
-              composer install --no-dev --optimize-autoloader
+              composer install --no-scripts
   
   # Run activate release
   activate-release:
