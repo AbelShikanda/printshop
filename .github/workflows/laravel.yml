@@ -202,9 +202,6 @@ jobs:
           envs: GITHUB_SHA,RELEASE_PATH,ACTIVE_RELEASE_PATH,STORAGE_PATH,BASE_PATH
           script: |
               echo "${GITHUB_SHA}"
-              ls -la $ACTIVE_RELEASE_PATH
-              cd $ACTIVE_RELEASE_PATH || { echo "Failed to cd into release path"; exit 1; }
-              composer install --no-scripts
   
   # Run activate release
   activate-release:
@@ -235,6 +232,9 @@ jobs:
             ln -s -n -f $STORAGE_PATH $RELEASE_PATH
             ln -s -n -f $RELEASE_PATH $ACTIVE_RELEASE_PATH
             ln -s -n -f $STORAGE_PATH $LINK_RELEASE_PATH
+              ls -la $ACTIVE_RELEASE_PATH
+              cd $ACTIVE_RELEASE_PATH || { echo "Failed to cd into release path"; exit 1; }
+              composer install --no-scripts
   
   # Run Migrations release
   migrations-run:
