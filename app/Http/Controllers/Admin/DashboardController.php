@@ -113,14 +113,16 @@ class DashboardController extends Controller
 
         $pageViewsTrend = [];
         $visitorTrend = [];
+        $ConversionTrend = [];
 
         for ($i = 6; $i >= 0; $i--) {
             $dayStart = Carbon::now()->subDays($i)->startOfDay();
             $dayEnd = Carbon::now()->subDays($i)->endOfDay();
 
-            // $pageViewsTrend[] = VisitorData::whereBetween('created_at', [$dayStart, $dayEnd])->count();
             $visitorTrend[] = VisitorData::whereBetween('created_at', [$dayStart, $dayEnd])->count();
             $pageViewsTrend[] = VisitorJourney::whereBetween('created_at', [$dayStart, $dayEnd])->count();
+            $ConversionTrend[] = VisitorJourney::where('page_url', 'like', '%checkout%')
+                ->whereBetween('created_at', [$dayStart, $dayEnd])->count();
         }
 
         // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -206,6 +208,7 @@ class DashboardController extends Controller
             'percentageConversionChange' => $percentageConversionChange,
             'percentageVisitorChange' => $percentageVisitorChange,
             'conversionBreakdown' => $conversionBreakdown,
+            'ConversionTrend' => $ConversionTrend,
             'pageViewsTrend' => $pageViewsTrend,
             'visitorTrend' => $visitorTrend,
             'topSellingProducts' => $topSellingProducts,

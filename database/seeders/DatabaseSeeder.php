@@ -24,22 +24,12 @@ class DatabaseSeeder extends Seeder
             ProductTypes::class,
             PriceTypeSeeder::class,
             // ++++++++++++++++++++++++++++++++++++++++++++++++
-            CreateProductPriceTriggerSeeder::class,
-            UpdateProductPriceTriggerSeeder::class,
-            // ++++++++++++++++++++++++++++++++++++++++++++++++
             CreateUsersSeeder::class,
             // ++++++++++++++++++++++++++++++++++++++++++++++++
-            CreateProductsSeeder::class,
-            CreateProductImagesSeeder::class,
-            // ++++++++++++++++++++++++++++++++++++++++++++++++
-            CreateBlogSeeder::class,
-            CreateBlogImagesSeeder::class,
-            // ++++++++++++++++++++++++++++++++++++++++++++++++
-            CreateCustomersSeeder::class,
-            // ++++++++++++++++++++++++++++++++++++++++++++++++
-            CreateCommentsSeeder::class,
-            // ++++++++++++++++++++++++++++++++++++++++++++++++
             CreateRolesSeeder::class,
+            // ++++++++++++++++++++++++++++++++++++++++++++++++
+            CreateProductPriceTriggerSeeder::class,
+            UpdateProductPriceTriggerSeeder::class,
             // ++++++++++++++++++++++++++++++++++++++++++++++++
             CreateOrdersMirrorTriggerSeeder::class,
             CreateBlogsMirrorTriggerSeeder::class,

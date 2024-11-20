@@ -278,7 +278,7 @@
             // Your data for Page Views, Visitors, and Orders (conversionData)
             var pageViewsData = @json($pageViewsTrend); // Example: [120, 150, 130, 140, 160, 170, 180]
             var visitorsData = @json($visitorTrend); // Example: [20, 30, 25, 35, 40, 50, 45]
-            var conversionData = @json($conversionBreakdown); // Example: [60, 30, 10]
+            var conversionData = @json($ConversionTrend); // Example: [60, 30, 10]
 
             // Get the canvas element
             var ctx = document.getElementById('lineChart').getContext('2d');
