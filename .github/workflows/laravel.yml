@@ -37,10 +37,6 @@ jobs:
       - name: Build Assets
         run: npm run build
 
-      # Install composer
-      - name: Install composer dependencies
-        run: composer install --no-scripts
-
       - name: Create Deployment Archive
         env:
           GITHUB_SHA: ${{ github.sha }}
@@ -52,6 +48,10 @@ jobs:
         with:
           php-version: "8.3"
           extensions: imagick, swoole, openssl
+
+      # Install composer
+      - name: Install composer dependencies
+        run: composer install --no-scripts
 
       # store artifacts for distribution
       - name: store artifacts for distribution
