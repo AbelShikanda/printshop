@@ -58,7 +58,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: app-build
-          path: ${{ github.sha}}.tar.gz
+          path: ${{ github.sha }}.tar.gz
 
   # Prepairing release on server
   ssh-release:
@@ -70,9 +70,9 @@ jobs:
         with:
           name: app-build
           
-      - name: Debug Artifact
+      - name: Debug build
         run: ls -la
-        
+
       - name: upload
         uses: appleboy/scp-action@v0.1.7
         with:
