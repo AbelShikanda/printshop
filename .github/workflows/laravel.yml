@@ -47,7 +47,7 @@ jobs:
 
       # Install composer
       - name: Install composer dependencies
-        run: composer install --no-scripts
+        run: composer install --no-dev --optimize-autoloader
 
       # PHPUnit tests
       # - name: PHPUnit tests
@@ -256,18 +256,7 @@ jobs:
           envs: GITHUB_SHA,RELEASE_PATH,ACTIVE_RELEASE_PATH,STORAGE_PATH,BASE_PATH,LARAVEL_ENV
           # in the event of trouble recognizing the changes after the link find a solution to refresh
           script: |
-              # Ensure directory exists
-              if [ ! -d "$ACTIVE_RELEASE_PATH" ]; then
-                echo "Directory $ACTIVE_RELEASE_PATH does not exist!"
-                exit 1
-              fi
-            
-              # Move to the active release path
-              cd $ACTIVE_RELEASE_PATH || exit 1
-              ls -la 
-              echo $ACTIVE_RELEASE_PATH
-              ls -la 
-              
+              cd $ACTIVE_RELEASE_PATH
               php artisan migrate --force
               php artisan db:seed
         
