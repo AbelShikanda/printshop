@@ -10,12 +10,12 @@ jobs:
     steps:
 
       # Check if the source branch is master
-      - name: Checking source branch (master)
-        run: |
-          if [ "$(git rev-parse --abbrev-ref HEAD)" != "master" ]; then
-            echo "This workflow only runs for pushes directly from the master branch."
-            exit 1
-          fi
+      # - name: Checking source branch (master)
+      #   run: |
+      #     if [ "$(git rev-parse --abbrev-ref HEAD)" != "master" ]; then
+      #       echo "This workflow only runs for pushes directly from the master branch."
+      #       exit 1
+      #     fi
       # Runs a single command using the runners shell
       - name: Ls
         run: ls -la
