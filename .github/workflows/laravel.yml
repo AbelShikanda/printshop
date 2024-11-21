@@ -59,7 +59,8 @@ jobs:
         env:
           GITHUB_SHA: ${{ github.sha }}
           # first deployments
-        run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules *
+        # run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules *
+        run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git *
 
       # store artifacts for distribution
       - name: store artifacts for distribution
