@@ -54,8 +54,8 @@ jobs:
       - name: Create Deployment Archive
         env:
           GITHUB_SHA: ${{ github.sha }}
-        # run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules *
-        run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules public vendor composer.json composer.lock
+        run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules *
+        # run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules public vendor composer.json composer.lock app config database resources routes
 
       # store artifacts for distribution
       - name: store artifacts for distribution
