@@ -155,12 +155,12 @@ jobs:
                 echo "admin directory does not exist in the source."
             fi
             # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            # mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/.htaccess" "/home/printsh1/public_html"
-            # mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/favican.ico" "/home/printsh1/public_html"
-            # mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/index.php" "/home/printsh1/public_html"
-            # mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/robots.txt" "/home/printsh1/public_html"
+            mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/.htaccess" "/home/printsh1/public_html"
+            mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/favican.ico" "/home/printsh1/public_html"
+            mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/index.php" "/home/printsh1/public_html"
+            mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/robots.txt" "/home/printsh1/public_html"
             # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            find /home/printsh1/printshopeld/release/${GITHUB_SHA}/public/ -mindepth 1 -not -path '/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/build*' -exec rm -rf {} +
+            # rm -rf /home/printsh1/printshopeld/release/${GITHUB_SHA}/public/
             # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
   # Run befor-hooks
