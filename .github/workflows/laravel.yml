@@ -261,23 +261,23 @@ jobs:
           envs: GITHUB_SHA,RELEASE_PATH,ACTIVE_RELEASE_PATH,STORAGE_PATH,BASE_PATH,LARAVEL_ENV,LINK_RELEASE_PATH
           # in the event of trouble recognizing the changes after the link find a solytion to refresh
           script: |
-              ls -la $ACTIVE_RELEASE_PATH
               cd $ACTIVE_RELEASE_PATH || { echo "Failed to cd into release path"; exit 1; }
+              ls -la $ACTIVE_RELEASE_PATH
 
-              # Download Node.js binaries (replace `v21.7.2` with your version)
-              curl -fsSL https://nodejs.org/dist/v21.7.2/node-v21.7.2-linux-x64.tar.xz -o node.tar.xz || { echo "Failed to download Node.js"; exit 1; }
-              mkdir -p nodejs && tar -xJf node.tar.xz -C nodejs --strip-components=1 || { echo "Failed to extract Node.js"; exit 1; }
-              export PATH=$ACTIVE_RELEASE_PATH/nodejs/bin:$PATH
+              # # Download Node.js binaries (replace `v21.7.2` with your version)
+              # curl -fsSL https://nodejs.org/dist/v21.7.2/node-v21.7.2-linux-x64.tar.gz -o node.tar.gz || { echo "Failed to download Node.js"; exit 1; }
+              # mkdir -p nodejs && tar -xzf node.tar.gz -C nodejs --strip-components=1 || { echo "Failed to extract Node.js"; exit 1; }
+              # export PATH=$ACTIVE_RELEASE_PATH/nodejs/bin:$PATH
               
-              node -v
-              npm -v
+              # node -v
+              # npm -v
               
-              echo "Installing Node.js dependencies..."
-              npm install || { echo "Failed to install Node.js dependencies"; exit 1; }
+              # echo "Installing Node.js dependencies..."
+              # npm install || { echo "Failed to install Node.js dependencies"; exit 1; }
 
-              # Build front-end assets
-              echo "Building front-end assets..."
-              npm run build || { echo "Failed to build assets"; exit 1; }
+              # # Build front-end assets
+              # echo "Building front-end assets..."
+              # npm run build || { echo "Failed to build assets"; exit 1; }
   
   # # Run Migrations release
   # migrations-run:
