@@ -10,12 +10,7 @@ jobs:
     steps:
 
       # Check if the source branch is master
-      # - name: Checking source branch (master)
-      #   run: |
-      #     if [ "$(git rev-parse --abbrev-ref HEAD)" != "master" ]; then
-      #       echo "This workflow only runs for pushes directly from the master branch."
-      #       exit 1
-      #     fi
+      
       # Runs a single command using the runners shell
       - name: Ls
         run: ls -la
@@ -64,9 +59,7 @@ jobs:
         env:
           GITHUB_SHA: ${{ github.sha }}
           # first deployments
-        # run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules *
-          # later deployments
-        run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules --exclude=vite.config.js *
+        run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules *
 
       # store artifacts for distribution
       - name: store artifacts for distribution
