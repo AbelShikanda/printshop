@@ -42,7 +42,7 @@ Route::get('/admin_', function () {
 Route::group(['prefix' => '/admin'], function () {
     Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('getLogin');
     Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('postLogin');
-    Route::post('/register', [AdminAuthController::class, 'postLogin'])->name('postLogin');
+    // Route::post('/register', [AdminAuthController::class, 'postLogin'])->name('postLogin');
     Route::post('/logout', [AdminAuthController::class, 'adminLogout'])->name('adminLogout');
     Route::resource('dashboard', DashboardController::class)->middleware('adminauth');
     Route::get('/schedules', [DashboardController::class, 'schedules'])->name('schedules');
@@ -76,8 +76,9 @@ Auth::routes(['verify' => true]);
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Route::group(['middleware' => 'TrackVisitorJourney'], function () {
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    // Route::get('/', [HomeController::class, 'index'])->name('home');
+    
     Route::get('/', [HomeController::class, 'index'])->name('home');
-    Route::get('/home', [HomeController::class, 'index'])->name('home');
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     Route::get('/catalog', [PagesController::class, 'catalog'])->name('catalog');
     Route::get('/catalog/show/{id}', [PagesController::class, 'catalog_detail'])->name('catalogDetail');
