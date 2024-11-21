@@ -22,6 +22,17 @@ jobs:
       - name: Ls
         run: ls -la
 
+      # configure php
+      - name: Setup PHP Action
+        uses: shivammathur/setup-php@2.30.4
+        with:
+          php-version: "8.3"
+          extensions: imagick, swoole, openssl
+
+      # Install composer
+      - name: Install composer dependencies
+        run: composer install --no-dev --optimize-autoloader
+
       # PHPUnit tests
       # - name: PHPUnit tests
       #   run: php artisan test
@@ -30,6 +41,9 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "21.7.2"
+
+      - name: Check Node.js Version
+        run: node -v
 
       - name: Install Node.js Dependencies
         run: npm install
@@ -40,18 +54,8 @@ jobs:
       - name: Create Deployment Archive
         env:
           GITHUB_SHA: ${{ github.sha }}
-        run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules *
-
-      # configure php
-      - name: Setup PHP Action
-        uses: shivammathur/setup-php@2.30.4
-        with:
-          php-version: "8.3"
-          extensions: imagick, swoole, openssl
-
-      # Install composer
-      - name: Install composer dependencies
-        run: composer install --no-scripts
+        # run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules *
+        run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules public vendor composer.json composer.lock
 
       # store artifacts for distribution
       - name: store artifacts for distribution
@@ -232,52 +236,9 @@ jobs:
             ln -s -n -f $STORAGE_PATH $RELEASE_PATH
             ln -s -n -f $RELEASE_PATH $ACTIVE_RELEASE_PATH
             ln -s -n -f $STORAGE_PATH $LINK_RELEASE_PATH
-              ls -la $ACTIVE_RELEASE_PATH
-              cd $ACTIVE_RELEASE_PATH || { echo "Failed to cd into release path"; exit 1; }
-              composer install --no-dev --optimize-autoloader
-  
-  
-  # Run node
-  run-node:
-    name: run-node
-    runs-on: ubuntu-latest
-    needs: [web-deploy, ssh-release, run-befor-hook, activate-release]
-    steps:
-      - name: run-node
-        uses: appleboy/ssh-action@master
-        env:
-          GITHUB_SHA: ${{ github.sha }}
-          RELEASE_PATH: /home/printsh1/printshopeld/release/${{github.sha}}
-          LINK_RELEASE_PATH: /home/printsh1/public_html
-          ACTIVE_RELEASE_PATH: /home/printsh1/printshopeld/current
-          STORAGE_PATH: /home/printsh1/printshopeld/storage
-          BASE_PATH: /home/printsh1/printshopeld
-          LARAVEL_ENV: ${{ secrets.LARAVEL_ENV }}
-        with:
-          host: ${{ secrets.SSH_SITES_IP }}
-          username: ${{ secrets.FTP_SITES_USER }}
-          password: ${{ secrets.FTP_SITES_PASSWORD }}
-          port: ${{ secrets.SSH_SITES_PORT }}
-          envs: GITHUB_SHA,RELEASE_PATH,ACTIVE_RELEASE_PATH,STORAGE_PATH,BASE_PATH,LARAVEL_ENV,LINK_RELEASE_PATH
-          # in the event of trouble recognizing the changes after the link find a solytion to refresh
-          script: |
-              cd $ACTIVE_RELEASE_PATH || { echo "Failed to cd into release path"; exit 1; }
-              ls -la $ACTIVE_RELEASE_PATH
-
-              # # Download Node.js binaries (replace `v21.7.2` with your version)
-              # curl -fsSL https://nodejs.org/dist/v21.7.2/node-v21.7.2-linux-x64.tar.gz -o node.tar.gz || { echo "Failed to download Node.js"; exit 1; }
-              # mkdir -p nodejs && tar -xzf node.tar.gz -C nodejs --strip-components=1 || { echo "Failed to extract Node.js"; exit 1; }
-              # export PATH=$ACTIVE_RELEASE_PATH/nodejs/bin:$PATH
-              
-              # node -v
-              # npm -v
-              
-              # echo "Installing Node.js dependencies..."
-              # npm install || { echo "Failed to install Node.js dependencies"; exit 1; }
-
-              # # Build front-end assets
-              # echo "Building front-end assets..."
-              # npm run build || { echo "Failed to build assets"; exit 1; }
+              # ls -la $ACTIVE_RELEASE_PATH
+              # cd $ACTIVE_RELEASE_PATH || { echo "Failed to cd into release path"; exit 1; }
+              # composer install --no-dev --optimize-autoloader
   
   # # Run Migrations release
   # migrations-run:
