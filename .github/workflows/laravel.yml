@@ -266,7 +266,7 @@ jobs:
           script: |
             echo "${GITHUB_SHA}"
   
-  # Run cleanup
+  # Runing cleanup
   clean-up:
     name: Clean-up
     runs-on: ubuntu-latest
