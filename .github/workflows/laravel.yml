@@ -168,10 +168,10 @@ jobs:
             # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             # ++++++++++++++++++++++++++++++++++++++++++++++later time++++++++++++++++++++++++++++++++++++++++++++++
             # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            # rm -rf /home/printsh1/printshopeld/release/${GITHUB_SHA}/public/.htaccess
-            # rm -rf /home/printsh1/printshopeld/release/${GITHUB_SHA}/public/favicon.ico
-            # rm -rf /home/printsh1/printshopeld/release/${GITHUB_SHA}/public/index.php
-            # rm -rf /home/psrintsh1/printshopeld/release/${GITHUB_SHA}/public/robots.txt
+            rm -rf /home/printsh1/printshopeld/release/${GITHUB_SHA}/public/.htaccess
+            rm -rf /home/printsh1/printshopeld/release/${GITHUB_SHA}/public/favicon.ico
+            rm -rf /home/printsh1/printshopeld/release/${GITHUB_SHA}/public/index.php
+            rm -rf /home/psrintsh1/printshopeld/release/${GITHUB_SHA}/public/robots.txt
             # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             # rm -rf /home/printsh1/printshopeld/release/${GITHUB_SHA}/public/
             # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
