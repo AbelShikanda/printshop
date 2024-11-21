@@ -25,17 +25,6 @@ jobs:
       - name: Ls
         run: ls -la
 
-      # configure php
-      - name: Setup PHP Action
-        uses: shivammathur/setup-php@2.30.4
-        with:
-          php-version: "8.3"
-          extensions: imagick, swoole, openssl
-
-      # Install composer
-      - name: Install composer dependencies
-        run: composer install --no-dev --optimize-autoloader
-
       # PHPUnit tests
       # - name: PHPUnit tests
       #   run: php artisan test
@@ -54,6 +43,17 @@ jobs:
 
       - name: Build Assets
         run: npm run build
+
+      # configure php
+      - name: Setup PHP Action
+        uses: shivammathur/setup-php@2.30.4
+        with:
+          php-version: "8.3"
+          extensions: imagick, swoole, openssl
+
+      # Install composer
+      - name: Install composer dependencies
+        run: composer install --no-dev --optimize-autoloader
 
       - name: Create Deployment Archive
         env:
