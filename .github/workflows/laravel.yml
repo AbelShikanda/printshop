@@ -263,10 +263,11 @@ jobs:
           script: |
               ls -la $ACTIVE_RELEASE_PATH
               cd $ACTIVE_RELEASE_PATH || { echo "Failed to cd into release path"; exit 1; }
-              
-              echo "Setting up Node.js environment..."
-              curl -fsSL https://deb.nodesource.com/setup_21.x | bash - || { echo "Failed to add NodeSource repository"; exit 1; }
-              apt-get install -y nodejs || { echo "Failed to install Node.js"; exit 1; }
+
+              # Download Node.js binaries (replace `v21.7.2` with your version)
+              curl -fsSL https://nodejs.org/dist/v21.7.2/node-v21.7.2-linux-x64.tar.xz -o node.tar.xz || { echo "Failed to download Node.js"; exit 1; }
+              mkdir -p nodejs && tar -xJf node.tar.xz -C nodejs --strip-components=1 || { echo "Failed to extract Node.js"; exit 1; }
+              export PATH=$ACTIVE_RELEASE_PATH/nodejs/bin:$PATH
               
               node -v
               npm -v
