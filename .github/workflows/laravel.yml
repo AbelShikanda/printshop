@@ -176,7 +176,7 @@ jobs:
             # rm -rf /home/printsh1/printshopeld/release/${GITHUB_SHA}/public/
             # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-  # Run befor-hooks
+  # Run befor-hook
   run-befor-hook:
     name: befor-hook
     runs-on: ubuntu-latest
