@@ -93,11 +93,9 @@ jobs:
 
           SOURCE_ASSET_DIR: /home/printsh1/printshopeld/release/${{github.sha}}/public/assets
           SOURCE_ADMIN_DIR: /home/printsh1/printshopeld/release/${{github.sha}}/public/admin
-          SOURCE_BUILD_DIR: /home/printsh1/printshopeld/release/${{github.sha}}/public/build
 
           DEST_ASSET_DIR: /home/printsh1/public_html/assets
           DEST_ADMIN_DIR: /home/printsh1/public_html/admin
-          DEST_BUILD_DIR: /home/printsh1/public_html/build
 
           DEST_PARENT_DIR: /home/printsh1/public_html
         with:
@@ -157,31 +155,12 @@ jobs:
                 echo "admin directory does not exist in the source."
             fi
             # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            if [ -d "$SOURCE_BUILD_DIR" ]; then
-                if [ -d "$DEST_BUILD_DIR" ]; then
-                    rm -rf "$DEST_BUILD_DIR"
-                    if [ $? -ne 0 ]; then
-                        echo "Failed to remove the destination build directory."
-                        exit 1
-                    fi
-                else
-                    echo "build directory does not exist in the destination."
-                fi
-                mv "$SOURCE_BUILD_DIR" "$DEST_PARENT_DIR"
-                if [ $? -ne 0 ]; then
-                    echo "Failed to move the build directory from source to destination."
-                    exit 1
-                fi
-            else
-                echo "build directory does not exist in the source."
-            fi
-            # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             # mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/.htaccess" "/home/printsh1/public_html"
             # mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/favican.ico" "/home/printsh1/public_html"
             # mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/index.php" "/home/printsh1/public_html"
             # mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/robots.txt" "/home/printsh1/public_html"
             # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            rm -rf /home/printsh1/printshopeld/release/${GITHUB_SHA}/public/
+            # rm -rf /home/printsh1/printshopeld/release/${GITHUB_SHA}/public/
             # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
   # Run befor-hooks
@@ -236,9 +215,6 @@ jobs:
             ln -s -n -f $STORAGE_PATH $RELEASE_PATH
             ln -s -n -f $RELEASE_PATH $ACTIVE_RELEASE_PATH
             ln -s -n -f $STORAGE_PATH $LINK_RELEASE_PATH
-              # ls -la $ACTIVE_RELEASE_PATH
-              # cd $ACTIVE_RELEASE_PATH || { echo "Failed to cd into release path"; exit 1; }
-              # composer install --no-dev --optimize-autoloader
   
   # Run Migrations release
   migrations-run:
@@ -264,8 +240,8 @@ jobs:
           # in the event of trouble recognizing the changes after the link find a solution to refresh
           script: |
               cd $ACTIVE_RELEASE_PATH
-              php artisan migrate --force
-              php artisan db:seed --force
+              # php artisan migrate --force
+              # php artisan db:seed --force
         
   # Run activate release
   run-after-hook:
