@@ -44,7 +44,7 @@
 
             <div class="artist is-verified">
 
-                <div class="artist__header">
+                <div class="artist__header" style="background-image: url('{{ asset('assets/img/header.jpg') }}'); opacity: 0.5;">
 
                     <div class="artist__info">
 
