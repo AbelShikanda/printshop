@@ -76,8 +76,6 @@ Auth::routes(['verify' => true]);
 // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 Route::group(['middleware' => 'TrackVisitorJourney'], function () {
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    // Route::get('/', [HomeController::class, 'index'])->name('home');
-    
     Route::get('/', [HomeController::class, 'index'])->name('home');
     // +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
     Route::get('/catalog', [PagesController::class, 'catalog'])->name('catalog');
