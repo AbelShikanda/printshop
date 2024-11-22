@@ -121,50 +121,50 @@ jobs:
             chmod -R 0777 /home/printsh1/printshopeld/storage
             fi
             # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            # if [ -d "$SOURCE_ASSET_DIR" ]; then
-            #     if [ -d "$DEST_ASSET_DIR" ]; then
-            #         rm -rf "$DEST_ASSET_DIR"
-            #         if [ $? -ne 0 ]; then
-            #             echo "Failed to remove the destination asset directory."
-            #             exit 1
-            #         fi
-            #     else
-            #         echo "asset directory does not exist in the destination."
-            #     fi
-            #     mv "$SOURCE_ASSET_DIR" "$DEST_PARENT_DIR"
-            #     if [ $? -ne 0 ]; then
-            #         echo "Failed to move the asset directory from source to destination."
-            #         exit 1
-            #     fi
-            # else
-            #     echo "asset directory does not exist in the source."
-            # fi
-            # # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            # if [ -d "$SOURCE_ADMIN_DIR" ]; then
-            #     if [ -d "$DEST_ADMIN_DIR" ]; then
-            #         rm -rf "$DEST_ADMIN_DIR"
-            #         if [ $? -ne 0 ]; then
-            #             echo "Failed to remove the destination admin directory."
-            #             exit 1
-            #         fi
-            #     else
-            #         echo "admin directory does not exist in the destination."
-            #     fi
-            #     mv "$SOURCE_ADMIN_DIR" "$DEST_PARENT_DIR"
-            #     if [ $? -ne 0 ]; then
-            #         echo "Failed to move the admin directory from source to destination."
-            #         exit 1
-            #     fi
-            # else
-            #     echo "admin directory does not exist in the source."
-            # fi
+            if [ -d "$SOURCE_ASSET_DIR" ]; then
+                if [ -d "$DEST_ASSET_DIR" ]; then
+                    rm -rf "$DEST_ASSET_DIR"
+                    if [ $? -ne 0 ]; then
+                        echo "Failed to remove the destination asset directory."
+                        exit 1
+                    fi
+                else
+                    echo "asset directory does not exist in the destination."
+                fi
+                mv "$SOURCE_ASSET_DIR" "$DEST_PARENT_DIR"
+                if [ $? -ne 0 ]; then
+                    echo "Failed to move the asset directory from source to destination."
+                    exit 1
+                fi
+            else
+                echo "asset directory does not exist in the source."
+            fi
+            # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+            if [ -d "$SOURCE_ADMIN_DIR" ]; then
+                if [ -d "$DEST_ADMIN_DIR" ]; then
+                    rm -rf "$DEST_ADMIN_DIR"
+                    if [ $? -ne 0 ]; then
+                        echo "Failed to remove the destination admin directory."
+                        exit 1
+                    fi
+                else
+                    echo "admin directory does not exist in the destination."
+                fi
+                mv "$SOURCE_ADMIN_DIR" "$DEST_PARENT_DIR"
+                if [ $? -ne 0 ]; then
+                    echo "Failed to move the admin directory from source to destination."
+                    exit 1
+                fi
+            else
+                echo "admin directory does not exist in the source."
+            fi
             # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             # ++++++++++++++++++++++++++++++++++++++++++++++First time++++++++++++++++++++++++++++++++++++++++++++++
             # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-            # mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/.htaccess" "/home/printsh1/public_html"
-            # mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/favicon.ico" "/home/printsh1/public_html"
-            # mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/index.php" "/home/printsh1/public_html"
-            # mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/robots.txt" "/home/printsh1/public_html"
+            mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/.htaccess" "/home/printsh1/public_html"
+            mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/favicon.ico" "/home/printsh1/public_html"
+            mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/index.php" "/home/printsh1/public_html"
+            mv -f "/home/printsh1/printshopeld/release/${GITHUB_SHA}/public/robots.txt" "/home/printsh1/public_html"
             # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
             # ++++++++++++++++++++++++++++++++++++++++++++++later time++++++++++++++++++++++++++++++++++++++++++++++
             # ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
