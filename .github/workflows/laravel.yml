@@ -61,7 +61,7 @@ jobs:
           # first deployments
         run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules public *
 
-      # store artifacts for distribution
+      # store artifacts for distributio
       - name: store artifacts for distribution
         uses: actions/upload-artifact@v4
         with:
